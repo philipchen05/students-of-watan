@@ -22,9 +22,7 @@ class Student {
     std::vector<std::shared_ptr<Goal>> goals;
 
   public:
-    enum{ASSIGNMENT = 1, MIDTERM, EXAM};
-    
-    void update();
+    void complete(Criterion *c);
     ~Student();
 };
 
