@@ -7,18 +7,20 @@
 
 class Achievement: public Subject {
   private:
-    int number;
+    int id;
     std::map<Resource, int> cost;
     std::shared_ptr<Student> owner;
 
   public:
+    Achievement(int id, std::map<Resource, int> cost, std::shared_ptr<Student> owner = nullptr);
+
     void complete(std::shared_ptr<Student> student);
 
     // get owner name for printing.
     // is there a case where we'd need it to return a ptr to the actual student? wouldn't be very good oop
-    std::string getOwnerName(); 
+    std::string getOwnerName() const; 
 
-    ~Achievement();     
+    virtual ~Achievement() = 0; // abstract class
 };
 
 #endif
