@@ -10,6 +10,7 @@ class Goal: public Achievement {
     bool achieved;
     
   public:
+    Goal(int id, std::map<Resource, int> cost, std::shared_ptr<Student> owner = nullptr, bool achieved = false);
     ~Goal();
 };
 
