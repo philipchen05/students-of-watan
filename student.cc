@@ -1,10 +1,13 @@
 #include "student.h"
 #include "resource.h"
 #include "criterion.h"
+#include "goal.h"
 
 #include <iostream>
+#include <memory>
 #include <map>
 
+// Constructor
 Student::Student(std::string colour, int number, int numVP, const std::map<Resource, int> &resources):
     colour{colour},
     number{number},
@@ -12,32 +15,51 @@ Student::Student(std::string colour, int number, int numVP, const std::map<Resou
     resources{resources}
 {}
 
-bool Student::canAcquire(Achievement *a) {
-    std::map<Resource, int> cost = a->getUpgradeCost(); // get cost of upgrading
-
-    // check that student has enough of each resource needed
-    for(auto &[resource, needed]: cost) {
-        if (resources[resource] < needed) {
-            return false;
+// adds criterion to student's list of completed criteria
+void Student::addCriterion(Criterion *c) {
+    // quit if criterion already tracked by student
+    for (std::shared_ptr<Criterion> sptr: criteria) {
+        if (sptr.get() == c) {
+            std::cout << colour << " already has criterion " << c->getId() << std::endl;
+            return;
         }
     }
-    return true;
+
+    // add shared ptr of criterion to student's list of criteria
+    std::shared_ptr<Criterion> cptr{c}; // make shared ptr
+    criteria.emplace_back(cptr); // add to list
 }
 
-void Student::complete(Criterion *c) {
-    if (!canAcquire(c)) {
-        std::cout << "You do not have enough resources." << std::endl;
+// adds goal to student's list of achieved goals
+void Student::addGoal(Goal *g) {
+    // quit if goal already tracked by student
+    for (std::shared_ptr<Goal> sptr: goals) {
+        if (sptr.get() == g) {
+            std::cout << colour << " already has criterion " << g->getId() << std::endl;
+            return;
+        }
     }
+
+    // add shared ptr of goal to student's list of goals
+    std::shared_ptr<Goal> gptr{g}; // make shared ptr
+    goals.emplace_back(gptr); // add to list
 }
 
 void Student::addResources(Resource type, int amount) {
     resources[type] += amount;
 }
 
-std::string Student::getColour() const {
+// returns student's colour (name)
+const std::string& Student::getColour() const {
     return colour;
 }
 
+// returns student's current resources
+const std::map<Resource, int>& Student::getResources() const {
+    return resources;
+}
+
+// prints student's status (victory points and resources)
 void Student::printStatus() const {
     // .at used because [] operator has no const overload
     std::cout << colour << " has " 
@@ -50,6 +72,7 @@ void Student::printStatus() const {
         << std::endl;
 }
 
+// prints student's completed criteria
 void Student::printCriteria() const {
     std::cout << colour << " has completed:" << std::endl;
     for (auto criterion: criteria) {

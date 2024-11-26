@@ -24,16 +24,19 @@ class Student {
     std::vector<std::shared_ptr<Criterion>> criteria; // list of all criteria that student has completed
     std::vector<std::shared_ptr<Goal>> goals; // list of all goals that student has achieved
 
-    bool canAcquire(Achievement *a);
-
   public:
     Student(std::string colour, int number, int numVP = 0, const std::map<Resource, int> &resources = {});
 
-    void complete(Criterion *c); // attempts to complete the given criterion
+    void addCriterion(Criterion *c); // adds criterion to student's list of completed criteria
+    void improve(Criterion *c); // attempts to improve the given criterion
+    void addGoal(Goal *g); // adds goal to the list of student's list of achieved goals
 
     void addResources(Resource type, int amount); // adds resources earned from the criterion
 
-    std::string getColour() const; // gets student colour (name)
+    const std::string& getColour() const; // returns student colour (name)
+    int getVP() const; // returns number of victory points
+    const std::map<Resource, int>& getResources() const; // returns student's current resources
+    
     void printStatus() const; // prints status (victory points and available resources)
     void printCriteria() const; // prints completed criteria
 

@@ -14,7 +14,7 @@ bool Achievement::isOwned() const {
 }
 
 // if achievement is owned, returns owner's colour, otherwise empty string
-std::string Achievement::getOwnerName() const {
+const std::string& Achievement::getOwnerName() const {
     if (owner != nullptr) return owner->getColour();
     return std::string{};
 }

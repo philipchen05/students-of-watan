@@ -22,7 +22,7 @@ class Achievement: public Observer {
     virtual void notify(const Subject *sbj); // called by subject
 
     bool isOwned() const; // returns true if achievement has owner, otherwise false
-    std::string getOwnerName() const; // returns owner's colour if achievement has owner, otherwise empty string
+    const std::string& getOwnerName() const; // returns owner's colour if achievement has owner, otherwise empty string
     int getId() const; // returns achievement's id (number)
 
     // returns cost of upgrading (or acquiring) an achievement
