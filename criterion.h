@@ -2,6 +2,8 @@
 #define CRITERION_H
 
 #include "achievement.h"
+#include "resource.h"
+
 
 #include <string>
 
@@ -11,16 +13,20 @@ class Criterion: public Achievement {
 
   private:
     CompletionLevel completion;
+    std::map<CompletionLevel, std::map<Resource, int>> upgradeCost;
 
   public:
-    Criterion(int id, std::map<Resource, int> cost, std::shared_ptr<Student> owner = nullptr, CompletionLevel completion = CompletionLevel::INCOMPLETE);
+    Criterion(int id, std::shared_ptr<Student> owner = nullptr, CompletionLevel completion = CompletionLevel::INCOMPLETE);
 
-    void update();
+    void complete(std::shared_ptr<Student> s); // makes criterion completed by the given student (which becomes criterion's owner)
+    void improve(); // attempts to upgrade to the next level (midterm or exam)
 
-    CompletionLevel getCompletion() const; // getter
+    void notify(const Subject *sbj) override; // adds the earned resources to owner
+
+    int getCompletion() const; // returns the completion level (incomplete, assignment, midterm, exam)
+    const std::map<Resource, int>& getUpgradeCost() const override; // returns the cost of upgrading to next level
 
     ~Criterion() override;
-
 };
 
 #endif

@@ -8,11 +8,13 @@ class Subject {
   private:
     std::vector<Observer*> observers;
 
-  public:
+  protected:
     void attach( Observer* o );
     void detach( Observer* o );
     void notifyObservers();
     virtual char getState( int row, int col ) const = 0;
+
+  public:
     virtual ~Subject() = default;
 };
 

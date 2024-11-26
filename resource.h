@@ -2,7 +2,7 @@
 #define RESOURCE_H
 
 enum class Resource {
-    CAFFIENE = 0,
+    CAFFEINE = 0,
     LAB,
     LECTURE,
     STUDY,

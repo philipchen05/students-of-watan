@@ -2,27 +2,41 @@
 #define STUDENT_H
 
 #include "achievement.h"
+#include "resource.h"
 
 #include <string>
 #include <memory>
 #include <map>
 
-#include "criterion.h"
-#include "goal.h"
-#include "resource.h"
+
+// forward declaration
+class Goal; 
+class Criterion;
+class Achievement;
 
 class Student {
   private:
     std::string colour;
     int number;
-
-    std::map<Resource, int> resources;
+    int numVP;
+    std::map<Resource, int> resources; 
 
     std::vector<std::shared_ptr<Criterion>> criteria;
     std::vector<std::shared_ptr<Goal>> goals;
 
+    bool canAcquire(Achievement *a);
+
   public:
-    void complete(Criterion *c);
+    Student(std::string colour, int number, int numVP = 0, const std::map<Resource, int> &resources = {});
+
+    void complete(Criterion *c); // attempts to complete the given criterion
+
+    void addResources(Resource type, int amount); // adds resources earned from the criterion
+
+    std::string getColour() const; // gets student colour (name)
+    void printStatus() const; // prints status (victory points and available resources)
+    void printCriteria() const; // prints completed criteria
+
     ~Student();
 };
 
