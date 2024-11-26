@@ -12,4 +12,11 @@ void End::play() {
     std::cout << "Would you like to play again?" << std::endl;
     std::cout << "> ";
     std::cin >> res;
+
+    // Interpret response
+    if(res == "yes") {
+        playAgain = true;
+    } else {
+        playAgain = false;
+    }
 }
