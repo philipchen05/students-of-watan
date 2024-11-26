@@ -21,11 +21,12 @@ class Tile: public Subject {
     std::vector<std::shared_ptr<Goal>> goals;
 
   public:
-    Tile(Resource type, int value, int location, std::vector<std::shared_ptr<Criterion>> criteria, std::vector<std::shared_ptr<Goal>> goals);
+    Tile(Resource type, int value, int location, const std::vector<std::shared_ptr<Criterion>> &criteria, std::vector<std::shared_ptr<Goal>> goals);
 
-    bool geese();
-    void setGeese(bool geese);
-
+    bool hasGeese() const; // true if geese on tile
+    Resource getType() const; // gets type of resource
+    void setGeese(bool geese); // sets whether or not geese are on tile
+ 
     ~Tile();
 };
 

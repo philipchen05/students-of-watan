@@ -2,15 +2,25 @@
 #define GOAL_H
 
 #include "achievement.h"
+#include "resource.h"
+#include "student.h"
 
 #include <string>
 
+class Student; // forward declaration
+class Criterion; // forward declaration
+class Achievement; // forward declaration
+
 class Goal: public Achievement {
+  public:
+    // cost of achieving this goal
+    static const std::map<Resource, int> upgradeCost;
   private:
-    bool achieved;
+    bool achieved; // whether or not this goal was achieved 
     
   public:
-    Goal(int id, std::map<Resource, int> cost, std::shared_ptr<Student> owner = nullptr, bool achieved = false);
+    Goal(int id, std::shared_ptr<Student> owner = nullptr, bool achieved = false); // ctor
+    const std::map<Resource, int>& getUpgradeCost() const override; // returns the cost of upgrading to the next level (i.e. acheiving the goal)
     ~Goal();
 };
 

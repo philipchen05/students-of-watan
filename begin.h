@@ -1,6 +1,7 @@
 #ifndef BEGIN_H
 #define BEGIN_H
 
+#include <gamephase.h>
 #include <memory>
 
 // Begin class for managing beginning of game
