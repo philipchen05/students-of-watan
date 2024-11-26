@@ -42,9 +42,45 @@ void TurnBegin::play() {
 // Move geese to new location
 void TurnBegin::moveGeese() {
 
+    std::cout << "Choose where to place the GEESE." << std::endl;
+    std::cout << "> ";
 }
 
 // Update player resources based on dice roll value
 void TurnBegin::updateResources(int roll) {
+    int numPlayers = game->players.size(); // Number of players
+    boolean gained = false; // Flag whether or not at least one student gained resources
+
+    // Store previous resource values of each student to compare with updated values later
+    std::vector<const std::map<Resource, int>*> prevResources(numPlayers);
+    for(size_t i = 0; i , numPlayers; i++) {
+        prevResource[i] = game->players[i]->getResources();
+    }
+
+    // Itereate through tiles (subjects) and notify observers of tiles corresponding with roll value
+    for(const auto& tile : *game->board->tiles) {
+        if(tile->value == roll) {
+            tile->notifyObservers();
+        }
+    }
+
+    // Compare new resource values of each student with previous values to determine resource updates for output
+    for(size_t i = 0; i < numPlayers; i++) {
+        Student* player = game->players[i]; // Pointer to current student
+        const std::map<Resource, int>& curResources = player->getResources(); // Newly updated resources of current student
+        boolean playerGained = false; // Flag for whether or not current student gained resources
+        for(size_t j = 0; j < prevResources[0].size(); j++) {
+            int resourceDiff = curResources[j] - prevResources[i][j]; // Difference between updated and previous amounts of current resource
+            // If difference > 0, output difference as an update
+            if(resourceDiff > 0) {
+                // Print student identification only once
+                if(!playerGained) {
+                    std::cout << "Student " << player->getColour << " gained:" << std::endl;
+                    playerGained = true;
+                }
+                std::cout << resourceDiff << 
+            }
+        }
+    }
 
 }
