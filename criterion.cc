@@ -1,6 +1,9 @@
 #include "criterion.h"
+#include "achievement.h"
 #include "observer.h"
 #include "tile.h"
+
+#include <iostream>
 
 const std::map<Criterion::CompletionLevel, std::map<Resource, int>> Criterion::upgradeCosts = {
     {Criterion::CompletionLevel::INCOMPLETE, 
@@ -31,18 +34,44 @@ const std::map<Criterion::CompletionLevel, std::map<Resource, int>> Criterion::u
 Criterion::Criterion(int id, std::shared_ptr<Student> owner, CompletionLevel completion):
     Achievement{id, owner},
     completion{completion}
-{
+{}
+
+// makes criterion completed by the given student (which becomes criterion's owner)
+void Criterion::complete(std::shared_ptr<Student> s) {
+    if (owner != nullptr) {
+        std::cout << getOwnerName() << " has already completed criterion " << getId() << std::endl;
+        return;
+    }
+    owner = s;
+    completion = Criterion::CompletionLevel::ASSIGNMENT;
 }
 
-// updates resources of owner
+// upgrades criterion to the next completion level (e.g. assignment to midterm)
+void Criterion::improve() {
+    switch (completion) {
+    case Criterion::CompletionLevel::ASSIGNMENT:
+        completion = Criterion::CompletionLevel::MIDTERM;
+        break;
+    case Criterion::CompletionLevel::MIDTERM:
+        completion = Criterion::CompletionLevel::EXAM;
+        break;
+    default:
+        std::cout << "Invalid improvement of criterion " << getId() << " with completion level " << getCompletion() << std::endl;
+        break;
+    }
+}
+
+// adds resources earned from the notifying tile to the criterion owner
 void Criterion::notify(const Subject *sbj) {
     const Tile *t = dynamic_cast<const Tile*>(sbj);
     owner->addResources(t->getType(), (int)this->completion); // add resources to owner
 }
-
+// returns an integer [0,3] representing completion level
 int Criterion::getCompletion() const {
     return (int)completion;
 }
+
+// returns the cost of upgrading to next level
 const std::map<Resource, int>& Criterion::getUpgradeCost() const {
     return upgradeCost.at(completion); // use .at because [] doesn't have overload for const map
 }

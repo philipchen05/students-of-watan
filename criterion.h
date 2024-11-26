@@ -23,12 +23,12 @@ class Criterion: public Achievement {
   public:
     Criterion(int id, std::shared_ptr<Student> owner = nullptr, CompletionLevel completion = CompletionLevel::INCOMPLETE); // ctor
 
-    void complete(std::shared_ptr<Student> s); // makes criterion completed by the given student (which becomes criterion's owner)
-    void improve(); // attempts to upgrade to the next level (midterm or exam)
+    void complete(std::shared_ptr<Student> s); // sets criterion as completed by the given student
+    void improve(); // upgrades criterion to the next completion level (e.g. assignment to midterm)
 
-    void notify(const Subject *sbj) override; // adds the earned resources to owner
+    void notify(const Subject *sbj) override; // adds earned resources from the notifying tile to the owner
 
-    int getCompletion() const; // returns the completion level (incomplete, assignment, midterm, exam)
+    int getCompletion() const; // returns an integer [0, 3] representing the completion level 
     const std::map<Resource, int>& getUpgradeCost() const override; // returns the cost of upgrading to next level
 
     ~Criterion() override;

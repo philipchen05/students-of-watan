@@ -6,6 +6,7 @@
 #include <iostream>
 #include <memory>
 #include <map>
+#include <cmath>
 
 // Constructor
 Student::Student(std::string colour, int number, int numVP, const std::map<Resource, int> &resources):
@@ -47,6 +48,16 @@ void Student::addGoal(Goal *g) {
 
 void Student::addResources(Resource type, int amount) {
     resources[type] += amount;
+}
+
+// removes specified amount of the specified resource
+void Student::removeResources(Resource type, int amount) {
+    resources[type] = std::max(resources[type] - amount, 0); // can't have negative resources
+}
+
+// adds the specified amount of victory points
+void Student::addVP(int amount) {
+    numVP += amount;
 }
 
 // returns student's colour (name)

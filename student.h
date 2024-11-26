@@ -31,7 +31,9 @@ class Student {
     void improve(Criterion *c); // attempts to improve the given criterion
     void addGoal(Goal *g); // adds goal to the list of student's list of achieved goals
 
-    void addResources(Resource type, int amount); // adds resources earned from the criterion
+    void addResources(Resource type, int amount); // adds specified amount of the specified resource
+    void removeResources(Resource type, int amount); // removes specified amount of the specified resource
+    void addVP(int amount); // adds the specified amount of victory points
 
     const std::string& getColour() const; // returns student colour (name)
     int getVP() const; // returns number of victory points
