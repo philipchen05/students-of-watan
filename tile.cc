@@ -10,12 +10,19 @@ Tile::Tile(Resource type, int value, int location, const std::vector<std::shared
     criteria{criteria},
     goals{goals} {}
 
+// returns true if there are geese on the tile, otherwise false
 bool Tile::hasGeese() const {
     return geese;
 }
 
+// returns type of resource
 Resource Tile::getType() const { 
     return type;
+}
+
+// returns value of tile
+int Tile::getValue() const {
+    return value;
 }
 
 void Tile::setGeese(bool geese) {

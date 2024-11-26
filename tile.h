@@ -23,9 +23,10 @@ class Tile: public Subject {
   public:
     Tile(Resource type, int value, int location, const std::vector<std::shared_ptr<Criterion>> &criteria, std::vector<std::shared_ptr<Goal>> goals);
 
-    bool hasGeese() const; // true if geese on tile
-    Resource getType() const; // gets type of resource
-    int getValue() const; // gets value of tile
+    bool hasGeese() const; // returns true if there are geese on the tile, otherwise false
+    Resource getType() const; // returns type of resource
+    int getValue() const; // returns value of tile
+
     void setGeese(bool geese); // sets whether or not geese are on tile
  
     ~Tile();
