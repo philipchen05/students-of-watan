@@ -20,11 +20,7 @@ void Board::generateCriteriaAndGoals() {
 
     // Generate 71 goals with fixed costs
     for (int i = 0; i < 71; ++i) {
-        std::map<Resource, int> cost = {
-            {Resource::LECTURE, 1},
-            {Resource::TUTORIAL, 1}
-        };
-        goals.push_back(std::make_unique<Goal>(i, cost));
+        goals.push_back(std::make_unique<Goal>(i));
     }
 }
 
@@ -100,19 +96,69 @@ void Board::display() const {
     while (inputFile.get(ch)) {
 
         if (ch == 'G') {
-            
+            if (goals[goalIndex]->isOwned()) {
+                cout << goals[goalIndex]->getOwnerName()[0] << "A";
+            } else {
+                std::cout << goals[goalIndex]->getId();
+
+            }
+            goalIndex++;
+
         }   
         else if (ch=='T') {
-
+            switch (tiles[tileIndex]->getType())
+            {
+            case Resource::CAFFEINE:
+                cout << "CAFFEINE";
+                break;
+            case Resource::STUDY:
+                cout << "STUDY";
+                break;
+            case Resource::LAB:
+                cout << "LAB";
+                break;
+            case Resource::TUTORIAL:
+                cout << "TUTORIAL";
+                break;
+            default:
+                cout << "NETFLIX";
+                break;
+            }
+            tileIndex++;
         }
         else if (ch=='C') {
+            if (criteria[criteriaIndex]->isOwned()) {
+                cout << criteria[criteriaIndex]->getOwnerName()[0];
+                switch (criteria[criteriaIndex]->getCompletion())
+                {
+                case 1:
+                    std::cout << "A";
+                    break;
+                case 2:
+                    std::cout << "M";
+                    break;
+                case 3:
+                    std::cout << "E";
+                    break;
+                
+                default:
+                    std::cout << criteria[criteriaIndex]->getId();
+                    break;
+                }
 
+            } else {
+                std::cout << criteria[criteriaIndex]->getId();
+
+            }
+            criteriaIndex++;
         }
         else if (ch=='I') {
-
+            std::cout << index;
+            index++;
         }
-        else if (ch=='R') {
-
+        else if (ch=='R') { 
+            std::cout << tiles[rollIndex]->getValue();
+            rollIndex++;
         }
         else {
             cout << ch;
