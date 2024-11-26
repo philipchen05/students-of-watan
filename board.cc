@@ -1,20 +1,128 @@
 #include <string>
+#include <iostream>
+#include <fstream>
 #include "board.h"
 using namespace std;
 
+Board::Board(std::unique_ptr<BoardSetup> setup) {
+    generateCriteriaAndGoals();
+    tiles = setup->generateTiles();
+    populateCriterionMap();
+}
 
-void Board::display() const{
-    // TOP SECTION
 
-    // MIDDLE SECTION
-    for (int i = 0; i < 3; i++) {
-    cout << "    | 6|-- 9--| 7|      10       | 8|--10--| 9|      5         |10|--11--|11" << endl;
-    cout << "    /            \\              /            \\               /             \\" << endl;
-    cout << "   12      3      13           14       4      15            16       5       17" << endl;
-    cout << "  /       LAB      \\          /     NETFLIX     \\          /      STUDY       \\" << endl;
-    cout << "|12|       4       |13|--18--|14|       0        |15|--19--|16|      10         |17|" << endl;
-    cout << " \\                /           \\                /           \\                 /" << endl;
+// Generate criteria and goals
+void Board::generateCriteriaAndGoals() {
+    // Generate 53 criteria with initial costs (assignment cost)
+    for (int i = 0; i < 53; ++i) {
+        std::map<Resource, int> cost = {
+            {Resource::CAFFIENE, 1},
+            {Resource::LAB, 1},
+            {Resource::LECTURE, 1},
+            {Resource::TUTORIAL, 1}
+        };
+        criteria.push_back(std::make_unique<Criterion>(i, cost));
     }
 
-    
+    // Generate 71 goals with fixed costs
+    for (int i = 0; i < 71; ++i) {
+        std::map<Resource, int> cost = {
+            {Resource::LECTURE, 1},
+            {Resource::TUTORIAL, 1}
+        };
+        goals.push_back(std::make_unique<Goal>(i, cost));
+    }
+}
+
+void Board::populateCriterionMap() {
+    // TEMP CODE
+    for (int i = 0; i < 53; ++i) {
+        std::set<int> adjacentCriteria;
+        std::set<int> adjacentGoals;
+        for (int j = -1; j <= 1; ++j) { 
+            adjacentCriteria.insert(j);
+        }
+        for (int j = -1; j <= 1; ++j) {
+         
+            adjacentGoals.insert(j);
+        }
+        criterionMap[i] = {adjacentCriteria, adjacentGoals};
+    }
+}
+
+// Check if it's valid to build at a specific location
+bool Board::canBuild(int criterionId, const Student& student) const {
+    // REMOVE LATER
+    if (criterionMap.find(criterionId) == criterionMap.end()) {
+        return false;
+    }
+
+    const auto& [adjCriteria, adjGoals] = criterionMap.at(criterionId);
+
+    // Check if no one owns adjacent criteria
+    for (int adj : adjCriteria) {
+        const auto& criterion = criteria[adj];
+        if (!criterion->getOwnerName().empty()) {
+            return false;
+        }
+    }
+
+    // Check if the student owns at least one adjacent goal
+    for (int adj : adjGoals) {
+        const auto& goal = goals[adj];
+        if (goal->getOwnerName() == student.getColour()) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool Board::emptyAdjacent(int criterionId) const {
+    const auto& [adjCriteria, adjGoals] = criterionMap.at(criterionId);
+    for (int adj : adjCriteria) {
+        const auto& criterion = criteria[adj];
+        if (!criterion->getOwnerName().empty()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+void Board::display() const {
+    ifstream inputFile("board.txt");
+
+     if (!inputFile.is_open()) {
+        cerr << "Error: Could not open the file." << endl;
+        return;
+    }
+
+    char ch;
+
+    // Read character by character
+    int goalIndex = 0, criteriaIndex = 0, index = 0, rollIndex = 0, tileIndex = 0;
+
+    while (inputFile.get(ch)) {
+
+        if (ch == 'G') {
+            
+        }   
+        else if (ch=='T') {
+
+        }
+        else if (ch=='C') {
+
+        }
+        else if (ch=='I') {
+
+        }
+        else if (ch=='R') {
+
+        }
+        else {
+            cout << ch;
+        }
+        
+    }
 }

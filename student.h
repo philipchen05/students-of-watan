@@ -23,6 +23,7 @@ class Student {
 
   public:
     void complete(Criterion *c);
+    std::string getColour() const;
     ~Student();
 };
 

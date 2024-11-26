@@ -23,9 +23,6 @@ private:
 
     // Generate criteria and goals
     void generateCriteriaAndGoals();
-    
-    // Generate tiles and assign corresponding criteria and goals
-    void generateTiles();
 
     // Populate the criterion map with adjacency data
     void populateCriterionMap();
@@ -37,8 +34,8 @@ public:
     // Check if it's valid to build at a specific location
     bool canBuild(int criterionId, const Student& student) const;
 
-    // Get adjacent criteria and goals for a given criterion ID
-    std::pair<std::set<int>, std::set<int>> getAdjacent(int criterionId) const;
+    // Get adjacent criteria for a given criterion ID
+    bool emptyAdjacent(int criterionId) const;
 
     // Display the board
     void display() const;

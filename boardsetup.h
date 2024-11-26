@@ -9,21 +9,25 @@
 
 class BoardSetup {
 public:
-    virtual std::vector<std::shared_ptr<Tile>> generateTiles() = 0;
+    virtual std::vector<std::unique_ptr<Tile>> generateTiles() = 0;
     virtual ~BoardSetup() = default;
 };
 
 class FileSetup : public BoardSetup {
     private:
-        std::string file;
+        std::string filename;
     public:
         FileSetup(const std::string& filename);
-        std::vector<std::shared_ptr<Tile>> generateTiles() override;
+        std::vector<std::unique_ptr<Tile>> generateTiles() override;
 };
 
 class RandomSetup : public BoardSetup {
+private: 
+    int seed;
+
 public:
-    std::vector<std::shared_ptr<Tile>> generateTiles() override;
+    RandomSetup(int seed = 5555);
+    std::vector<std::unique_ptr<Tile>> generateTiles() override;
 };
 
 #endif
