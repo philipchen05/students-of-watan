@@ -20,3 +20,8 @@ void End::play() {
         playAgain = false;
     }
 }
+
+// Returns true if players wish to play again
+boolean End::playAgain() {
+    return playAgain;
+}

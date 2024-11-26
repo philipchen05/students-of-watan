@@ -1,7 +1,7 @@
 #ifndef END_H
 #define END_H
 
-#include <string>
+#include <gamephase.h>
 
 // End class for managing end of game
 class End: public GamePhase {
