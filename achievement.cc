@@ -4,13 +4,22 @@
 Achievement::Achievement(int id, std::shared_ptr<Student> owner):
     Observer{},
     id{id},
+    owned{(owner != nullptr)}, // true if given student instance
     owner{owner}
 {}
 
-std::string Achievement::getOwnerName() const {
-    return owner->getColour();
+// true if achievement has owner, otherwise false
+bool Achievement::isOwned() const {
+    return owned;
 }
 
+// if achievement is owned, returns owner's colour, otherwise empty string
+std::string Achievement::getOwnerName() const {
+    if (owner != nullptr) return owner->getColour();
+    return std::string{};
+}
+
+// returns achievement's id number
 int Achievement::getId() const {
     return id;
 }
