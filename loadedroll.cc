@@ -3,7 +3,7 @@
 #include <string>
 
 // Roll method
-int LoadedRoll::roll() {
+int LoadedRoll::roll() const {
     int input; // Student input
 
     std::cout << "Input a roll between 2 and 12:" << endl; // Prompt student for roll value

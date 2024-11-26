@@ -2,9 +2,9 @@
 #define LOADEDROLL_H
 
 // LoadedRoll class for loaded dice roll algorithm
-class LoadedRoll {
+class LoadedRoll: public DiceRoll {
     public:
-        int roll() override; // Roll method
+        int roll() const override; // Roll method
 };
 
 #endif

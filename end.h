@@ -11,7 +11,7 @@ class End: public GamePhase {
         End(); // End constructor
         ~End() = default; // End destructor
         void play() override; // Method for executing end of game events
-        boolean playAgain(); // Getter method for playAgain
+        boolean playAgain() const; // Getter method for playAgain
 };
 
 #endif

@@ -14,23 +14,34 @@ Game::Game() : board{std::make_unique<Board>()}, players{std::vector<unique_ptr<
 
 // Method for playing game
 void Game::play() {
+    int turn = 0; // Stores turn number; used for determining which player's turn it is
+
     do {
         // Play beginning of game
-        gamePhase = std::make_unique<Begin>();
+        gamePhase = std::make_unique<Begin>(this);
         gamePhase->play();
 
+        // Continue taking turns while nobody has won
         while(!hasWon()) {
-            // Turns
+            // Beginning of turn
+            gamePhase = std::make_unique<TurnBegin>(this, players[turn % players.size()]);
+            gamePhase->play();
+
+            // End of turn
+            gamePhase = std::make_unique<TurnEnd>(this, players[turn % players.size()]);
+            gamePhase->play();
+
+            turn++; // Increment turn number
         }
 
         // Play end of game
-        gamePhase = std::make_unique<End>();
+        gamePhase = std::make_unique<End>(this);
         gamePhase->play();        
     } while(gamePhase->playAgain());
 }
 
 // Helper method for determining if a player has won
-boolean Game::hasWon() {
+boolean Game::hasWon() const {
     // Iterate through players
     for(const auto& s : players) {
         if(s->numVP >= 10) {

@@ -6,7 +6,7 @@
 Begin::Begin(Game* game) : GamePhase{game} {}
 
 // Method for executing beginning of game events
-void Begin::play() {
+void Begin::play() const {
     Board* board = game->board; // Pointer to Board
     int numTurns = game->players.size() * 2; // Total number of turns in beginning of game
 

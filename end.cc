@@ -22,6 +22,6 @@ void End::play() {
 }
 
 // Returns true if players wish to play again
-boolean End::playAgain() {
+boolean End::playAgain() const {
     return playAgain;
 }

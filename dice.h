@@ -1,10 +1,12 @@
 #ifndef DICE_H
 #define DICE_H
 
-// DiceRoll abstract class for dice roll algorithm
-class DiceRoll {
+// Dice class
+class Dice {
     public:
-        virtual int roll() = 0; // Roll method
+        Dice() = default; // Dice constructor
+        ~Dice() = default; // Dice destructor
+        int roll(boolean fair) const; // Dice roll method
 };
 
 #endif

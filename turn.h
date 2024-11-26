@@ -8,7 +8,7 @@ class Turn: public GamePhase {
     protected:
         Student* player; // Pointer to player whose turn it is
     public:
-        Turn(Student* player); // Turn constructor
+        Turn(Game* game, Student* player); // Turn constructor
         virtual ~Turn() = default; // Turn destructor
 };
 

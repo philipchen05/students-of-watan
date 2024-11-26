@@ -1,3 +1,3 @@
 #include "turn.h"
 
-Turn::Turn(Student* player) : player{player} {}
+Turn::Turn(Game* game, Student* player) : GamePhase{game}, player{player} {}
