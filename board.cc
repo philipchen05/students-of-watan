@@ -15,13 +15,7 @@ Board::Board(std::unique_ptr<BoardSetup> setup) {
 void Board::generateCriteriaAndGoals() {
     // Generate 53 criteria with initial costs (assignment cost)
     for (int i = 0; i < 53; ++i) {
-        std::map<Resource, int> cost = {
-            {Resource::CAFFIENE, 1},
-            {Resource::LAB, 1},
-            {Resource::LECTURE, 1},
-            {Resource::TUTORIAL, 1}
-        };
-        criteria.push_back(std::make_unique<Criterion>(i, cost));
+        criteria.push_back(std::make_unique<Criterion>(i));
     }
 
     // Generate 71 goals with fixed costs
