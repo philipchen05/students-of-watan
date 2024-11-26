@@ -13,7 +13,7 @@ Student::Student(std::string colour, int number, int numVP, const std::map<Resou
 {}
 
 bool Student::canAcquire(Achievement *a) {
-    std::map<Resource, int> cost = a->getUpgradeCost(); // get cost (amount needed for each type of resource)
+    std::map<Resource, int> cost = a->getUpgradeCost(); // get cost of upgrading
 
     // check that student has enough of each resource needed
     for(auto &[resource, needed]: cost) {

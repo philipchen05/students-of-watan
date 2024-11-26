@@ -12,9 +12,11 @@ class Criterion; // forward declaration
 class Achievement; // forward declaration
 
 class Goal: public Achievement {
+  public:
+    // cost of achieving this goal
+    static const std::map<Resource, int> upgradeCost;
   private:
-    bool achieved;
-    std::map<Resource, int> upgradeCost;
+    bool achieved; // whether or not this goal was achieved 
     
   public:
     Goal(int id, std::shared_ptr<Student> owner = nullptr, bool achieved = false); // ctor

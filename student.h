@@ -16,13 +16,13 @@ class Achievement;
 
 class Student {
   private:
-    std::string colour;
-    int number;
-    int numVP;
-    std::map<Resource, int> resources; 
+    std::string colour; // student's colour (name)
+    int number; // student's place in order of turns [1, 4]
+    int numVP; // number of victory points student has
+    std::map<Resource, int> resources; // number of each resource that student has: resource |-> amount
 
-    std::vector<std::shared_ptr<Criterion>> criteria;
-    std::vector<std::shared_ptr<Goal>> goals;
+    std::vector<std::shared_ptr<Criterion>> criteria; // list of all criteria that student has completed
+    std::vector<std::shared_ptr<Goal>> goals; // list of all goals that student has achieved
 
     bool canAcquire(Achievement *a);
 

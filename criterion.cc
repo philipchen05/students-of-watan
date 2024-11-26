@@ -2,36 +2,36 @@
 #include "observer.h"
 #include "tile.h"
 
+const std::map<Criterion::CompletionLevel, std::map<Resource, int>> Criterion::upgradeCosts = {
+    {Criterion::CompletionLevel::INCOMPLETE, 
+        {
+            {Resource::CAFFEINE, 1},
+            {Resource::LAB, 1},
+            {Resource::LECTURE, 1},
+            {Resource::TUTORIAL, 1}
+        }
+    },
+    {Criterion::CompletionLevel::ASSIGNMENT, 
+        {
+            {Resource::LECTURE, 2},
+            {Resource::STUDY, 3}
+        }
+    },
+    {Criterion::CompletionLevel::MIDTERM, 
+        {
+            {Resource::CAFFEINE, 3},
+            {Resource::LAB, 2},
+            {Resource::LECTURE, 2},
+            {Resource::TUTORIAL, 1},
+            {Resource::STUDY, 2}
+        }
+    },
+};
+
 Criterion::Criterion(int id, std::shared_ptr<Student> owner, CompletionLevel completion):
     Achievement{id, owner},
     completion{completion}
 {
-    // maps CURRENT level to cost of NEXT level
-    upgradeCost = {
-        {CompletionLevel::INCOMPLETE, 
-            {
-                {Resource::CAFFEINE, 1},
-                {Resource::LAB, 1},
-                {Resource::LECTURE, 1},
-                {Resource::TUTORIAL, 1}
-            }
-        },
-        {CompletionLevel::ASSIGNMENT, 
-            {
-                {Resource::LECTURE, 2},
-                {Resource::STUDY, 3}
-            }
-        },
-        {CompletionLevel::MIDTERM, 
-            {
-                {Resource::CAFFEINE, 3},
-                {Resource::LAB, 2},
-                {Resource::LECTURE, 2},
-                {Resource::TUTORIAL, 1},
-                {Resource::STUDY, 2}
-            }
-        },
-    };
 }
 
 // updates resources of owner
