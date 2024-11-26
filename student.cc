@@ -70,6 +70,15 @@ const std::map<Resource, int>& Student::getResources() const {
     return resources;
 }
 
+// returns total number of resources
+int Student::getTotalResources() const {
+    int sum = 0;
+    for (auto &[resource, amount]: resources) {
+        sum += amount;
+    }
+    return sum;
+}
+
 // prints student's status (victory points and resources)
 void Student::printStatus() const {
     // .at used because [] operator has no const overload
