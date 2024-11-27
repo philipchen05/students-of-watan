@@ -61,6 +61,12 @@ void Criterion::improve() {
     }
 }
 
+// adds resources earned from the notifying tile to the owner
+void Criterion::notify(const Subject *sbj) {
+    const Tile *tile = dynamic_cast<const Tile*>(sbj);
+    owner->addResources(tile->getType(), getCompletion());
+}
+
 // adds resources earned from the notifying tile to the criterion owner
 void Criterion::notify(const Subject *sbj) {
     const Tile *t = dynamic_cast<const Tile*>(sbj);

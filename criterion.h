@@ -26,7 +26,7 @@ class Criterion: public Achievement {
     void complete(std::shared_ptr<Student> s); // sets criterion as completed by the given student
     void improve(); // upgrades criterion to the next completion level (e.g. assignment to midterm)
 
-    void notify(const Subject *sbj) override; // adds earned resources from the notifying tile to the owner
+    void notify(const Subject *sbj) override; // adds resources earend from the notifying tile to the owner
 
     int getCompletion() const; // returns an integer [0, 3] representing the completion level 
     const std::map<Resource, int>& getUpgradeCost() const override; // returns the cost of upgrading to next level
