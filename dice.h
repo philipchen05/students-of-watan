@@ -6,7 +6,7 @@ class Dice {
     public:
         Dice() = default; // Dice constructor
         ~Dice() = default; // Dice destructor
-        int roll(boolean fair) const; // Dice roll method
+        int roll(bool fair) const; // Dice roll method
 };
 
 #endif

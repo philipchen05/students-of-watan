@@ -2,6 +2,7 @@
 #define RESOURCE_H
 
 #include <iostream>
+#include <cctype>
 
 enum class Resource {
     CAFFEINE = 0,
@@ -11,6 +12,25 @@ enum class Resource {
     TUTORIAL,
     NETFLIX,
 };
+
+// Converts string to Resource
+Resource resource(string s) {
+    std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) { return std::toupper(c); });
+    switch(s) {
+        case "CAFFEINE":
+            return Resource::CAFFEINE;
+        case "LAB":
+            return Resource::LAB;
+        case "LECTURE":
+            return Resource::LECTURE;
+        case "STUDY":
+            return Resource::STUDY;
+        case "TUTORIAL":
+            return Resource::TUTORIAL;
+        case "NETFLIX":
+            return Resource::NETFLIX;
+    }
+}
 
 // Overloaded operator<< method for outputting Resource types
 std::ostream &operator<<(std::ostream &out, const Resource &r) {

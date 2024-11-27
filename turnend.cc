@@ -38,13 +38,16 @@ void TurnEnd::play() {
                 std::cin >> id;
                 improve(id);
                 break;
-            case "trade <colour> <give> <take>":
+            case "trade":
                 string colour, give, take;
                 std::cin >> colour >> give >> take;
                 trade(colour, give, take);
                 break;            
-            case "save <file>":
-
+            case "save":
+                string file;
+                std::cin >> file;
+                
+                break;
             case "help":
                 help();
                 break;
@@ -162,8 +165,8 @@ void TurnEnd::improve(int id) {
 // Trade resources with another player
 void TurnEnd::trade(string colour, string give, string take) {
     Student* otherPlayer; // Pointer to other player
-    Resource resource1; // Resource being offered
-    Resource resource2; // Resource wanted in return
+    Resource resource1 = resource(give); // Resource being offered
+    Resource resource2 - resource(take); // Resource wanted in return
 
     // Determine otherPlayer
     for(const auto& s : game->players) {
@@ -173,11 +176,21 @@ void TurnEnd::trade(string colour, string give, string take) {
         }
     }
 
-    // Determine resources
-    
+    // Prompt other player with trade proposition
+    std::cout << player-getColour() << " offers " << otherPlayer.getColour() << " one " << resource1 << " for one " << resource2 << "." << std::endl;
+    std::cout << "Does " otherPlayer->getColour() << " accept this offer?" << std::endl;
 
-    std::cout << player-getColour() << " offers " << otherPlayer.getColour() << " one " <resource1> for one <resource2>.
-Does <colour2> accept this offer?
+    string response; // Other player's response
+    std::cout << "> ";
+    std::cin >> response;
+
+    // Make trade if other player agrees
+    if(response == "yes") {
+        player->removeResources(resource1, 1);
+        player->addResources(resource2, 1);
+        otherPlayer->removeResources(resource2, 1);
+        otherPlayer->addResources(resource1, 1);
+    }
 }
 
 // Print help guide
