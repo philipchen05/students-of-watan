@@ -2,7 +2,7 @@
 #define RESOURCE_H
 
 #include <iostream>
-#include <cctype>
+#include <string>
 
 enum class Resource {
     CAFFEINE = 0,
@@ -14,21 +14,19 @@ enum class Resource {
 };
 
 // Converts string to Resource
-Resource resource(string s) {
-    std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) { return std::toupper(c); });
-    switch(s) {
-        case "CAFFEINE":
-            return Resource::CAFFEINE;
-        case "LAB":
-            return Resource::LAB;
-        case "LECTURE":
-            return Resource::LECTURE;
-        case "STUDY":
-            return Resource::STUDY;
-        case "TUTORIAL":
-            return Resource::TUTORIAL;
-        case "NETFLIX":
-            return Resource::NETFLIX;
+Resource resource(std::string s) {
+    if(s == "CAFFEINE") {
+        return Resource::CAFFEINE;
+    } else if(s == "LAB") {
+        return Resource::LAB;
+    } else if(s == "LECTURE") {
+        return Resource::LECTURE;
+    } else if(s == "STUDY") {
+        return Resource::STUDY;
+    } else if(s == "TUTORIAL") {
+        return Resource::TUTORIAL;
+    } else {
+        return Resource::NETFLIX;
     }
 }
 

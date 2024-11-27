@@ -3,6 +3,8 @@
 
 #include <memory>
 
+class Game;
+
 // GamePhase abstract class
 class GamePhase {
     protected:

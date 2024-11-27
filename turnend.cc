@@ -46,7 +46,7 @@ void TurnEnd::play() {
             case "save":
                 string file;
                 std::cin >> file;
-                
+
                 break;
             case "help":
                 help();
@@ -77,7 +77,7 @@ void TurnEnd::criteria() {
 }
 
 // Determine if player can afford desired goal/achievement
-boolean TurnEnd::canAfford(Achievement* a) {
+bool TurnEnd::canAfford(Achievement* a) {
     const std::map<Resource, int>& upgradeCost = a->getUpgradeCost(); // Upgrade cost
     const std::map<Resource, int>& resources = player->getResources(); // Player resources
     for(const auto& [resource, cost] : upgradeCost) {

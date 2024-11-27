@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "board.h"
+#include "turnend.h"
 #include <vector>
 #include <memory>
 
@@ -11,7 +13,7 @@ class Game {
         std::vector<std::unique_ptr<Student>> players; // Vector containing pointers to players
         std::unique_ptr<GamePhase> gamePhase; // Unique pointer to GamePhase object
 
-        boolean hasWon() const; // Helper method for determining if a player has won
+        bool hasWon() const; // Helper method for determining if a player has won
     public:
         Game(); // Game constructor
         void play(); // Method for playing game

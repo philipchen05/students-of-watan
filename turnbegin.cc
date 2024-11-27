@@ -16,7 +16,7 @@ void TurnBegin::play() {
     std::cout << "> ";
 
     std::string command; // Player's command
-    boolean fair = true; // Fair roll or not
+    bool fair = true; // Fair roll or not
 
     // Loop allows player to switch between fair and loaded dice until roll command
     while(std::cin >> command && command != "roll") {
@@ -153,17 +153,17 @@ void TurnBegin::updateResources(int roll) {
 }
 
 // Output resource updates; returns true if at least one resource updated
-boolean TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevResources, boolean gain, std::vector<int>* amountsLost) const {
+bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevResources, bool gain, std::vector<int>* amountsLost) const {
     int numPlayers = game->players.size(); // Number of players
     std::vector<Resource> resources = {Resource::CAFFEINE, Resource::LAB, Resource::LECTURE, Resource::STUDY, Resource::TUTORIAL}; // Stores resources in output order
-    boolean update = false; // Flag whether or not at least one student's resources were updated
+    bool update = false; // Flag whether or not at least one student's resources were updated
     int lostIndex = 0; // Index for amountsLost vector
 
     // Compare new resource values of each student with previous values to determine resource updates for output
     for(size_t i = 0; i < numPlayers; i++) {
         Student* player = game->players[i]; // Pointer to current student
         const std::map<Resource, int>& curResources = player->getResources(); // Newly updated resources of current student
-        boolean playerUpdated = false; // Flag for whether or not current student resources were updated
+        bool playerUpdated = false; // Flag for whether or not current student resources were updated
         for(size_t j = 0; j < resources.size(); j++) {
             Resource curResource = resources[j]; // Current resource
             int resourceDiff = abs(curResources[curResource] - prevResources[i][curResource]); // Difference between updated and previous amount of current resource
@@ -190,12 +190,12 @@ boolean TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &pre
 }
 
 // Output resource gains; returns true if at least one resource was gained
-boolean TurnBegin::printGains(std::vector<const std::map<Resource, int>*> &prevResources) const {
+bool TurnBegin::printGains(std::vector<const std::map<Resource, int>*> &prevResources) const {
     return printUpdates(prevResources, 1, nullptr);
 }
 
 // Output resource losses; returns true if at least one resource was lost
-boolean TurnBegin::printLosses(std::vector<const std::map<Resource, int>*> &prevResources, std::vector<int>* amountsLost) const {
+bool TurnBegin::printLosses(std::vector<const std::map<Resource, int>*> &prevResources, std::vector<int>* amountsLost) const {
     return printUpdates(prevResources, 0, amountsLost);
 }
 

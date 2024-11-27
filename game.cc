@@ -1,10 +1,12 @@
 #include "game.h"
 #include "student.h"
-#include "gamePhase.h"
+#include "begin.h"
+#include "turnbegin.h"
+#include "end.h"
 
 // Game constructor
-Game::Game() : board{std::make_unique<Board>()}, players{std::vector<unique_ptr<Student>>(4)}, gamePhase{nullptr} {
-    std::vector<string> colours = {"Blue", "Red", "Orange", "Yellow"};
+Game::Game() : board{std::make_unique<Board>()}, players{std::vector<std::unique_ptr<Student>>(4)}, gamePhase{nullptr} {
+    std::vector<std::string> colours = {"Blue", "Red", "Orange", "Yellow"};
 
     // Initialize Students
     for(size_t i = 0; i < players.size(); i++) {
@@ -41,12 +43,12 @@ void Game::play() {
 }
 
 // Helper method for determining if a player has won
-boolean Game::hasWon() const {
+bool Game::hasWon() const {
     const int winVP = 10; // 10 victory points needed to win
 
     // Iterate through players
     for(const auto& s : players) {
-        if(s->numVP >= winVP) {
+        if(s->getVP() >= winVP) {
             return true; // Return true if a player has at least the number of victory points needed to win
         }
     }
