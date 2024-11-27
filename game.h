@@ -16,6 +16,11 @@ class Game {
         bool hasWon() const; // Helper method for determining if a player has won
     public:
         Game(); // Game constructor
+
+        int getNumPlayers() const; // returns number of players
+        Student* getPlayer(int index) const; // returns raw pointer to the index-th player
+        Board* getBoard() const; // returns raw pointer to board 
+
         void play(); // Method for playing game
 };
 

@@ -42,6 +42,19 @@ void Game::play() {
     } while(gamePhase->playAgain());
 }
 
+// returns number of players
+int Game::getNumPlayers() const {
+    return players.size();
+}
+// returns pointer to board
+Board* Game::getBoard() const {
+    return board.get();
+}
+// returns raw pointer to index-th player
+Student* Game::getPlayer(int index) const {
+    return players.at(index).get();
+}
+
 // Helper method for determining if a player has won
 bool Game::hasWon() const {
     const int winVP = 10; // 10 victory points needed to win
