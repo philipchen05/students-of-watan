@@ -3,3 +3,6 @@ Makefile*
 
 *.o
 *.d
+test*
+test.cc
+
