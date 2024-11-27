@@ -25,6 +25,7 @@ int Tile::getValue() const {
     return value;
 }
 
+// sets whether or not geese are on tile
 void Tile::setGeese(bool geese) {
     this->geese = geese;
 }
