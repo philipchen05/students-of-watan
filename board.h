@@ -15,8 +15,8 @@ private:
     std::vector<std::unique_ptr<Tile>> tiles;
 
     // Hard-coded criteria and goals
-    std::vector<std::unique_ptr<Criterion>> criteria;
-    std::vector<std::unique_ptr<Goal>> goals;
+    std::vector<std::shared_ptr<Criterion>> criteria;
+    std::vector<std::shared_ptr<Goal>> goals;
 
     // Map of criteria to their adjacent criteria and goals
     std::map<int, std::pair<std::set<int>, std::set<int>>> criterionMap;
@@ -36,6 +36,8 @@ public:
 
     // Get adjacent criteria for a given criterion ID
     bool emptyAdjacent(int criterionId) const;
+
+    Tile* getGeeseLocation(); 
 
     // Display the board
     void display() const;

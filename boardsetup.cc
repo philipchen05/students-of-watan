@@ -6,10 +6,14 @@
 #include <sstream>
 #include "boardsetup.h"
 #include "tile.h" // Include your Tile class header file
+#include "resource.h"
 
-RandomSetup::RandomSetup(int seed = 5555) : seed{seed} {}
+RandomSetup::RandomSetup(int seed) : seed{seed} {}
 
-std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles() {
+std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles(
+    const std::vector<std::shared_ptr<Criterion>>& criteria,
+    const std::vector<std::shared_ptr<Goal>>& goals
+) {
     // Predefine the resources (types) according to constraints
     std::vector<int> resources = {
         0, 0, 0, 0,    // 4 CAFFEINE
@@ -38,13 +42,28 @@ std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles() {
 
     // Create the tiles
     std::vector<std::unique_ptr<Tile>> tiles;
+    std::vector<std::shared_ptr<Criterion>> TileCriteria;
+    std::vector<std::shared_ptr<Goal>> TileGoals;
 
     for (int i = 0; i < 19; ++i) {
         int type = resources[i];
         int value = values[i]; 
-
+        for (int j = 0; j < 6; j++) {
+            TileCriteria.push_back(criteria[tilesCriteria[i][j]]);
+            TileGoals.push_back(goals[tilesGoals[i][j]]);
+        }
+        
+        Resource tileType;
+        switch (type) {
+            case (0): tileType = Resource::CAFFEINE;break;
+            case (1): tileType =Resource::LAB;break;
+            case (2): tileType =Resource::LECTURE;break;
+            case (3): tileType =Resource::STUDY;break;
+            case (4): tileType =Resource::TUTORIAL;break;
+            default: tileType =Resource::NETFLIX;break;
+        }
         // Create the tile
-        auto tile = std::make_unique<Tile>(i, value, type);// EDIT THIS LATER TO ADD CRITERIA AND GOALS
+        auto tile = std::make_unique<Tile>(tileType, value, i, TileCriteria, TileGoals);// EDIT THIS LATER TO ADD CRITERIA AND GOALS
 
         // Add the tile to the tiles vector
         tiles.push_back(std::move(tile));
@@ -55,7 +74,9 @@ std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles() {
 
 FileSetup::FileSetup(const std::string& filename) : filename{filename} {}
 
-std::vector<std::unique_ptr<Tile>> FileSetup::generateTiles() {
+std::vector<std::unique_ptr<Tile>> FileSetup::generateTiles(
+    const std::vector<std::shared_ptr<Criterion>>& criteria,
+    const std::vector<std::shared_ptr<Goal>>& goals) {
     std::ifstream file{filename};
 
     if (!file.is_open()) {
@@ -94,7 +115,24 @@ std::vector<std::unique_ptr<Tile>> FileSetup::generateTiles() {
         }
 
         // Create the tile
-        auto tile = std::make_unique<Tile>(i, value, type);
+        std::vector<std::shared_ptr<Criterion>> TileCriteria;
+        std::vector<std::shared_ptr<Goal>> TileGoals;
+
+        for (int j = 0; j < 6; j++) {
+            TileCriteria.push_back(criteria[tilesCriteria[i][j]]);
+            TileGoals.push_back(goals[tilesGoals[i][j]]);
+        }
+        Resource tileType;
+        switch (type) {
+            case (0): tileType = Resource::CAFFEINE;break;
+            case (1): tileType =Resource::LAB;break;
+            case (2): tileType =Resource::LECTURE;break;
+            case (3): tileType =Resource::STUDY;break;
+            case (4): tileType =Resource::TUTORIAL;break;
+            default: tileType =Resource::NETFLIX;break;
+        }
+        // Create the tile
+        auto tile = std::make_unique<Tile>(tileType, value, i, TileCriteria, TileGoals);// EDIT THIS LATER TO ADD CRITERIA AND GOALS
 
         // Add the tile to the tiles vector
         tiles.push_back(std::move(tile));

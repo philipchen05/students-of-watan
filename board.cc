@@ -6,7 +6,7 @@ using namespace std;
 
 Board::Board(std::unique_ptr<BoardSetup> setup) {
     generateCriteriaAndGoals();
-    tiles = setup->generateTiles();
+    tiles = setup->generateTiles(criteria, goals);
     populateCriterionMap();
 }
 
@@ -15,12 +15,12 @@ Board::Board(std::unique_ptr<BoardSetup> setup) {
 void Board::generateCriteriaAndGoals() {
     // Generate 53 criteria with initial costs (assignment cost)
     for (int i = 0; i < 53; ++i) {
-        criteria.push_back(std::make_unique<Criterion>(i));
+        criteria.push_back(std::make_shared<Criterion>(i));
     }
 
     // Generate 71 goals with fixed costs
     for (int i = 0; i < 71; ++i) {
-        goals.push_back(std::make_unique<Goal>(i));
+        goals.push_back(std::make_shared<Goal>(i));
     }
 }
 
@@ -52,7 +52,7 @@ bool Board::canBuild(int criterionId, const Student& student) const {
     // Check if no one owns adjacent criteria
     for (int adj : adjCriteria) {
         const auto& criterion = criteria[adj];
-        if (!criterion->getOwnerName().empty()) {
+        if (criterion->isOwned()) {
             return false;
         }
     }
@@ -78,6 +78,17 @@ bool Board::emptyAdjacent(int criterionId) const {
     }
     return true;
 }
+
+// Return raw pointer of tile that has geese
+Tile* Board::getGeeseLocation() {
+    for (int i = 0; i < 19; ++i) {
+        if (tiles[i]->hasGeese()) {
+            return tiles[i].get();
+        }
+    }
+    return nullptr;
+}
+
 
 
 void Board::display() const {
