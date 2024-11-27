@@ -42,6 +42,11 @@ void Board::populateCriterionMap() {
 
 // Check if it's valid to build at a specific location
 bool Board::canBuild(int criterionId, const Student& student) const {
+    // Check if criteria is already owned
+    if(criteria[criterionId]->isOwned()) {
+        return false
+    }
+
     // REMOVE LATER
     if (criterionMap.find(criterionId) == criterionMap.end()) {
         return false;
@@ -176,4 +181,14 @@ void Board::display() const {
         }
         
     }
+}
+
+// Returns criteria vector
+const std::vector<std::shared_ptr<Criterion>>& Board::getCriteria() const {
+    return criteria;
+}
+
+// Returns goals vector
+const std::vector<std::shared_ptr<Goal>>& Board::getGoals() const {
+    return goals;
 }

@@ -25,6 +25,8 @@ void TurnBegin::play() {
             fair = true;
         } else if(command == "loaded") {
             fair = false;
+        } else {
+            std::cout << "Invalid command." << std::endl;
         }
         std::cout << "> "; // Prepare for next command input
     }
@@ -122,6 +124,9 @@ void TurnBegin::moveGeese() {
         // Output update on stolen resource
         std::cout << "Student " << player->getColour() << " steals " << resource << " from student " << victim.getColour() << "." << std::endl;
     }
+
+    game->board->getGeeseLocation()->setGeese(false); // Set tile with current geese location to no longer have geese
+    newGeeseTile->setGeese(true); // Set geese to be true on new geese tile
 }
 
 // Update player resources based on dice roll value
@@ -135,9 +140,9 @@ void TurnBegin::updateResources(int roll) {
         prevResources[i] = game->players[i]->getResources();
     }
 
-    // Itereate through tiles (subjects) and notify observers of tiles corresponding with roll value
+    // Itereate through tiles (subjects) and notify observers of tiles corresponding with roll value that don't have geese
     for(const auto& tile : *game->board->tiles) {
-        if(tile->getValue() == roll) {
+        if(tile->getValue() == roll && !tile->hasGeese()) {
             tile->notifyObservers();
         }
     }
@@ -148,7 +153,7 @@ void TurnBegin::updateResources(int roll) {
 }
 
 // Output resource updates; returns true if at least one resource updated
-boolean TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevResources, boolean gain, std::vector<int>* amountsLost) {
+boolean TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevResources, boolean gain, std::vector<int>* amountsLost) const {
     int numPlayers = game->players.size(); // Number of players
     std::vector<Resource> resources = {Resource::CAFFEINE, Resource::LAB, Resource::LECTURE, Resource::STUDY, Resource::TUTORIAL}; // Stores resources in output order
     boolean update = false; // Flag whether or not at least one student's resources were updated
@@ -185,12 +190,12 @@ boolean TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &pre
 }
 
 // Output resource gains; returns true if at least one resource was gained
-boolean TurnBegin::printGains(std::vector<const std::map<Resource, int>*> &prevResources) {
+boolean TurnBegin::printGains(std::vector<const std::map<Resource, int>*> &prevResources) const {
     return printUpdates(prevResources, 1, nullptr);
 }
 
 // Output resource losses; returns true if at least one resource was lost
-boolean TurnBegin::printlosses(std::vector<const std::map<Resource, int>*> &prevResources, std::vector<int>* amountsLost) {
+boolean TurnBegin::printLosses(std::vector<const std::map<Resource, int>*> &prevResources, std::vector<int>* amountsLost) const {
     return printUpdates(prevResources, 0, amountsLost);
 }
 

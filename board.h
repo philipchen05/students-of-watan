@@ -41,6 +41,12 @@ public:
 
     // Display the board
     void display() const;
+
+    // Returns criteria vector
+    const std::vector<std::shared_ptr<Criterion>>& getCriteria() const; 
+
+    // Returns goals vector
+    const std::vector<std::shared_ptr<Goal>>& getGoals() const;
 };
 
 #endif
