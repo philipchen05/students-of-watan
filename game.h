@@ -18,8 +18,8 @@ class Game {
         Game(); // Game constructor
 
         int getNumPlayers() const; // returns number of players
-        Student* getPlayer(int index) const; // returns raw pointer to the index-th player
-        Board* getBoard() const; // returns raw pointer to board 
+        Student* getPlayer(int index); // returns raw pointer to the index-th player
+        Board* getBoard(); // returns raw pointer to board 
 
         void play(); // Method for playing game
 };

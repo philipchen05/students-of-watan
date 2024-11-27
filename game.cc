@@ -47,11 +47,11 @@ int Game::getNumPlayers() const {
     return players.size();
 }
 // returns pointer to board
-Board* Game::getBoard() const {
+Board* Game::getBoard() {
     return board.get();
 }
 // returns raw pointer to index-th player
-Student* Game::getPlayer(int index) const {
+Student* Game::getPlayer(int index) {
     return players.at(index).get();
 }
 
