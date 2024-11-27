@@ -1,6 +1,7 @@
 #include "turnend.h"
 #include <string>
 #include <iostream>
+#include <fstream>
 
 // TurnBegin constructor
 TurnEnd::TurnEnd(Student* player) : Turn{player} {}
@@ -46,7 +47,7 @@ void TurnEnd::play() {
             case "save":
                 string file;
                 std::cin >> file;
-
+                save(file);
                 break;
             case "help":
                 help();
@@ -191,6 +192,18 @@ void TurnEnd::trade(string colour, string give, string take) {
         otherPlayer->removeResources(resource2, 1);
         otherPlayer->addResources(resource1, 1);
     }
+}
+
+// Saves current game state to specified file
+void TurnEnd::save(std::string file) {
+    ofstream out{file}; // Output file stream
+    out << player->getColour() << std::endl;
+    for(const auto& s : game->players) {
+        out << s->getData() << std::endl;
+    }
+    out << game->board->getData() << std::endl;
+    out << game->board->getGeeseLocation()->getLocation() << std::endl;
+    out.close();
 }
 
 // Print help guide

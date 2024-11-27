@@ -31,6 +31,11 @@ int Tile::getValue() const {
     return value;
 }
 
+// returns location of tile
+int Tile::getLocation() const {
+    return location;
+}
+
 // sets whether or not geese are on tile
 void Tile::setGeese(bool geese) {
     this->geese = geese;

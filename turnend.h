@@ -15,6 +15,7 @@ class TurnEnd: public Turn {
         bool canAfford(Achievement* a); // Determine if player can afford desired goal/achievement
         void purchase(Achievement* a); // Deducts cost of given achievement from player resources
         void trade(std::string colour, std::string give, std::string take); // Trade resources with another player
+        void save(std::string file); // Saves current game state to specified file
         void help(); // Print help guide
     public:
         TurnEnd(Student* player); // TurnEnd constructor

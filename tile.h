@@ -26,6 +26,7 @@ class Tile: public Subject {
     bool hasGeese() const; // returns true if there are geese on the tile, otherwise false
     Resource getType() const; // returns type of resource
     int getValue() const; // returns value of tile
+    int getLocation() const; // return location of tile
 
     void setGeese(bool geese); // sets whether or not geese are on tile
  
