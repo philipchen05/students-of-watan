@@ -42,11 +42,13 @@ void Game::play() {
 
 // Helper method for determining if a player has won
 boolean Game::hasWon() const {
+    const int winVP = 10; // 10 victory points needed to win
+
     // Iterate through players
     for(const auto& s : players) {
-        if(s->numVP >= 10) {
-            return true; // Return true if a player has at least 10 victory points (that player has won)
+        if(s->numVP >= winVP) {
+            return true; // Return true if a player has at least the number of victory points needed to win
         }
     }
-    return false; // Otherwise, return false if no player has at least 10 victory points
+    return false; // Otherwise, return false if no player has won
 }

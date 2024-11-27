@@ -9,7 +9,7 @@ class Begin: public GamePhase {
     public:
         Begin(Game* game); // Begin constructor
         ~Begin() = default; // Begin destructor
-        void play() const override; // Method for executing beginning of game events
+        void play() override; // Method for executing beginning of game events
 };
 
 #endif

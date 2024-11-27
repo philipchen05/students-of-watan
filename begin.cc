@@ -6,9 +6,9 @@
 Begin::Begin(Game* game) : GamePhase{game} {}
 
 // Method for executing beginning of game events
-void Begin::play() const {
+void Begin::play() {
+    const int numTurns = game->players.size() * 2; // Total number of turns in beginning of game
     Board* board = game->board; // Pointer to Board
-    int numTurns = game->players.size() * 2; // Total number of turns in beginning of game
 
     // Prompt students for starting assignment location; first in order, then in reverse-order
     for(size_t i = 0; i < numTurns; i++) {
