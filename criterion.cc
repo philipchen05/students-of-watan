@@ -67,11 +67,6 @@ void Criterion::notify(const Subject *sbj) {
     owner->addResources(tile->getType(), getCompletion());
 }
 
-// adds resources earned from the notifying tile to the criterion owner
-void Criterion::notify(const Subject *sbj) {
-    const Tile *t = dynamic_cast<const Tile*>(sbj);
-    owner->addResources(t->getType(), (int)this->completion); // add resources to owner
-}
 // returns an integer [0,3] representing completion level
 int Criterion::getCompletion() const {
     return (int)completion;

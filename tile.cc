@@ -2,13 +2,19 @@
 
 #include <memory>
 
-Tile::Tile(Resource type, int value, int location, const std::vector<std::shared_ptr<Criterion>> &criteria, std::vector<std::shared_ptr<Goal>> goals):
+Tile::Tile(Resource type, int value, int location, const std::vector<std::shared_ptr<Criterion>> &criteria, const std::vector<std::shared_ptr<Goal>>& goals):
     Subject{},
     type{type},
     value{value},
     location{location},
     criteria{criteria},
-    goals{goals} {}
+    goals{goals}
+{
+    // attach all criteria (observers) to this tile (subject)
+    for (auto cptr: criteria) {
+        this->attach(cptr.get());
+    }
+}
 
 // returns true if there are geese on the tile, otherwise false
 bool Tile::hasGeese() const {
