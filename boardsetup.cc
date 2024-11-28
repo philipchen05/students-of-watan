@@ -42,10 +42,11 @@ std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles(
 
     // Create the tiles
     std::vector<std::unique_ptr<Tile>> tiles;
-    std::vector<std::shared_ptr<Criterion>> TileCriteria;
-    std::vector<std::shared_ptr<Goal>> TileGoals;
 
     for (int i = 0; i < 19; ++i) {
+        std::vector<std::shared_ptr<Criterion>> TileCriteria;
+        std::vector<std::shared_ptr<Goal>> TileGoals;
+        
         int type = resources[i];
         int value = values[i];
          
