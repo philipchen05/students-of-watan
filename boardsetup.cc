@@ -81,7 +81,6 @@ std::vector<std::unique_ptr<Tile>> FileSetup::generateTiles(
     const std::vector<std::shared_ptr<Criterion>>& criteria,
     const std::vector<std::shared_ptr<Goal>>& goals) {
 
-    ////////////////
     std::istringstream iss(boardDataString);
     std::vector<int> boardData;
     int num;

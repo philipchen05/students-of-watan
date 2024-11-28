@@ -8,6 +8,8 @@
 #include <set>
 #include "tile.h"
 #include "boardsetup.h"
+#include "student.h"
+#include "resource.h"
 
 class Board {
 private:
@@ -39,6 +41,7 @@ public:
     // Get adjacent criteria for a given criterion ID
     bool emptyAdjacent(int criterionId) const;
 
+    bool ownsGoal(int criterionId, const Student &student) const;
     Tile* getGeeseLocation(); 
 
     // Display the board
@@ -55,6 +58,9 @@ public:
 
     // Returns tiles vector
     const std::vector<std::unique_ptr<Tile>>& getTiles() const;
+
+    // Returns a string of the board data
+    std::string getData() const;
 };
 
 #endif
