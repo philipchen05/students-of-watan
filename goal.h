@@ -19,8 +19,8 @@ class Goal: public Achievement {
     bool achieved; // whether or not this goal was achieved 
     
   public:
-    Goal(int id, std::shared_ptr<Student> owner = nullptr, bool achieved = false); // ctor
-    void achieve(std::shared_ptr<Student> s); // sets goal as achieved by the given student
+    Goal(int id, Student* owner = nullptr, bool achieved = false); // ctor
+    void achieve(Student* s); // sets goal as achieved by the given student
     const std::map<Resource, int>& getUpgradeCost() const override; // returns the cost of upgrading to the next level (i.e. achieving the goal)
     ~Goal();
 };

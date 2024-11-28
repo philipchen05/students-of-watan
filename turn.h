@@ -2,6 +2,7 @@
 #define TURN_H
 
 #include "gamephase.h"
+#include "student.h"
 
 // Turn abstract class
 class Turn: public GamePhase {

@@ -49,7 +49,7 @@ Game::Game(int seed, std::string load, std::string board) : board{nullptr}, play
         for(int i = 0; i < numPlayers; i++) {
             istringstream iss{playerData[i]}; // Input string stream from current player data
             players[i] = std::make_unique<Student>(colours[i]); // Initialize player
-            Student* player& = players[i]; // Pointer to current player
+            Student* player = players[i].get(); // Pointer to current player
 
             // Add resources
             for(Resource r : resources) {
@@ -64,7 +64,7 @@ Game::Game(int seed, std::string load, std::string board) : board{nullptr}, play
             iss >> s;
             while(s != "c") {
                 int id = std::stoi(s); // Goal location
-                Goal* goal = board->getGoals()[id]; // Pointer to goal
+                Goal* goal = (board->getGoals()[id]).get(); // Pointer to goal
                 goal->achieve(player);
                 player->addGoal(goal);
             }
@@ -72,7 +72,7 @@ Game::Game(int seed, std::string load, std::string board) : board{nullptr}, play
             // Add criteria
             while(iss >> s) {
                 int id = std::stoi(s); // Criterion location
-                Criterion* criterion = board->getCriteria()[id] // Pointer to criterion
+                Criterion* criterion = (board->getCriteria()[id]).get(); // Pointer to criterion
                 int completionLevel; // Criterion completion level
                 iss >> completionLevel;
                 criterion->complete(player);
@@ -121,12 +121,12 @@ void Game::play() {
         gamePhase->play();
 
         // Reset game if players wish to play again
-        if(gamePhase->playAgain()) {
+        if(gamePhase->getPlayAgain()) {
             board = std::make_unique<Board>(new RandomSetup{seed}); // Reset Board (including goals and criteria)
             initializePlayer(); // Reset players
             loaded = false;
         }
-    } while(gamePhase->playAgain());
+    } while(gamePhase->getPlayAgain());
 }
 
 

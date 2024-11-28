@@ -14,7 +14,7 @@ void Begin::play() {
     Board* board = game->getBoard(); // Pointer to Board
 
     // Prompt students for starting assignment location; first in order, then in reverse-order
-    for(size_t i = 0; i < numTurns; i++) {
+    for(int i = 0; i < numTurns; i++) {
         int index = numTurns > 3 ? numTurns - 1 - i : i; // Calculate index number of player whose turn it is to choose an assignment
         int intersection; // Stores player input for desired intersection
         Student* player = game->getPlayer(index); // Pointer to current student

@@ -4,6 +4,8 @@
 #include "turn.h"
 #include "dice.h"
 #include "resource.h"
+#include <map>
+#include <random>
 
 // TurnBegin class for managing beginning of player turn
 class TurnBegin: public Turn {

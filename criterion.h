@@ -20,9 +20,9 @@ class Criterion: public Achievement {
     // where cost is a map from each resource to the amount of that resource needed
 
   public:
-    Criterion(int id, std::shared_ptr<Student> owner = nullptr, CompletionLevel completion = CompletionLevel::INCOMPLETE); // ctor
+    Criterion(int id, Student* owner = nullptr, CompletionLevel completion = CompletionLevel::INCOMPLETE); // ctor
 
-    void complete(std::shared_ptr<Student> s); // sets criterion as completed by the given student
+    void complete(Student* s); // sets criterion as completed by the given student
     void improve(); // upgrades criterion to the next completion level (e.g. assignment to midterm)
 
     void notify(const Subject *sbj) override; // adds resources earend from the notifying tile to the owner

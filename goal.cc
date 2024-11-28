@@ -8,13 +8,13 @@ const std::map<Resource, int> Goal::upgradeCost = {
     {Resource::TUTORIAL, 1}
 };
 
-Goal::Goal(int id, std::shared_ptr<Student> owner, bool achieved):
+Goal::Goal(int id, Student* owner, bool achieved):
     Achievement{id, owner},
     achieved{achieved}
 {}
 
 // sets goal as achieved by the given student
-void Goal::achieve(std::shared_ptr<Student> s) {
+void Goal::achieve(Student* s) {
     if (owner != nullptr) {
         std::cout << getOwnerName() << " has already completed goal " << getId() << std::endl;
         return;

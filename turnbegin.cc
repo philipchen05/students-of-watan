@@ -1,10 +1,11 @@
 #include "turnbegin.h"
+#include "tile.h"
 #include <iostream>
 #include <string>
 #include <random>
 
 // TurnBegin constructor
-TurnBegin::TurnBegin(Game* game, Student* player, int seed) : Turn{game, player}, dice{Dice{seed}}, gen{seed} {}
+TurnBegin::TurnBegin(Game* game, Student* player, int seed) : Turn{game, player}, dice{Dice{seed}}, gen{static_cast<uint32_t>(seed)} {}
 
 // Method for playing beginning of turn events
 void TurnBegin::play() {
@@ -34,7 +35,7 @@ void TurnBegin::play() {
     // Roll dice
     int roll = dice.roll(fair);
 
-    if(roll = geeseRoll) {
+    if(roll == geeseRoll) {
         moveGeese(); // Move geese if 7 is rolled
     } else {
         updateResources(roll); // Otherwise simply update player resources
@@ -43,17 +44,19 @@ void TurnBegin::play() {
 
 // Move geese to new location
 void TurnBegin::moveGeese() {
+    const int numPlayers = game->getNumPlayers(); // Number of players
     const int geeseMin = 10; // Minimum number of total resources for geese to be able to "steal" from a player
     std::vector<int> amountsLost; // Resource amounts lost in player index order
 
     // Store previous resource values of each student to compare with updated values later
     std::vector<const std::map<Resource, int>*> prevResources(numPlayers);
-    for(size_t i = 0; i < numPlayers; i++) {
-        prevResources[i] = game->players[i]->getResources();
+    for(int i = 0; i < numPlayers; i++) {
+        prevResources[i] = game->getPlayer(i)->getResources();
     }
 
     // Each player with more than 10 total resources randomly loses half
-    for(const auto& s : game->players) {
+    for(int i = 0; i < numPlayers; i++) {
+        Student* s = game->getPlayer(i); // Pointer to current player
         int totalResources = s->getTotalResources(); // Current player's total resources
         if(totalResources >= geeseMin) {
             int numLost = totalResources - (totalResources / 2)
@@ -72,10 +75,11 @@ void TurnBegin::moveGeese() {
     std::cout << "Choose where to place the GEESE." << std::endl; // Prompt player for new geese location
     std::cout << "> ";
     std::cin >> newGeeseLocation;
-    newGeeseTile = (*game->board->tiles)[newGeeseLocation];
+    newGeeseTile = (*game->getBoard()->tiles)[newGeeseLocation];
 
     // Determine stealable students by iterating through all students one by one
-    for(const auto& s : game->players) {
+    for(int i = 0; i < numPlayers; i++) {
+        Student* s = game->getPlayer(i); // Pointer to current player
         if(s != player) { // Skip the student who currently has their turn
             // Iterate through each criteria on the new geese tile to see if any are owner by the current student
             for(Criterion* c : newGeeseTile->criteria) {
@@ -96,7 +100,7 @@ void TurnBegin::moveGeese() {
     } else {
         // Print stealable students
         std::cout << "Student " << s->getColour() << " can choose to steal from ";
-        for(size_t i = 0; i < numStealable; i++) {
+        for(int i = 0; i < numStealable; i++) {
             std::cout << stealableStudents[i];
             if(i < numStealable - 1) {
                 std::cout << ", ";
@@ -125,43 +129,43 @@ void TurnBegin::moveGeese() {
         std::cout << "Student " << player->getColour() << " steals " << resource << " from student " << victim.getColour() << "." << std::endl;
     }
 
-    game->board->getGeeseLocation()->setGeese(false); // Set tile with current geese location to no longer have geese
+    game->getBoard()->getGeeseLocation()->setGeese(false); // Set tile with current geese location to no longer have geese
     newGeeseTile->setGeese(true); // Set geese to be true on new geese tile
 }
 
 // Update player resources based on dice roll value
 void TurnBegin::updateResources(int roll) {
-    const int numPlayers = game->players.size(); // Number of players
-    const string playerMessage = " gained:";
+    const int numPlayers = game->getNumPlayers(); // Number of players
+    const std::string playerMessage = " gained:";
 
     // Store previous resource values of each student to compare with updated values later
     std::vector<const std::map<Resource, int>*> prevResources(numPlayers);
     for(size_t i = 0; i < numPlayers; i++) {
-        prevResources[i] = game->players[i]->getResources();
+        prevResources[i] = game->getPlayer(i)->getResources();
     }
 
     // Itereate through tiles (subjects) and notify observers of tiles corresponding with roll value that don't have geese
-    for(const auto& tile : *game->board->tiles) {
+    for(const auto& tile : *game->getBoard()->tiles) {
         if(tile->getValue() == roll && !tile->hasGeese()) {
             tile->notifyObservers();
         }
     }
 
-    if(!printUpdates(prevResources, playerMessage)) {
+    if(!printUpdates(prevResources, nullptr)) {
         std::cout << "No students gained resources." << std::endl; // Output if no students gained resources
     }
 }
 
 // Output resource updates; returns true if at least one resource updated
 bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevResources, bool gain, std::vector<int>* amountsLost) const {
-    int numPlayers = game->players.size(); // Number of players
+    int numPlayers = game->getNumPlayers(); // Number of players
     std::vector<Resource> resources = {Resource::CAFFEINE, Resource::LAB, Resource::LECTURE, Resource::STUDY, Resource::TUTORIAL}; // Stores resources in output order
     bool update = false; // Flag whether or not at least one student's resources were updated
     int lostIndex = 0; // Index for amountsLost vector
 
     // Compare new resource values of each student with previous values to determine resource updates for output
     for(size_t i = 0; i < numPlayers; i++) {
-        Student* player = game->players[i]; // Pointer to current student
+        Student* player = game->getPlayer(i); // Pointer to current student
         const std::map<Resource, int>& curResources = player->getResources(); // Newly updated resources of current student
         bool playerUpdated = false; // Flag for whether or not current student resources were updated
         for(size_t j = 0; j < resources.size(); j++) {
@@ -173,7 +177,7 @@ bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevRe
                 if(!playerUpdated) {
                     std::cout << "Student " << player->getColour;
                     if(gain) {
-                        std::cout << " gained:"
+                        std::cout << " gained:";
                     } else {
                         std::cout << " loses " << (*amountsLost)[lostIndex++] << " resources to the geese. They lose:";
                     }

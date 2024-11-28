@@ -2,11 +2,11 @@
 #include <iostream>
 
 // End constructor
-End::End() : response{""} {}
+End::End(Game* game) : GamePhase{game}, playAgain{false} {}
 
 // Method for executing end of game events
 void End::play() {
-    string res; // Stores response from player(s)
+    std::string res; // Stores response from player(s)
 
     // Prompt player(s) for input
     std::cout << "Would you like to play again?" << std::endl;
@@ -22,6 +22,6 @@ void End::play() {
 }
 
 // Returns true if players wish to play again
-bool End::playAgain() const {
+bool End::getPlayAgain() const {
     return playAgain;
 }

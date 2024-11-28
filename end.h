@@ -8,10 +8,10 @@ class End: public GamePhase {
     private:
         bool playAgain; // Whether or not players wish to play again
     public:
-        End(); // End constructor
+        End(Game* game); // End constructor
         ~End() = default; // End destructor
         void play() override; // Method for executing end of game events
-        bool playAgain() const; // Getter method for playAgain
+        bool getPlayAgain() const; // Getter method for playAgain
 };
 
 #endif

@@ -1,9 +1,8 @@
 #ifndef GAMEPHASE_H
 #define GAMEPHASE_H
 
+#include "game.h"
 #include <memory>
-
-class Game;
 
 // GamePhase abstract class
 class GamePhase {

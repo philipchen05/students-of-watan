@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-Achievement::Achievement(int id, std::shared_ptr<Student> owner):
+Achievement::Achievement(int id, Student* owner):
     Observer{},
     id{id},
     owned{(owner != nullptr)}, // true if given student instance

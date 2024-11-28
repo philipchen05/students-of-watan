@@ -14,9 +14,9 @@ class Achievement: public Observer {
   protected:
     int id; // identifying number
     bool owned; // true if achievement has an owner, otherwise false
-    std::shared_ptr<Student> owner; // student that has completed/achieved this achievement
+    Student* owner; // student that has completed/achieved this achievement
 
-    Achievement(int id, std::shared_ptr<Student> owner = nullptr); // constructor
+    Achievement(int id, Student* owner = nullptr); // constructor
 
   public:
     virtual void notify(const Subject *sbj); // called by subject

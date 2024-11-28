@@ -31,13 +31,13 @@ const std::map<Criterion::CompletionLevel, std::map<Resource, int>> Criterion::u
     },
 };
 
-Criterion::Criterion(int id, std::shared_ptr<Student> owner, CompletionLevel completion):
+Criterion::Criterion(int id, Student* owner, CompletionLevel completion):
     Achievement{id, owner},
     completion{completion}
 {}
 
 // makes criterion completed by the given student (which becomes criterion's owner)
-void Criterion::complete(std::shared_ptr<Student> s) {
+void Criterion::complete(Student* s) {
     if (owner != nullptr) {
         std::cout << getOwnerName() << " has already completed criterion " << getId() << std::endl;
         return;
