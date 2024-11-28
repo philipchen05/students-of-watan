@@ -10,8 +10,10 @@ Tile::Tile(Resource type, int value, int location, const std::vector<std::shared
     criteria{criteria},
     goals{goals}
 {
+    std::cerr << "Tile::Tile (type: " << resourceToString(type) << ", val: " << value << ", loc: " << location << "):" << std::endl; // DEBUG - MUST DELETE
     // attach all criteria (observers) to this tile (subject)
     for (auto cptr: criteria) {
+        std::cerr << "\tCriterion (id: " << cptr->getId() << ")" << std::endl; // DEBUG - MUST DELETE
         this->attach(cptr.get());
     }
 }

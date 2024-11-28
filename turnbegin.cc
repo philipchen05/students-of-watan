@@ -25,7 +25,7 @@ void TurnBegin::play() {
         // Set fair boolean value based on command
         if(command == "fair") {
             fair = true;
-        } else if(command == "loaded") {
+        } else if(command == "load") {
             fair = false;
         } else {
             std::cout << "Invalid command." << std::endl;
@@ -144,13 +144,16 @@ void TurnBegin::updateResources(int roll) {
     for(int i = 0; i < numPlayers; i++) {
         prevResources[i] = &(game->getPlayer(i)->getResources());
     }
+    std::cerr << "got prev resources" << std::endl; // DEBUG - MUST DELETE
 
     // Itereate through tiles (subjects) and notify observers of tiles corresponding with roll value that don't have geese
     for(const auto& tile : game->getBoard()->getTiles()) {
         if(tile->getValue() == roll && !tile->hasGeese()) {
+            std::cerr << "notifying tile (loc:" << tile->getLocation() << ", val: " << tile->getValue() << ")" << std::endl; // DEBUG - MUST DELETE
             tile->notifyObservers();
         }
     }
+    std::cerr << "notified all tiles" << std::endl; // DEBUG - MUST DELETE
 
     if(!printUpdates(prevResources, 1, nullptr)) {
         std::cout << "No students gained resources." << std::endl; // Output if no students gained resources
@@ -159,6 +162,7 @@ void TurnBegin::updateResources(int roll) {
 
 // Output resource updates; returns true if at least one resource updated
 bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevResources, bool gain, std::vector<int>* amountsLost) const {
+    std::cerr << "in printUpdates" << std::endl; // DEBUG - MUST DELETE
     int numPlayers = game->getNumPlayers(); // Number of players
     std::vector<Resource> resources = {Resource::CAFFEINE, Resource::LAB, Resource::LECTURE, Resource::STUDY, Resource::TUTORIAL}; // Stores resources in output order
     bool update = false; // Flag whether or not at least one student's resources were updated
@@ -167,6 +171,7 @@ bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevRe
     // Compare new resource values of each student with previous values to determine resource updates for output
     for(int i = 0; i < numPlayers; i++) {
         Student* player = game->getPlayer(i); // Pointer to current student
+        std::cerr << "student " << player->getColour() << std::endl; // DEBUG - MUST DELETE
         const std::map<Resource, int>& curResources = player->getResources(); // Newly updated resources of current student
         bool playerUpdated = false; // Flag for whether or not current student resources were updated
         for(size_t j = 0; j < resources.size(); j++) {

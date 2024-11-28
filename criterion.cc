@@ -42,6 +42,7 @@ void Criterion::complete(Student* s) {
         std::cout << getOwnerName() << " has already completed criterion " << getId() << std::endl;
         return;
     }
+    std::cerr << "Criterion::complete() - setting onwer = " << s << std::endl; // DEBUG - MUST DELETE
     owner = s;
     completion = Criterion::CompletionLevel::ASSIGNMENT;
 }
@@ -63,8 +64,12 @@ void Criterion::improve() {
 
 // adds resources earned from the notifying tile to the owner
 void Criterion::notify(const Subject *sbj) {
+    std::cerr << "[Criterion] (id: " << getId() << ", ptr: " << this << ") notify() - entered" << std::endl; // DEBUG - MUST DELTE
     const Tile *tile = dynamic_cast<const Tile*>(sbj);
+    std::cerr << "[Criterion] (" << getId() << ") notify() - casted subject to tile" << std::endl;// DEBUG - MUST DELTE
+    std::cerr << "[Criterion] (" << getId() << ") notify() - owner = " << owner << std::endl;// DEBUG - MUST DELTE
     owner->addResources(tile->getType(), getCompletion());
+    std::cerr << "[Criterion] (" << getId() << ") notify() - added resources to owner" << std::endl;// DEBUG - MUST DELTE
 }
 
 // returns an integer [0,3] representing completion level

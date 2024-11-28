@@ -1,6 +1,7 @@
 #include "begin.h"
 #include "gamephase.h"
 #include "game.h"
+#include "board.h"
 
 #include <iostream>
 #include <string>
@@ -30,6 +31,7 @@ void Begin::play() {
         }
         
         // Complete specified criterion under current player
+        std::cerr << "Begin::play() - Criterion Id = " << intersection << " criterion ptr from Board::getCriterion = " << board->getCriterion(intersection) << std::endl; // DEBUG - MUST DELETE
         board->getCriterion(intersection)->complete(player);
     }
 

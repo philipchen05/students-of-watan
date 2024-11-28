@@ -2,6 +2,9 @@ features.md
 *UnitMake
 *Unit*
 
+Makefile[0-9]*
+watan
+
 gcm.cache/
 
 *.o
