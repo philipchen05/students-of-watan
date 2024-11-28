@@ -47,6 +47,8 @@ std::string resourceToString(Resource type) {
             return"LAB";
         case Resource::TUTORIAL:
             return "TUTORIAL";
+        case Resource::LECTURE:
+            return "LECTURE";
         default:
             return "NETFLIX";
     }

@@ -161,8 +161,11 @@ void Board::display() const {
             index++;
         }
         else if (ch=='R') { 
-            std::cout << tiles[rollIndex]->getValue();
-            if (tiles[rollIndex]->getValue() >= 10) {inputFile.get(ch);}
+            if (tiles[rollIndex]->getValue() == 0) {std::cout << " ";}
+            else {
+                std::cout << tiles[rollIndex]->getValue();
+                if (tiles[rollIndex]->getValue() >= 10) {inputFile.get(ch);}
+            }
             rollIndex++;
         }
         else {
