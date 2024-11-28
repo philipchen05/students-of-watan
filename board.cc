@@ -14,19 +14,19 @@ Board::Board(std::unique_ptr<BoardSetup> setup) {
 // Generate criteria and goals
 void Board::generateCriteriaAndGoals() {
     // Generate 53 criteria with initial costs (assignment cost)
-    for (int i = 0; i < 53; ++i) {
+    for (int i = 0; i < 54; ++i) {
         criteria.push_back(std::make_shared<Criterion>(i));
     }
 
     // Generate 71 goals with fixed costs
-    for (int i = 0; i < 71; ++i) {
+    for (int i = 0; i < 72; ++i) {
         goals.push_back(std::make_shared<Goal>(i));
     }
 }
 
 void Board::populateCriterionMap() {
     // TEMP CODE
-    for (int i = 0; i < 53; ++i) {
+    for (int i = 0; i < 54; ++i) {
         std::set<int> adjacentCriteria;
         std::set<int> adjacentGoals;
         for (int j = -1; j <= 1; ++j) { 
@@ -44,6 +44,7 @@ void Board::populateCriterionMap() {
 bool Board::canBuild(int criterionId, const Student& student) const {
     // Check if criteria is already owned
     if (getCriterion(criterionId)->isOwned()) {return false;}
+    // cout << "Can build: isOwned " << getCriterion(criterionId)->isOwned() << endl;
 
     const auto& [adjCriteria, adjGoals] = criterionMap.at(criterionId);
 
@@ -109,20 +110,24 @@ void Board::display() const {
         if (ch == 'G') {
             if (goals[goalIndex]->isOwned()) {
                 cout << goals[goalIndex]->getOwnerName()[0] << "A";
+                inputFile.get(ch);
             } else {
                 std::cout << goals[goalIndex]->getId();
+                if (goals[goalIndex]->getId() >= 10) {inputFile.get(ch);}
 
             }
+            // cout << "goal index: " << goalIndex << endl;
             goalIndex++;
 
         }   
         else if (ch=='T') {
             std::string typeString = resourceToString(tiles[tileIndex]->getType());
             cout << typeString;
-            for (int i = 0; i < typeString.length() - 1; i++) {inputFile.get(ch);}
+            for (std::size_t i = 0; i < typeString.length() - 1; i++) {inputFile.get(ch);}
             tileIndex++;
         }
         else if (ch=='C') {
+        // cout << "display: isOwned " << criteria[criteriaIndex]->isOwned() << endl; 
             if (criteria[criteriaIndex]->isOwned()) {
                 cout << criteria[criteriaIndex]->getOwnerName()[0];
                 switch (criteria[criteriaIndex]->getCompletion())
@@ -141,19 +146,23 @@ void Board::display() const {
                     std::cout << criteria[criteriaIndex]->getId();
                     break;
                 }
-
+                inputFile.get(ch);
             } else {
                 std::cout << criteria[criteriaIndex]->getId();
+                if (criteria[criteriaIndex]->getId() >= 10) {inputFile.get(ch);}
 
             }
+            // cout << "criteria index: " << criteriaIndex << endl;
             criteriaIndex++;
         }
         else if (ch=='I') {
             std::cout << index;
+            if (index >= 10) {inputFile.get(ch);}
             index++;
         }
         else if (ch=='R') { 
             std::cout << tiles[rollIndex]->getValue();
+            if (tiles[rollIndex]->getValue() >= 10) {inputFile.get(ch);}
             rollIndex++;
         }
         else {
@@ -161,6 +170,8 @@ void Board::display() const {
         }
         
     }
+    inputFile.close();
+
 }
 
 // returns raw pointer to the criterion with the given id
