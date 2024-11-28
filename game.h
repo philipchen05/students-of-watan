@@ -35,6 +35,8 @@ class Game {
         Board* getBoard(); // returns raw pointer to board 
 
         void play(); // Method for playing game
+
+        static const int getDefaultSeed() { return defaultSeed; }; // Returns default seed value
 };
 
 #endif

@@ -43,7 +43,7 @@ std::vector<std::shared_ptr<Criterion>>& Tile::getCriteria() {
 
 // return goals associated with tile
 std::vector<std::shared_ptr<Goal>>& Tile::getGoals() {
-    return goals
+    return goals;
 }
 
 // sets whether or not geese are on tile

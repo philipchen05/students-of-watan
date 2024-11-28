@@ -2,7 +2,7 @@
 
 // Main method for executing program
 int main(int argc, char* argv[]) {
-    int seed = Game::defaultSeed; // Game seed for random number generation
+    int seed = Game::getDefaultSeed(); // Game seed for random number generation
     std::string load = ""; // Load file
     std::string board = ""; // Board file
 
