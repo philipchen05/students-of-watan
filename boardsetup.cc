@@ -1,12 +1,13 @@
-#include <algorithm> // For std::shuffle
 #include <random>    // For random number generation
 #include <vector>
 #include <memory>
 #include <fstream>
 #include <sstream>
 #include "boardsetup.h"
+#include <cstdlib> // For rand()
 #include "tile.h" // Include your Tile class header file
 #include "resource.h"
+
 
 RandomSetup::RandomSetup(int seed) : seed{seed} {}
 
@@ -26,19 +27,15 @@ std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles(
 
     // Predefine the values according to constraints
     std::vector<int> values = {
-        0,                           // One 0
+        // 0,                           // One 0
         2,                           // One 2
         12,                          // One 12
         3, 3, 4, 4, 5, 5, 6, 6,      // Two each of 3-6
         8, 8, 9, 9, 10, 10, 11, 11   // Two each of 8-11
     };
-
-    // Initialize random engine with the given seed
-    std::default_random_engine rng(seed);
-
-    // Shuffle resources and values using the seeded random engine
-    std::shuffle(resources.begin(), resources.end(), rng);
-    std::shuffle(values.begin(), values.end(), rng);
+    
+    // Seed random number generator
+    std::srand(seed);
 
     // Create the tiles
     std::vector<std::unique_ptr<Tile>> tiles;
@@ -46,22 +43,37 @@ std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles(
     std::vector<std::shared_ptr<Goal>> TileGoals;
 
     for (int i = 0; i < 19; ++i) {
-        int type = resources[i];
-        int value = values[i];
-         
+        int resourceIndex = std::rand() % resources.size();
+        int type = resources[resourceIndex];
+       
+        // Assign value based on the resource
+        int value = 0; // Default value for Netflix (resource 5)
+        if (type != 5) {
+            // Randomly pick a value for non-Netflix resources
+            int valueIndex = std::rand() % values.size();
+            value = values[valueIndex];
+
+            // Remove the selected value from the values vector
+            values.erase(values.begin() + valueIndex);
+        }
+
+        // Remove the selected resource from the vector
+        resources.erase(resources.begin() + resourceIndex);
+
+        
         for (int j = 0; j < 6; j++) {
             TileCriteria.push_back(criteria[tilesCriteria[i][j]]);
             TileGoals.push_back(goals[tilesGoals[i][j]]);
         }
         
         Resource tileType = resourceFromInt(type);
+
         // Create the tile
         auto tile = std::make_unique<Tile>(tileType, value, i, TileCriteria, TileGoals);
 
         // Add the tile to the tiles vector
         tiles.push_back(std::move(tile));
     }
-
     return tiles; // Return the constructed vector of tiles
 }
 
