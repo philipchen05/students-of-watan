@@ -4,7 +4,7 @@
 #include <random>
 
 // TurnBegin constructor
-TurnBegin::TurnBegin(Student* player) : Turn{player}, dice{Dice{}} {}
+TurnBegin::TurnBegin(Student* player, mt19937& gen) : Turn{player}, dice{Dice{}}, gen{gen} {}
 
 // Method for playing beginning of turn events
 void TurnBegin::play() {
@@ -204,8 +204,6 @@ Resource TurnBegin::loseResource(const Student& s) {
     std::vector<Resource> resourceOrder = {Resource::CAFFEINE, Resource::LAB, Resource::LECTURE, Resource::STUDY, Resource::TUTORIAL}; // Order of resources
     const size_t numResources = resourceOrder.size(); // Total number of distinct resources
     Resource resource; // Resource lost
-    std::random_device rd; // Generate non-deterministic seed
-    std::mt19937 gen{rd()}; // Initialize random number generator with seed
     std::uniform_int_distribution<> distrib{1, s.getTotalResources()}; // Range between 1 and total number of resources for proportional probabilities
     const std::map<Resource, int>& resources = s.getResources(); // Student's resources
     std::vector<int> prefixSum(numResources); // Prefix sum array of Student resource amounts (order is CAFFEINE, LAB, LECTURE, STUDY, TUTORIAL)
