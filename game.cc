@@ -14,7 +14,7 @@ Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullpt
         if(boardFile == "") {
             board = std::make_unique<Board>(new RandomSetup{seed}); // Case: generate board from scratch
         } else {
-            board = std::make_unique<Board>(new FileSetup{board}); // Case: load saved board
+            board = std::make_unique<Board>(new FileSetup{boardFile}); // Case: load saved board
         }
         // Initialize new Students in index order
         initializePlayers();

@@ -18,6 +18,9 @@ Resource resourceFromInt(std::string s);
 
 Resource resourceFromInt(int value);
 
+std::string resourceToString(Resource type);
+
+
 // Overloaded operator<< method for outputting Resource types
 std::ostream &operator<<(std::ostream &out, const Resource &r);
 

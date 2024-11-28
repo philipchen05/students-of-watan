@@ -117,24 +117,7 @@ void Board::display() const {
 
         }   
         else if (ch=='T') {
-            switch (tiles[tileIndex]->getType())
-            {
-            case Resource::CAFFEINE:
-                cout << "CAFFEINE";
-                break;
-            case Resource::STUDY:
-                cout << "STUDY";
-                break;
-            case Resource::LAB:
-                cout << "LAB";
-                break;
-            case Resource::TUTORIAL:
-                cout << "TUTORIAL";
-                break;
-            default:
-                cout << "NETFLIX";
-                break;
-            }
+            cout << resourceToString(tiles[tileIndex]->getType());
             tileIndex++;
         }
         else if (ch=='C') {

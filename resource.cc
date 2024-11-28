@@ -36,6 +36,21 @@ Resource resourceFromInt(int value) {
     }
 }
 
+std::string resourceToString(Resource type) {
+    switch (type)
+    {
+        case Resource::CAFFEINE:
+            return "CAFFEINE";
+        case Resource::STUDY:
+            return "STUDY";
+        case Resource::LAB:
+            return"LAB";
+        case Resource::TUTORIAL:
+            return "TUTORIAL";
+        default:
+            return "NETFLIX";
+    }
+}
 
 // Overloaded operator<< method for outputting Resource types
 std::ostream &operator<<(std::ostream &out, const Resource &r) {
