@@ -134,13 +134,16 @@ void Game::play() {
 int Game::getNumPlayers() const {
     return players.size();
 }
+
 // returns pointer to board
 Board* Game::getBoard() {
     return board.get();
 }
+
 // returns raw pointer to index-th player
 Student* Game::getPlayer(int index) {
     return players.at(index).get();
+}
 
 // Initialize players at beginning of game
 void Game::initializePlayers() {

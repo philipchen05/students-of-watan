@@ -5,7 +5,7 @@
 class DiceRoll {
     public:
         virtual ~DiceRoll() = default; // virtual DiceRoll destructor
-        virtual int roll() const = 0; // Roll method
+        virtual int roll() = 0; // Roll method
 };
 
 #endif

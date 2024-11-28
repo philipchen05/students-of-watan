@@ -6,7 +6,7 @@
 // LoadedRoll class for loaded dice roll algorithm
 class LoadedRoll: public DiceRoll {
     public:
-        int roll() const override; // Roll method
+        int roll() override; // Roll method
 };
 
 #endif

@@ -1,11 +1,10 @@
 #include "fairroll.h"
-#include <random>
 
 // FairRoll constructor
-FairRoll::FairRoll(int seed) : gen{seed} {}
+FairRoll::FairRoll(int seed) : gen{static_cast<uint32_t>(seed)} {}
 
 // Roll method
-int FairRoll::roll() const {
+int FairRoll::roll() {
     std::uniform_int_distribution<> distrib{1, 6}; // Range between 1 and 6 (inclusive)
     int rollSum = 0;
 
