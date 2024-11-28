@@ -3,8 +3,10 @@
 
 // Dice class
 class Dice {
+    private:
+        int seed; // Seed for random number generation
     public:
-        Dice() = default; // Dice constructor
+        Dice(int seed); // Dice constructor
         ~Dice() = default; // Dice destructor
         int roll(bool fair) const; // Dice roll method
 };

@@ -1,12 +1,16 @@
 #include "achievement.h"
 #include "student.h"
 
+#include <iostream>
+
 Achievement::Achievement(int id, std::shared_ptr<Student> owner):
     Observer{},
     id{id},
     owned{(owner != nullptr)}, // true if given student instance
     owner{owner}
 {}
+
+void Achievement::notify(const Subject *sbj) {}
 
 // true if achievement has owner, otherwise false
 bool Achievement::isOwned() const {

@@ -18,7 +18,7 @@ class TurnEnd: public Turn {
         void save(std::string file); // Saves current game state to specified file
         void help(); // Print help guide
     public:
-        TurnEnd(Student* player); // TurnEnd constructor
+        TurnEnd(Game* game, Student* player); // TurnEnd constructor
         virtual ~TurnEnd() = default; // TurnEnd destructor
         void play() override; // Method for playing end of turn events
 };

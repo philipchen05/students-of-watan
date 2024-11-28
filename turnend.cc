@@ -4,7 +4,7 @@
 #include <fstream>
 
 // TurnBegin constructor
-TurnEnd::TurnEnd(Student* player) : Turn{player} {}
+TurnEnd::TurnEnd(Game* game, Student* player) : Turn{game, player} {}
 
 // Method for playing end of turn events
 void TurnEnd::play() {
