@@ -11,9 +11,9 @@ class Subject {
   protected:
     void attach( Observer* o );
     void detach( Observer* o );
-    void notifyObservers();
-
+    
   public:
+    void notifyObservers();
     virtual ~Subject() = default;
 };
 

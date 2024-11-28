@@ -190,3 +190,9 @@ const std::vector<std::shared_ptr<Criterion>>& Board::getCriteria() const {
 const std::vector<std::shared_ptr<Goal>>& Board::getGoals() const {
     return goals;
 }
+
+
+// Returns tiles vector
+const std::vector<std::unique_ptr<Tile>>& Board::getTiles() const {
+    return tiles;
+}

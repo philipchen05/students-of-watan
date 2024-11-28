@@ -52,7 +52,7 @@ void TurnBegin::moveGeese() {
     // Store previous resource values of each student to compare with updated values later
     std::vector<const std::map<Resource, int>*> prevResources(numPlayers);
     for(int i = 0; i < numPlayers; i++) {
-        prevResources[i] = game->getPlayer(i)->getResources();
+        prevResources[i] = &(game->getPlayer(i)->getResources());
     }
 
     // Each player with more than 10 total resources randomly loses half
@@ -76,14 +76,14 @@ void TurnBegin::moveGeese() {
     std::cout << "Choose where to place the GEESE." << std::endl; // Prompt player for new geese location
     std::cout << "> ";
     std::cin >> newGeeseLocation;
-    newGeeseTile = (*game->getBoard()->tiles)[newGeeseLocation];
+    newGeeseTile = game->getBoard()->getTiles()[newGeeseLocation].get();
 
     // Determine stealable students by iterating through all students one by one
     for(int i = 0; i < numPlayers; i++) {
         Student* s = game->getPlayer(i); // Pointer to current player
         if(s != player) { // Skip the student who currently has their turn
             // Iterate through each criteria on the new geese tile to see if any are owner by the current student
-            for(Criterion* c : newGeeseTile->getCriteria()) {
+            for(const auto& c : newGeeseTile->getCriteria()) {
                 if(c->getOwnerName() == s->getColour()) {
                     if(s->getTotalResources() > 0) {
                         stealableStudents.push_back(s); // Only mark student as stealable if they have more than 0 resources
@@ -142,17 +142,17 @@ void TurnBegin::updateResources(int roll) {
     // Store previous resource values of each student to compare with updated values later
     std::vector<const std::map<Resource, int>*> prevResources(numPlayers);
     for(int i = 0; i < numPlayers; i++) {
-        prevResources[i] = game->getPlayer(i)->getResources();
+        prevResources[i] = &(game->getPlayer(i)->getResources());
     }
 
     // Itereate through tiles (subjects) and notify observers of tiles corresponding with roll value that don't have geese
-    for(const auto& tile : *game->getBoard()->tiles) {
+    for(const auto& tile : game->getBoard()->getTiles()) {
         if(tile->getValue() == roll && !tile->hasGeese()) {
             tile->notifyObservers();
         }
     }
 
-    if(!printUpdates(prevResources, nullptr)) {
+    if(!printUpdates(prevResources, 1, nullptr)) {
         std::cout << "No students gained resources." << std::endl; // Output if no students gained resources
     }
 }
@@ -171,7 +171,7 @@ bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevRe
         bool playerUpdated = false; // Flag for whether or not current student resources were updated
         for(size_t j = 0; j < resources.size(); j++) {
             Resource curResource = resources[j]; // Current resource
-            int resourceDiff = abs(curResources[curResource] - prevResources[i][curResource]); // Difference between updated and previous amount of current resource
+            int resourceDiff = abs(curResources.at(curResource) - prevResources[i]->at(curResource)); // Difference between updated and previous amount of current resource
             // If difference > 0, output difference as an update
             if(resourceDiff > 0) {
                 // Print student identification message only once
@@ -216,7 +216,7 @@ Resource TurnBegin::loseResource(Student& s) {
     // Initialize prefix sum array values
     int sum = 0;
     for(size_t i = 0; i < numResources; i++) {
-        sum += resources[resourceOrder[i]];
+        sum += resources.at(resourceOrder[i]);
         prefixSum[i] = sum;
     }
 

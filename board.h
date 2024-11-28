@@ -52,6 +52,9 @@ public:
     
     // Returns goals vector
     const std::vector<std::shared_ptr<Goal>>& getGoals() const;
+
+    // Returns tiles vector
+    const std::vector<std::unique_ptr<Tile>>& getTiles() const;
 };
 
 #endif
