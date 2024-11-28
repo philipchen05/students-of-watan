@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "board.h"
+#include "resource.h"
 using namespace std;
 
 Board::Board(std::unique_ptr<BoardSetup> setup) {
@@ -46,27 +47,28 @@ bool Board::canBuild(int criterionId, const Student& student) const {
     if (getCriterion(criterionId)->isOwned()) {return false;}
     // cout << "Can build: isOwned " << getCriterion(criterionId)->isOwned() << endl;
 
+    if (!emptyAdjacent(criterionId)) {return false;}
+
+    // Check if the student owns at least one adjacent goal
+    if (!ownsGoal(criterionId, student)) {return false;}
+
+    return true;
+}
+
+bool Board::isValid(int criterionId) const {
+    return true;
+}
+
+bool Board::ownsGoal(int criterionId, const Student& student) const {
     const auto& [adjCriteria, adjGoals] = criterionMap.at(criterionId);
-
-    // Check if no one owns adjacent criteria
-    for (int adj : adjCriteria) {
-        if (getCriterion(adj)->isOwned()) {
-            return false;
-        }
-    }
-
     // Check if the student owns at least one adjacent goal
     for (int adj : adjGoals) {
         if (getGoal(adj)->getOwnerName() == student.getColour()) {
             return true;
         }
     }
-
     return false;
-}
 
-bool Board::isValid(int criterionId) const {
-    return true;
 }
 
 // Returns true if no adjacent criteria to a given a criterionId is owned 
@@ -211,4 +213,17 @@ const std::vector<std::shared_ptr<Goal>>& Board::getGoals() const {
 // Returns tiles vector
 const std::vector<std::unique_ptr<Tile>>& Board::getTiles() const {
     return tiles;
+}
+
+
+std::string Board::getData() const {
+    std::string boardData = "";
+    for (const auto& tile : tiles) {
+        boardData += std::to_string(resourceToInt(tile->getType()));
+        boardData += " ";
+        boardData += std::to_string(tile->getValue());
+        if (tile->getLocation() != 18) {boardData += " ";}
+        
+    }
+    return boardData;
 }

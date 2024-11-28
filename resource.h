@@ -22,6 +22,9 @@ Resource resourceFromInt(int value);
 // Converts Resource to string
 std::string resourceToString(Resource type);
 
+// Converts Resource to int
+int resourceToInt(Resource type);
+
 // Overloaded operator<< method for outputting Resource types
 std::ostream &operator<<(std::ostream &out, const Resource &r);
 
