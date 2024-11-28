@@ -125,4 +125,9 @@ void Student::printCriteria() const {
     }
 }
 
+// returns number of victory points
+int Student::getVP() const {
+    return numVP;
+}
+
 Student::~Student() {}

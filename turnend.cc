@@ -94,7 +94,7 @@ void TurnEnd::achieve(int id) {
     Goal* goal = game->getBoard()->getGoals()[id].get(); // Pointer to goal
 
     // Check if space is valid
-    if(!game->getBoard()->canBuildGoal(id, *player)) {
+    if(!game->getBoard()->canBuild(id, *player)) {
         std::cout << "You cannot build here." << std::endl;
         return;
     }
@@ -116,7 +116,7 @@ void TurnEnd::complete(int id) {
     Criterion* criterion = game->getBoard()->getCriteria()[id].get(); // Pointer to criterion
 
     // Check if space is valid
-    if(!game->getBoard()->canBuildCriterion(id, *player)) {
+    if(!game->getBoard()->canBuild(id, *player)) {
         std::cout << "You cannot build here." << std::endl;
         return;
     }
@@ -194,7 +194,7 @@ void TurnEnd::save(std::string file) {
         Student* s = game->getPlayer(i); // Pointer to current player
         out << s->getData() << std::endl;
     }
-    out << game->getBoard()->getData() << std::endl;
+    //out << game->getBoard()->getData() << std::endl;
     out << game->getBoard()->getGeeseLocation()->getLocation() << std::endl;
     out.close();
 }
