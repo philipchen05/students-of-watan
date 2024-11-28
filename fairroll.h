@@ -7,9 +7,9 @@
 // FairRoll class for fair dice roll algorithm
 class FairRoll: public DiceRoll {
     private:
-        std::mt19937 gen; // Random number generator
+        std::mt19937 &gen; // Random number generator
     public:
-        FairRoll(int seed); // FairRoll constructor
+        FairRoll(std::mt19937 &gen); // FairRoll constructor
         int roll() override; // Roll method
 };
 

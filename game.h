@@ -25,6 +25,7 @@ class Game {
         int seed; // Seed for random number generation
         int turn; // Stores turn number; used for determining which player's turn it is
         bool loaded; // Whether or not game was loaded from previously saved game
+        std::mt19937 gen; // Random number generator for game
         void initializePlayers(); // Initialize players at beginning of game
         bool hasWon() const; // Helper method for determining if a player has won
     public:

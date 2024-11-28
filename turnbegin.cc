@@ -6,7 +6,7 @@
 #include <random>
 
 // TurnBegin constructor
-TurnBegin::TurnBegin(Game* game, Student* player, int seed) : Turn{game, player}, dice{Dice{seed}}, gen{static_cast<uint32_t>(seed)} {}
+TurnBegin::TurnBegin(Game* game, Student* player, std::mt19937 &gen) : Turn{game, player}, dice{Dice{gen}}, gen{gen} {}
 
 // Method for playing beginning of turn events
 void TurnBegin::play() {

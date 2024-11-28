@@ -10,7 +10,7 @@
 #include <sstream>
 
 // Game constructor
-Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, seed{seed}, turn{0}, loaded{false} {
+Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, seed{seed}, turn{0}, loaded{false}, gen{static_cast<uint32_t>(seed)} {
     if(loadFile == "") { // Case: not loading game from file
         if(boardFile == "") {
             board = std::make_unique<Board>(std::make_unique<RandomSetup>(seed)); // Case: generate board from scratch
@@ -110,7 +110,7 @@ void Game::play() {
         // Continue taking turns while nobody has won
         while(!hasWon()) {
             // Beginning of turn
-            gamePhase = std::make_unique<TurnBegin>(this, players[turn % numPlayers].get(), seed);
+            gamePhase = std::make_unique<TurnBegin>(this, players[turn % numPlayers].get(), gen);
             gamePhase->play();
 
             // End of turn
