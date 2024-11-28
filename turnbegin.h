@@ -17,7 +17,7 @@ class TurnBegin: public Turn {
         bool printUpdates(std::vector<const std::map<Resource, int>*> &prevResources, bool gain, std::vector<int>* amountsLost) const; // Output resource updates; returns true if at least one resource updated
         bool printGains(std::vector<const std::map<Resource, int>*> &prevResources) const; // Output resource gains; returns true if at least one resource was gained
         bool printLosses(std::vector<const std::map<Resource, int>*> &prevResources, std::vector<int>* amountsLost) const; // Output resource losses; returns true if at least one resource was lost
-        Resource loseResource(const Student& s); // Loses one random resource and returns it; proportional probabilities of losing each resource
+        Resource loseResource(Student& s); // Loses one random resource and returns it; proportional probabilities of losing each resource
     public:
         TurnBegin(Game* game, Student* player, int seed); // TurnBegin constructor
         virtual ~TurnBegin() = default; // TurnBegin destructor

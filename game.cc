@@ -9,9 +9,9 @@
 #include <sstream>
 
 // Game constructor
-Game::Game(int seed, std::string load, std::string board) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, gen{seed}, seed{seed}, turn{0}, loaded{false} {
-    if(load == "") { // Case: not loading game from file
-        if(board == "") {
+Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, gen{seed}, seed{seed}, turn{0}, loaded{false} {
+    if(loadFile == "") { // Case: not loading game from file
+        if(boardFile == "") {
             board = std::make_unique<Board>(new RandomSetup{seed}); // Case: generate board from scratch
         } else {
             board = std::make_unique<Board>(new FileSetup{board}); // Case: load saved board

@@ -36,6 +36,16 @@ int Tile::getLocation() const {
     return location;
 }
 
+// return criteria associated with tile
+std::vector<std::shared_ptr<Criterion>>& Tile::getCriteria() {
+    return criteria;
+}
+
+// return goals associated with tile
+std::vector<std::shared_ptr<Goal>>& Tile::getGoals() {
+    return goals
+}
+
 // sets whether or not geese are on tile
 void Tile::setGeese(bool geese) {
     this->geese = geese;

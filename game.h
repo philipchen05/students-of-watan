@@ -2,11 +2,13 @@
 #define GAME_H
 
 #include "board.h"
-#include "turnend.h"
+#include "gamephase.h"
 #include "resource.h"
+#include "student.h"
 #include <vector>
 #include <memory>
 #include <random>
+#include <string>
 
 // Game class; controls game flow
 class Game {
@@ -27,7 +29,7 @@ class Game {
         void initializePlayers(); // Initialize players at beginning of game
         bool hasWon() const; // Helper method for determining if a player has won
     public:
-        Game(int seed, std::string load, std::string board); // Game constructor
+        Game(int seed, std::string loadFile, std::string boardFile); // Game constructor
 
         int getNumPlayers() const; // returns number of players
         Student* getPlayer(int index); // returns raw pointer to the index-th player

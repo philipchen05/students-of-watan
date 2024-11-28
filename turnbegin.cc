@@ -1,5 +1,6 @@
 #include "turnbegin.h"
 #include "tile.h"
+#include "game.h"
 #include <iostream>
 #include <string>
 #include <random>
@@ -59,7 +60,7 @@ void TurnBegin::moveGeese() {
         Student* s = game->getPlayer(i); // Pointer to current player
         int totalResources = s->getTotalResources(); // Current player's total resources
         if(totalResources >= geeseMin) {
-            int numLost = totalResources - (totalResources / 2)
+            int numLost = totalResources - (totalResources / 2);
             amountsLost.push_back(numLost);
             for(int i = 0; i < numLost; i++) {
                 loseResource(*s);
@@ -71,7 +72,7 @@ void TurnBegin::moveGeese() {
 
     int newGeeseLocation; // New geese tile location
     Tile* newGeeseTile; // Pointer to tile with new geese location
-    std::vector<const Student*> stealableStudents; // Students that can be stolen from
+    std::vector<Student*> stealableStudents; // Students that can be stolen from
     std::cout << "Choose where to place the GEESE." << std::endl; // Prompt player for new geese location
     std::cout << "> ";
     std::cin >> newGeeseLocation;
@@ -82,8 +83,8 @@ void TurnBegin::moveGeese() {
         Student* s = game->getPlayer(i); // Pointer to current player
         if(s != player) { // Skip the student who currently has their turn
             // Iterate through each criteria on the new geese tile to see if any are owner by the current student
-            for(Criterion* c : newGeeseTile->criteria) {
-                if(c->owner == s) {
+            for(Criterion* c : newGeeseTile->getCriteria()) {
+                if(c->getOwnerName() == s->getColour()) {
                     if(s->getTotalResources() > 0) {
                         stealableStudents.push_back(s); // Only mark student as stealable if they have more than 0 resources
                     }
@@ -96,10 +97,10 @@ void TurnBegin::moveGeese() {
     // Steal from a student (if possible)
     int numStealable = stealableStudents.size(); // Number of stealable students
     if(numStealable == 0) {
-        std::cout << "Student " player->getColour() << " has no students to steal from." << std::endl; // No students available to steal from
+        std::cout << "Student " << player->getColour() << " has no students to steal from." << std::endl; // No students available to steal from
     } else {
         // Print stealable students
-        std::cout << "Student " << s->getColour() << " can choose to steal from ";
+        std::cout << "Student " << player->getColour() << " can choose to steal from ";
         for(int i = 0; i < numStealable; i++) {
             std::cout << stealableStudents[i];
             if(i < numStealable - 1) {
@@ -109,7 +110,7 @@ void TurnBegin::moveGeese() {
         std::cout << "." << std::endl;
 
         // Prompt player for who to steal from
-        string victimColour;
+        std::string victimColour;
         Student* victim;
         std::cout << "Choose a student to steal from." << std::endl;
         std::cout << "> ";
@@ -117,16 +118,16 @@ void TurnBegin::moveGeese() {
 
         // Set pointer to victim student (student who is stolen from)
         for(const auto& s : stealableStudents) {
-            if(s->colour == victimColour) {
-                victim = &s;
+            if(s->getColour() == victimColour) {
+                victim = s;
             }
         }
 
-        Resource resource = loseResource(victim); // Stolen resource
+        Resource resource = loseResource(*victim); // Stolen resource
         player->addResources(resource, 1); // Add stolen resource to current player
         
         // Output update on stolen resource
-        std::cout << "Student " << player->getColour() << " steals " << resource << " from student " << victim.getColour() << "." << std::endl;
+        std::cout << "Student " << player->getColour() << " steals " << resource << " from student " << victim->getColour() << "." << std::endl;
     }
 
     game->getBoard()->getGeeseLocation()->setGeese(false); // Set tile with current geese location to no longer have geese
@@ -140,7 +141,7 @@ void TurnBegin::updateResources(int roll) {
 
     // Store previous resource values of each student to compare with updated values later
     std::vector<const std::map<Resource, int>*> prevResources(numPlayers);
-    for(size_t i = 0; i < numPlayers; i++) {
+    for(int i = 0; i < numPlayers; i++) {
         prevResources[i] = game->getPlayer(i)->getResources();
     }
 
@@ -164,7 +165,7 @@ bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevRe
     int lostIndex = 0; // Index for amountsLost vector
 
     // Compare new resource values of each student with previous values to determine resource updates for output
-    for(size_t i = 0; i < numPlayers; i++) {
+    for(int i = 0; i < numPlayers; i++) {
         Student* player = game->getPlayer(i); // Pointer to current student
         const std::map<Resource, int>& curResources = player->getResources(); // Newly updated resources of current student
         bool playerUpdated = false; // Flag for whether or not current student resources were updated
@@ -175,7 +176,7 @@ bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevRe
             if(resourceDiff > 0) {
                 // Print student identification message only once
                 if(!playerUpdated) {
-                    std::cout << "Student " << player->getColour;
+                    std::cout << "Student " << player->getColour();
                     if(gain) {
                         std::cout << " gained:";
                     } else {
@@ -204,7 +205,7 @@ bool TurnBegin::printLosses(std::vector<const std::map<Resource, int>*> &prevRes
 }
 
 // Loses one random resource for given Student and returns it; proportional probabilities of losing each resource
-Resource TurnBegin::loseResource(const Student& s) {
+Resource TurnBegin::loseResource(Student& s) {
     std::vector<Resource> resourceOrder = {Resource::CAFFEINE, Resource::LAB, Resource::LECTURE, Resource::STUDY, Resource::TUTORIAL}; // Order of resources
     const size_t numResources = resourceOrder.size(); // Total number of distinct resources
     Resource resource; // Resource lost

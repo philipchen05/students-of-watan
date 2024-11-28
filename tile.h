@@ -27,6 +27,8 @@ class Tile: public Subject {
     Resource getType() const; // returns type of resource
     int getValue() const; // returns value of tile
     int getLocation() const; // return location of tile
+    std::vector<std::shared_ptr<Criterion>>& getCriteria(); // return criteria associated with tile
+    std::vector<std::shared_ptr<Goal>>& getGoals(); // return goals associated with tile
 
     void setGeese(bool geese); // sets whether or not geese are on tile
  
