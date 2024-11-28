@@ -6,6 +6,7 @@ HEADERS = algorithm cmath fstream iostream map memory random set sstream string 
 EXEC = watan
 
 $(EXEC): $(SOURCES)
+	rm -rf gcm.cache
 	$(CXX) $(HEADERFLAGS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(EXEC)
 
