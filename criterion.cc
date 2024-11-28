@@ -68,7 +68,10 @@ void Criterion::notify(const Subject *sbj) {
     const Tile *tile = dynamic_cast<const Tile*>(sbj);
     std::cerr << "[Criterion] (" << getId() << ") notify() - casted subject to tile" << std::endl;// DEBUG - MUST DELTE
     std::cerr << "[Criterion] (" << getId() << ") notify() - owner = " << owner << std::endl;// DEBUG - MUST DELTE
-    owner->addResources(tile->getType(), getCompletion());
+    // if criterion has been completed, add resources to its owner
+    if (isOwned()) {
+        owner->addResources(tile->getType(), getCompletion());
+    }
     std::cerr << "[Criterion] (" << getId() << ") notify() - added resources to owner" << std::endl;// DEBUG - MUST DELTE
 }
 
@@ -82,4 +85,11 @@ const std::map<Resource, int>& Criterion::getUpgradeCost() const {
     return upgradeCost.at(completion); // use .at because [] doesn't have overload for const map
 }
 
+
 Criterion::~Criterion() {}
+
+// prints criterion contents for debug [Criterion: (id: ID, owner: OWNER, comp: COMPLETIONLEVEL)]
+std::ostream& operator<<(std::ostream &out, const Criterion &criterion) {
+    out << "[Criterion: (id: " << criterion.getId() << ", owner: " << criterion.getOwnerName() << ", comp: " << criterion.getCompletion() << ")]";
+    return out;
+}

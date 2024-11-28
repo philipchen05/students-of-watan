@@ -5,6 +5,7 @@
 #include "resource.h"
 
 #include <string>
+#include <ostream>
 
 class Criterion: public Achievement {
   public:
@@ -32,5 +33,8 @@ class Criterion: public Achievement {
 
     ~Criterion() override;
 };
+
+// prints criterion contents for debug [Criterion: (id: ID, owner: OWNER, comp: COMPLETIONLEVEL)]
+std::ostream& operator<<(std::ostream &out, const Criterion &criterion);
 
 #endif

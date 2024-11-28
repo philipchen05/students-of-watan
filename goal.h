@@ -6,6 +6,7 @@
 #include "student.h"
 
 #include <string>
+#include <ostream>
 
 class Student; // forward declaration
 class Criterion; // forward declaration
@@ -24,5 +25,8 @@ class Goal: public Achievement {
     const std::map<Resource, int>& getUpgradeCost() const override; // returns the cost of upgrading to the next level (i.e. achieving the goal)
     ~Goal();
 };
+
+// prints goal contents for debug [Goal: (id: ID, owner: OWNER, ach: ACHIEVED)]
+std::ostream& operator<<(std::ostream &out, const Goal &goal);
 
 #endif

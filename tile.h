@@ -6,10 +6,12 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <ostream>
 
 #include "criterion.h"
 #include "goal.h"
 #include "resource.h"
+
 
 class Tile: public Subject {
   private:
@@ -34,5 +36,8 @@ class Tile: public Subject {
  
     ~Tile();
 };
+
+// prints tile contents for debug [Tile: (type: TYPE, loc: LOCATION, val: VALUE)]
+std::ostream& operator<<(std::ostream &out, const Tile &tile);
 
 #endif

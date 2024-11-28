@@ -149,7 +149,7 @@ void TurnBegin::updateResources(int roll) {
     // Itereate through tiles (subjects) and notify observers of tiles corresponding with roll value that don't have geese
     for(const auto& tile : game->getBoard()->getTiles()) {
         if(tile->getValue() == roll && !tile->hasGeese()) {
-            std::cerr << "notifying tile (loc:" << tile->getLocation() << ", val: " << tile->getValue() << ")" << std::endl; // DEBUG - MUST DELETE
+            std::cerr << "notifying tile" << *tile << std::endl; // DEBUG - MUST DELETE
             tile->notifyObservers();
         }
     }

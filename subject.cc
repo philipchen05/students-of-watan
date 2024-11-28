@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 
+#include "criterion.h"
+
 // attaches observer to subject
 void Subject::attach( Observer* o ) {
     observers.emplace_back(o);
@@ -22,7 +24,7 @@ void Subject::detach( Observer* o ) {
 // notifies all observers attached to subject
 void Subject::notifyObservers() {
     for (auto &ob: observers) {
-        std::cerr << "[Subject] - notifying observer " << ob << std::endl; // DEBUG - MUST DELETE
+        std::cerr << "[Subject] - notifying observer " << *dynamic_cast<Criterion*>(ob) << std::endl; // DEBUG - MUST DELETE
         ob->notify(this);
     }
 }

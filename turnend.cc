@@ -44,7 +44,7 @@ void TurnEnd::play() {
         } else if(command == "help") {
             help();
         } else {
-            std::cout << "Invalid command.";
+            std::cout << "Invalid command." << std::endl;
         }
         std::cout << "> ";
         std::cin >> command;

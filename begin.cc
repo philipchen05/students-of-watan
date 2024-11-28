@@ -31,7 +31,7 @@ void Begin::play() {
         }
         
         // Complete specified criterion under current player
-        std::cerr << "Begin::play() - Criterion Id = " << intersection << " criterion ptr from Board::getCriterion = " << board->getCriterion(intersection) << std::endl; // DEBUG - MUST DELETE
+        std::cerr << "Begin::play() - completing " << *board->getCriterion(intersection) << std:: endl;
         board->getCriterion(intersection)->complete(player);
     }
 
