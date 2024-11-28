@@ -129,12 +129,26 @@ void Game::play() {
     } while(gamePhase->playAgain());
 }
 
+
+// returns number of players
+int Game::getNumPlayers() const {
+    return players.size();
+}
+// returns pointer to board
+Board* Game::getBoard() {
+    return board.get();
+}
+// returns raw pointer to index-th player
+Student* Game::getPlayer(int index) {
+    return players.at(index).get();
+
 // Initialize players at beginning of game
 void Game::initializePlayers() {
     // Initialize Students in index order
     for(size_t i = 0; i < numPlayers; i++) {
         players[i] = std::make_unique<Student>(colours[i]);
     }
+
 }
 
 // Helper method for determining if a player has won

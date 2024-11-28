@@ -28,6 +28,11 @@ class Game {
         bool hasWon() const; // Helper method for determining if a player has won
     public:
         Game(int seed, std::string load, std::string board); // Game constructor
+
+        int getNumPlayers() const; // returns number of players
+        Student* getPlayer(int index); // returns raw pointer to the index-th player
+        Board* getBoard(); // returns raw pointer to board 
+
         void play(); // Method for playing game
 };
 
