@@ -30,7 +30,7 @@ void Begin::play() {
         }
         
         // Complete specified criterion under current player
-        board->sortedCriteria[intersection]->complete(player);
+        board->getCriterion(intersection)->complete(player);
     }
 
     // Display updated board

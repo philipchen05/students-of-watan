@@ -6,7 +6,7 @@
 #include "end.h"
 #include <iostream>
 #include <fstream>
-#indlude <sstream>
+#include <sstream>
 
 // Game constructor
 Game::Game(int seed, std::string load, std::string board) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, gen{seed}, seed{seed}, turn{0}, loaded{false} {

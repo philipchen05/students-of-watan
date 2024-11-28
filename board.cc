@@ -44,7 +44,7 @@ void Board::populateCriterionMap() {
 bool Board::canBuild(int criterionId, const Student& student) const {
     // Check if criteria is already owned
     if(criteria[criterionId]->isOwned()) {
-        return false
+        return false;
     }
 
     // REMOVE LATER
@@ -71,6 +71,10 @@ bool Board::canBuild(int criterionId, const Student& student) const {
     }
 
     return false;
+}
+
+bool Board::isValid(int criterionId) const {
+    
 }
 
 bool Board::emptyAdjacent(int criterionId) const {
@@ -186,6 +190,16 @@ void Board::display() const {
 // Returns criteria vector
 const std::vector<std::shared_ptr<Criterion>>& Board::getCriteria() const {
     return criteria;
+}
+
+// returns raw pointer to the criterion with the given id
+Criterion* Board::getCriterion(int criterionId) const {
+    for (auto criterion: criteria) {
+        if (criterion->getId() == criterionId) {
+            return criterion.get();
+        }
+    }
+    return nullptr;
 }
 
 // Returns goals vector

@@ -34,6 +34,8 @@ public:
     // Check if it's valid to build at a specific location
     bool canBuild(int criterionId, const Student& student) const;
 
+    bool isValid(int criterionId) const;
+
     // Get adjacent criteria for a given criterion ID
     bool emptyAdjacent(int criterionId) const;
 
@@ -44,6 +46,8 @@ public:
 
     // Returns criteria vector
     const std::vector<std::shared_ptr<Criterion>>& getCriteria() const; 
+
+    Criterion* getCriterion(int criterionId) const; // returns raw pointer to the criterion with the given id
 
     // Returns goals vector
     const std::vector<std::shared_ptr<Goal>>& getGoals() const;
