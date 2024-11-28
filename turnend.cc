@@ -116,7 +116,7 @@ void TurnEnd::complete(int id) {
     Criterion* criterion = game->getBoard()->getCriteria()[id].get(); // Pointer to criterion
 
     // Check if space is valid
-    if(!game->getBoard()->canBuildCriteria(id, *player)) {
+    if(!game->getBoard()->canBuildCriteria(id, *player, false)) {
         std::cout << "You cannot build here." << std::endl;
         return;
     }

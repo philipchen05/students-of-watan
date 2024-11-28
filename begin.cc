@@ -25,7 +25,7 @@ void Begin::play() {
         std::cout << "> ";
 
         // Handle invalid intersections
-        while(std::cin >> intersection && !board->canBuildCriteria(intersection, *player)) {
+        while(std::cin >> intersection && !board->canBuildCriteria(intersection, *player, true)) {
             std::cout << "You cannot build here." << std::endl;
             std::cout << "> ";
         }
