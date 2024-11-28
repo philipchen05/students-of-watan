@@ -94,7 +94,7 @@ void TurnEnd::achieve(int id) {
     Goal* goal = game->getBoard()->getGoals()[id].get(); // Pointer to goal
 
     // Check if space is valid
-    if(!game->getBoard()->canBuild(id, *player)) {
+    if(!game->getBoard()->canBuildGoal(id, *player)) {
         std::cout << "You cannot build here." << std::endl;
         return;
     }
@@ -116,7 +116,7 @@ void TurnEnd::complete(int id) {
     Criterion* criterion = game->getBoard()->getCriteria()[id].get(); // Pointer to criterion
 
     // Check if space is valid
-    if(!game->getBoard()->canBuild(id, *player)) {
+    if(!game->getBoard()->canBuildCriteria(id, *player)) {
         std::cout << "You cannot build here." << std::endl;
         return;
     }
@@ -189,13 +189,25 @@ void TurnEnd::trade(std::string colour, std::string give, std::string take) {
 // Saves current game state to specified file
 void TurnEnd::save(std::string file) {
     std::ofstream out{file}; // Output file stream
+
+    // save current player's turn
     out << player->getColour() << std::endl;
+
+    // save all player data
     for(int i = 0; i < game->getNumPlayers(); i++) {
         Student* s = game->getPlayer(i); // Pointer to current player
         out << s->getData() << std::endl;
     }
-    //out << game->getBoard()->getData() << std::endl;
-    out << game->getBoard()->getGeeseLocation()->getLocation() << std::endl;
+
+    // save board data
+    out << game->getBoard()->getData() << std::endl;
+
+    // save geese location
+    if (game->getBoard()->getGeeseLocation() != nullptr) {
+        out << game->getBoard()->getGeeseLocation()->getLocation() << std::endl;
+    } else {
+        out << "-1" << std::endl;
+    }
     out.close();
 }
 

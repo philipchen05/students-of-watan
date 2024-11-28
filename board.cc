@@ -239,7 +239,11 @@ std::string Board::getData() const {
     for (const auto& tile : tiles) {
         boardData += std::to_string(resourceToInt(tile->getType()));
         boardData += " ";
-        boardData += std::to_string(tile->getValue());
+        if (tile->getType() == Resource::NETFLIX) {
+            boardData += "7";
+        } else {
+            boardData += std::to_string(tile->getValue());
+        }
         if (tile->getLocation() != 18) {boardData += " ";}
         
     }

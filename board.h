@@ -37,7 +37,7 @@ public:
     // Check if it's valid to build at a specific location
     bool canBuildCriteria(int criterionId, const Student& student) const;
 
-    bool Board::canBuildGoal(int goalId, const Student& student) const;
+    bool canBuildGoal(int goalId, const Student& student) const;
 
     bool isValid(int criterionId) const;
 
