@@ -11,4 +11,6 @@ gcm.cache/
 *.d
 test*
 test.cc
-
+*.err
+save.txt
+*.log

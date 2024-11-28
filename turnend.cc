@@ -189,13 +189,25 @@ void TurnEnd::trade(std::string colour, std::string give, std::string take) {
 // Saves current game state to specified file
 void TurnEnd::save(std::string file) {
     std::ofstream out{file}; // Output file stream
+
+    // save current player's turn
     out << player->getColour() << std::endl;
+
+    // save all player data
     for(int i = 0; i < game->getNumPlayers(); i++) {
         Student* s = game->getPlayer(i); // Pointer to current player
         out << s->getData() << std::endl;
     }
-    //out << game->getBoard()->getData() << std::endl;
-    out << game->getBoard()->getGeeseLocation()->getLocation() << std::endl;
+
+    // save board data
+    out << game->getBoard()->getData() << std::endl;
+
+    // save geese location
+    if (game->getBoard()->getGeeseLocation() != nullptr) {
+        out << game->getBoard()->getGeeseLocation()->getLocation() << std::endl;
+    } else {
+        out << "-1" << std::endl;
+    }
     out.close();
 }
 
