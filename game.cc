@@ -9,7 +9,7 @@
 #indlude <sstream>
 
 // Game constructor
-Game::Game(int seed, std::string load, std::string board) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, gen{seed}, turn{0}, loaded{false} {
+Game::Game(int seed, std::string load, std::string board) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, gen{seed}, seed{seed}, turn{0}, loaded{false} {
     if(load == "") { // Case: not loading game from file
         if(board == "") {
             board = std::make_unique<Board>(new RandomSetup{seed}); // Case: generate board from scratch
@@ -17,9 +17,7 @@ Game::Game(int seed, std::string load, std::string board) : board{nullptr}, play
             board = std::make_unique<Board>(new FileSetup{board}); // Case: load saved board
         }
         // Initialize new Students in index order
-        for(int i = 0; i < numPlayers; i++) {
-            players[i] = std::make_unique<Student>(colours[i]);
-        }
+        initializePlayers();
     } else { // Case: loading previously saved game
         ifstream in{load}; // Input file stream to read in saved game file
         string curTurn; // Store current player turn by name (colour)
@@ -122,7 +120,12 @@ void Game::play() {
         gamePhase = std::make_unique<End>(this);
         gamePhase->play();
 
-        loaded = false;
+        // Reset game if players wish to play again
+        if(gamePhase->playAgain()) {
+            board = std::make_unique<Board>(new RandomSetup{seed}); // Reset Board (including goals and criteria)
+            initializePlayer(); // Reset players
+            loaded = false;
+        }
     } while(gamePhase->playAgain());
 }
 

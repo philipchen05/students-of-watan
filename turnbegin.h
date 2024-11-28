@@ -9,7 +9,7 @@
 class TurnBegin: public Turn {
     private:
         Dice dice; // Dice object
-        std::mt19937& gen; // Random number generator
+        std::mt19937 gen; // Random number generator
         void moveGeese(); // Move geese to new location
         void updateResources(int roll); // Update player resources based on dice roll
         bool printUpdates(std::vector<const std::map<Resource, int>*> &prevResources, bool gain, std::vector<int>* amountsLost) const; // Output resource updates; returns true if at least one resource updated
@@ -17,7 +17,7 @@ class TurnBegin: public Turn {
         bool printLosses(std::vector<const std::map<Resource, int>*> &prevResources, std::vector<int>* amountsLost) const; // Output resource losses; returns true if at least one resource was lost
         Resource loseResource(const Student& s); // Loses one random resource and returns it; proportional probabilities of losing each resource
     public:
-        TurnBegin(Student* player, mt19937& gen); // TurnBegin constructor
+        TurnBegin(Game* game, Student* player, int seed); // TurnBegin constructor
         virtual ~TurnBegin() = default; // TurnBegin destructor
         void play() override; // Method for playing beginning of turn events
 };

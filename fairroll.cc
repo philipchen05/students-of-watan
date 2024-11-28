@@ -2,7 +2,7 @@
 #include <random>
 
 // FairRoll constructor
-FairRoll::FairRoll(std::mt19937& gen) : gen{gen} {}
+FairRoll::FairRoll(int seed) : gen{seed} {}
 
 // Roll method
 int FairRoll::roll() const {

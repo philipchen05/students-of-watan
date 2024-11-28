@@ -4,7 +4,7 @@
 #include <random>
 
 // TurnBegin constructor
-TurnBegin::TurnBegin(Student* player, mt19937& gen) : Turn{player}, dice{Dice{}}, gen{gen} {}
+TurnBegin::TurnBegin(Game* game, Student* player, int seed) : Turn{game, player}, dice{Dice{seed}}, gen{seed} {}
 
 // Method for playing beginning of turn events
 void TurnBegin::play() {
