@@ -41,8 +41,25 @@ void Board::populateCriterionMap() {
     }
 }
 
+bool Board::canBuildGoal(int goalId, const Student& student) const {
+    if (getGoal(goalId)->isOwned()) {return false;}
+    
+    // Find adjacent criteria to goal
+    for (const auto& [key, pairSet] : criterionMap) {
+        const auto& adjacentGoals = pairSet.second; // Access the second set in the pair
+        if (adjacentGoals.find(goalId) != adjacentGoals.end()) { // Check if goalId is in the set
+            if (getCriterion(key)->getOwnerName() == student.getColour()) {return true;}
+            for (int v : adjacentGoals) {
+                if (getGoal(v)->getOwnerName() == student.getColour()) {return true;}
+            }
+        }
+    }
+
+    return false;
+
+}
 // Check if it's valid to build at a specific location
-bool Board::canBuild(int criterionId, const Student& student) const {
+bool Board::canBuildCriteria(int criterionId, const Student& student) const {
     // Check if criteria is already owned
     if (getCriterion(criterionId)->isOwned()) {return false;}
     // cout << "Can build: isOwned " << getCriterion(criterionId)->isOwned() << endl;

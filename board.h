@@ -23,6 +23,7 @@ private:
     // Map of criteria to their adjacent criteria and goals
     std::map<int, std::pair<std::set<int>, std::set<int>>> criterionMap;
 
+
     // Generate criteria and goals
     void generateCriteriaAndGoals();
 
@@ -34,7 +35,9 @@ public:
     Board(std::unique_ptr<BoardSetup> setup);
 
     // Check if it's valid to build at a specific location
-    bool canBuild(int criterionId, const Student& student) const;
+    bool canBuildCriteria(int criterionId, const Student& student) const;
+
+    bool Board::canBuildGoal(int goalId, const Student& student) const;
 
     bool isValid(int criterionId) const;
 
