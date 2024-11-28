@@ -117,7 +117,9 @@ void Board::display() const {
 
         }   
         else if (ch=='T') {
-            cout << resourceToString(tiles[tileIndex]->getType());
+            std::string typeString = resourceToString(tiles[tileIndex]->getType());
+            cout << typeString;
+            for (int i = 0; i < typeString.length() - 1; i++) {inputFile.get(ch);}
             tileIndex++;
         }
         else if (ch=='C') {
