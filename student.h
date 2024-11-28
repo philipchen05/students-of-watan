@@ -16,6 +16,8 @@ class Achievement;
 
 class Student {
   private:
+    static const std::map<Resource, int> defaultResources;
+
     std::string colour; // student's colour (name)
     int number; // student's place in order of turns [1, 4]
     int numVP; // number of victory points student has
@@ -25,7 +27,7 @@ class Student {
     std::vector<std::shared_ptr<Goal>> goals; // list of all goals that student has achieved
 
   public:
-    Student(std::string colour, int number, int numVP = 0, const std::map<Resource, int> &resources = {});
+    Student(std::string colour, int number, int numVP = 0, const std::map<Resource, int> &resources = defaultResources);
 
     void addCriterion(Criterion *c); // adds criterion to student's list of completed criteria
     void improve(Criterion *c); // attempts to improve the given criterion

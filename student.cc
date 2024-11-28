@@ -8,6 +8,15 @@
 #include <memory>
 #include <map>
 #include <cmath>
+#include <stdexcept>
+
+const std::map<Resource, int> Student::defaultResources = {
+    {Resource::CAFFEINE, 0},
+    {Resource::LAB, 0},
+    {Resource::LECTURE, 0},
+    {Resource::TUTORIAL, 0},
+    {Resource::STUDY, 0}
+};
 
 // Constructor
 Student::Student(std::string colour, int number, int numVP, const std::map<Resource, int> &resources):
@@ -107,14 +116,19 @@ std::string Student::getData() const {
 // prints student's status (victory points and resources)
 void Student::printStatus() const {
     // .at used because [] operator has no const overload
-    std::cout << colour << " has " 
-        << numVP << " victory points, " 
-        << resources.at(Resource::CAFFEINE) << " caffeines, "
-        << resources.at(Resource::LAB) << " labs, "
-        << resources.at(Resource::LECTURE) << " lectures, "
-        << resources.at(Resource::TUTORIAL) << " tutorials, and"
-        << resources.at(Resource::STUDY) << " studies."
-        << std::endl;
+    try {
+        std::cout << colour << " has " 
+            << numVP << " victory points, " 
+            << resources.at(Resource::CAFFEINE) << " caffeines, "
+            << resources.at(Resource::LAB) << " labs, "
+            << resources.at(Resource::LECTURE) << " lectures, "
+            << resources.at(Resource::TUTORIAL) << " tutorials, and "
+            << resources.at(Resource::STUDY) << " studies."
+            << std::endl;
+    } catch(std::exception &e) {
+        std::cerr << "Failed to print Student " << getColour() << "'s status: " << std::endl;
+        std::cerr << "\t" << e.what() << std::endl;
+    }
 }
 
 // prints student's completed criteria
