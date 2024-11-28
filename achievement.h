@@ -13,7 +13,6 @@ class Student; // forward declaration
 class Achievement: public Observer {
   protected:
     int id; // identifying number
-    bool owned; // true if achievement has an owner, otherwise false
     Student* owner; // student that has completed/achieved this achievement
 
     Achievement(int id, Student* owner = nullptr); // constructor

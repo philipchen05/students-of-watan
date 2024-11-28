@@ -6,7 +6,6 @@
 Achievement::Achievement(int id, Student* owner):
     Observer{},
     id{id},
-    owned{(owner != nullptr)}, // true if given student instance
     owner{owner}
 {}
 
@@ -14,7 +13,7 @@ void Achievement::notify(const Subject *sbj) {}
 
 // true if achievement has owner, otherwise false
 bool Achievement::isOwned() const {
-    return owned;
+    return owner != nullptr;
 }
 
 // if achievement is owned, returns owner's colour, otherwise empty string

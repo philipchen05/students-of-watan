@@ -32,7 +32,9 @@ void Begin::play() {
         
         // Complete specified criterion under current player
         std::cerr << "Begin::play() - completing " << *board->getCriterion(intersection) << std:: endl;
-        board->getCriterion(intersection)->complete(player);
+        Criterion* criterion = board->getCriterion(intersection);
+        criterion->complete(player);
+        player->addCriterion(criterion);
     }
 
     // Display updated board

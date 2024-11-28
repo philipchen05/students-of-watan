@@ -130,6 +130,7 @@ void Board::display() const {
         }
         else if (ch=='C') {
         // cout << "display: isOwned " << criteria[criteriaIndex]->isOwned() << endl; 
+        std::cerr << *criteria[criteriaIndex] << std::endl;
             if (criteria[criteriaIndex]->isOwned()) {
                 cout << criteria[criteriaIndex]->getOwnerName()[0];
                 switch (criteria[criteriaIndex]->getCompletion())
