@@ -19,6 +19,24 @@ Resource resourceFromInt(std::string s) {
     }
 }
 
+// Converts string to Resource
+Resource resourceFromInt(int value) {
+    if(value == 0) {
+        return Resource::CAFFEINE;
+    } else if (value == 1) {
+        return Resource::LAB;
+    } else if(value == 2) {
+        return Resource::LECTURE;
+    } else if(value == 3) {
+        return Resource::STUDY;
+    } else if(value == 4) {
+        return Resource::TUTORIAL;
+    } else {
+        return Resource::NETFLIX;
+    }
+}
+
+
 // Overloaded operator<< method for outputting Resource types
 std::ostream &operator<<(std::ostream &out, const Resource &r) {
     switch(r) {

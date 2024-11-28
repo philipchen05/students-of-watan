@@ -11,6 +11,7 @@
 
 class BoardSetup {
     protected:
+        // a map of each tile's criteria (vertices)
         std::map<int, std::vector<int>> tilesCriteria = {{0, {0, 1, 3, 4, 8, 9}}, {1, {2, 3, 7, 8, 13, 14}}, {2, {4, 5, 9, 10, 15, 16}},
                                                       {3, {6, 7, 12, 13, 18, 19}}, {4, {8, 9, 14, 15, 20, 21}}, {5, {10, 11, 16, 17, 22, 23}},
                                                       {6, {13, 14, 19, 20, 25, 26}}, {7, {15, 16, 21, 22, 27, 28}}, {8, {18, 19, 24, 25, 30, 31}},
@@ -19,7 +20,7 @@ class BoardSetup {
                                                       {15, {34, 35, 40, 41, 46, 47}}, {16, {37, 38, 43, 44, 48, 49}}, {17, {39, 40, 45, 46, 50, 51}},
                                                       {18, {44, 45, 49, 50, 52, 53}}
                                                       };
-
+        // a map of each tile's goals (edges)
         std::map<int, std::vector<int>> tilesGoals = { {0, {0, 1, 2, 6, 7, 10}}, {1, {3, 5, 6, 13, 14, 18}}, {2, {4, 7, 8, 15, 16, 19}},
                                                     {3, {9, 12, 13, 20, 21, 26}}, {4, {10, 14, 15, 22, 23, 27}}, {5, {11, 16, 17, 24, 25, 28}},
                                                     {6, {18, 21, 22, 30, 31, 35}}, {7, {19, 23, 24, 32, 33, 36}}, {8, {26, 29, 30, 37, 38, 43}},
@@ -32,16 +33,16 @@ class BoardSetup {
     public:
 
         virtual std::vector<std::unique_ptr<Tile>> generateTiles(
-            const std::vector<std::shared_ptr<Criterion>>& criteria,
-            const std::vector<std::shared_ptr<Goal>>& goals) = 0;
+        const std::vector<std::shared_ptr<Criterion>>& criteria,
+        const std::vector<std::shared_ptr<Goal>>& goals) = 0;
         virtual ~BoardSetup() = default;
 };
 
 class FileSetup : public BoardSetup {
     private:
-        std::string filename;
+        std::string boardDataString;
     public:
-        FileSetup(const std::string& filename);
+        FileSetup(const std::string& boardDataString);
         std::vector<std::unique_ptr<Tile>> generateTiles(
                 const std::vector<std::shared_ptr<Criterion>>& criteria,
                 const std::vector<std::shared_ptr<Goal>>& goals) override;

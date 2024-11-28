@@ -16,6 +16,8 @@ enum class Resource {
 // Converts string to Resource
 Resource resourceFromInt(std::string s);
 
+Resource resourceFromInt(int value);
+
 // Overloaded operator<< method for outputting Resource types
 std::ostream &operator<<(std::ostream &out, const Resource &r);
 

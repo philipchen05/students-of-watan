@@ -43,29 +43,20 @@ void Board::populateCriterionMap() {
 // Check if it's valid to build at a specific location
 bool Board::canBuild(int criterionId, const Student& student) const {
     // Check if criteria is already owned
-    if(criteria[criterionId]->isOwned()) {
-        return false;
-    }
-
-    // REMOVE LATER
-    if (criterionMap.find(criterionId) == criterionMap.end()) {
-        return false;
-    }
+    if (getCriterion(criterionId)->isOwned()) {return false;}
 
     const auto& [adjCriteria, adjGoals] = criterionMap.at(criterionId);
 
     // Check if no one owns adjacent criteria
     for (int adj : adjCriteria) {
-        const auto& criterion = criteria[adj];
-        if (criterion->isOwned()) {
+        if (getCriterion(adj)->isOwned()) {
             return false;
         }
     }
 
     // Check if the student owns at least one adjacent goal
     for (int adj : adjGoals) {
-        const auto& goal = goals[adj];
-        if (goal->getOwnerName() == student.getColour()) {
+        if (getGoal(adj)->getOwnerName() == student.getColour()) {
             return true;
         }
     }
@@ -74,14 +65,14 @@ bool Board::canBuild(int criterionId, const Student& student) const {
 }
 
 bool Board::isValid(int criterionId) const {
-    
+    return true;
 }
 
+// Returns true if no adjacent criteria to a given a criterionId is owned 
 bool Board::emptyAdjacent(int criterionId) const {
     const auto& [adjCriteria, adjGoals] = criterionMap.at(criterionId);
     for (int adj : adjCriteria) {
-        const auto& criterion = criteria[adj];
-        if (!criterion->getOwnerName().empty()) {
+        if (getCriterion(adj)->isOwned()) {
             return false;
         }
     }
@@ -90,9 +81,9 @@ bool Board::emptyAdjacent(int criterionId) const {
 
 // Return raw pointer of tile that has geese
 Tile* Board::getGeeseLocation() {
-    for (int i = 0; i < 19; ++i) {
-        if (tiles[i]->hasGeese()) {
-            return tiles[i].get();
+    for (const auto& tile : tiles) {
+        if (tile->hasGeese()) {
+            return tile.get();
         }
     }
     return nullptr;
@@ -187,11 +178,6 @@ void Board::display() const {
     }
 }
 
-// Returns criteria vector
-const std::vector<std::shared_ptr<Criterion>>& Board::getCriteria() const {
-    return criteria;
-}
-
 // returns raw pointer to the criterion with the given id
 Criterion* Board::getCriterion(int criterionId) const {
     for (auto criterion: criteria) {
@@ -200,6 +186,21 @@ Criterion* Board::getCriterion(int criterionId) const {
         }
     }
     return nullptr;
+}
+
+// returns raw pointer to the goal with the given id
+Goal* Board::getGoal(int goalId) const {
+    for (auto goal: goals) {
+        if (goal->getId() == goalId) {
+            return goal.get();
+        }
+    }
+    return nullptr;
+}
+
+// Returns criteria vector
+const std::vector<std::shared_ptr<Criterion>>& Board::getCriteria() const {
+    return criteria;
 }
 
 // Returns goals vector

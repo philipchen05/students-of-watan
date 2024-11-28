@@ -48,7 +48,8 @@ public:
     const std::vector<std::shared_ptr<Criterion>>& getCriteria() const; 
 
     Criterion* getCriterion(int criterionId) const; // returns raw pointer to the criterion with the given id
-
+    Goal* getGoal(int goalId) const;
+    
     // Returns goals vector
     const std::vector<std::shared_ptr<Goal>>& getGoals() const;
 };

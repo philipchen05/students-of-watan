@@ -47,23 +47,16 @@ std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles(
 
     for (int i = 0; i < 19; ++i) {
         int type = resources[i];
-        int value = values[i]; 
+        int value = values[i];
+         
         for (int j = 0; j < 6; j++) {
             TileCriteria.push_back(criteria[tilesCriteria[i][j]]);
             TileGoals.push_back(goals[tilesGoals[i][j]]);
         }
         
-        Resource tileType;
-        switch (type) {
-            case (0): tileType = Resource::CAFFEINE;break;
-            case (1): tileType =Resource::LAB;break;
-            case (2): tileType =Resource::LECTURE;break;
-            case (3): tileType =Resource::STUDY;break;
-            case (4): tileType =Resource::TUTORIAL;break;
-            default: tileType =Resource::NETFLIX;break;
-        }
+        Resource tileType = resourceFromInt(type);
         // Create the tile
-        auto tile = std::make_unique<Tile>(tileType, value, i, TileCriteria, TileGoals);// EDIT THIS LATER TO ADD CRITERIA AND GOALS
+        auto tile = std::make_unique<Tile>(tileType, value, i, TileCriteria, TileGoals);
 
         // Add the tile to the tiles vector
         tiles.push_back(std::move(tile));
@@ -72,24 +65,14 @@ std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles(
     return tiles; // Return the constructed vector of tiles
 }
 
-FileSetup::FileSetup(const std::string& filename) : filename{filename} {}
+FileSetup::FileSetup(const std::string& boardDataString) : boardDataString{boardDataString} {}
 
 std::vector<std::unique_ptr<Tile>> FileSetup::generateTiles(
     const std::vector<std::shared_ptr<Criterion>>& criteria,
     const std::vector<std::shared_ptr<Goal>>& goals) {
-    std::ifstream file{filename};
 
-    if (!file.is_open()) {
-        throw std::runtime_error("Could not open file: " + filename);
-    }
-
-    // Read the entire line
-    std::string line;
-    if (!std::getline(file, line)) {
-        throw std::runtime_error("File is empty or invalid format: " + filename);
-    }
-
-    std::istringstream iss(line);
+    ////////////////
+    std::istringstream iss(boardDataString);
     std::vector<int> boardData;
     int num;
 
@@ -98,21 +81,12 @@ std::vector<std::unique_ptr<Tile>> FileSetup::generateTiles(
         boardData.push_back(num);
     }
 
-    // Ensure the data contains pairs of (type, value)
-    if (boardData.size() != 38) { // 19 tiles * 2 (type + value)
-        throw std::runtime_error("Invalid board data in file: " + filename);
-    }
-
     std::vector<std::unique_ptr<Tile>> tiles;
 
     for (int i = 0; i < 19; ++i) {
         int type = boardData[i * 2];
-        int value = boardData[i * 2 + 1];
-
         // Special handling for NETFLIX (type == 5)
-        if (type == 5) {
-            value = 0; // Indicate no value for NETFLIX
-        }
+        int value = (type == 5) ? 0 : boardData[i * 2 + 1];
 
         // Create the tile
         std::vector<std::shared_ptr<Criterion>> TileCriteria;
@@ -122,17 +96,10 @@ std::vector<std::unique_ptr<Tile>> FileSetup::generateTiles(
             TileCriteria.push_back(criteria[tilesCriteria[i][j]]);
             TileGoals.push_back(goals[tilesGoals[i][j]]);
         }
-        Resource tileType;
-        switch (type) {
-            case (0): tileType = Resource::CAFFEINE;break;
-            case (1): tileType =Resource::LAB;break;
-            case (2): tileType =Resource::LECTURE;break;
-            case (3): tileType =Resource::STUDY;break;
-            case (4): tileType =Resource::TUTORIAL;break;
-            default: tileType =Resource::NETFLIX;break;
-        }
+        Resource tileType = resourceFromInt(type);
+
         // Create the tile
-        auto tile = std::make_unique<Tile>(tileType, value, i, TileCriteria, TileGoals);// EDIT THIS LATER TO ADD CRITERIA AND GOALS
+        auto tile = std::make_unique<Tile>(tileType, value, i, TileCriteria, TileGoals);
 
         // Add the tile to the tiles vector
         tiles.push_back(std::move(tile));
