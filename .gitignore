@@ -1,5 +1,9 @@
 features.md
 Makefile*
+*UnitMake
+*Unit*
+
+gcm.cache/
 
 *.o
 *.d

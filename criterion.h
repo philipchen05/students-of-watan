@@ -4,7 +4,6 @@
 #include "achievement.h"
 #include "resource.h"
 
-
 #include <string>
 
 class Criterion: public Achievement {

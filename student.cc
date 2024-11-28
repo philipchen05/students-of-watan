@@ -4,6 +4,7 @@
 #include "goal.h"
 
 #include <iostream>
+#include <string>
 #include <memory>
 #include <map>
 #include <cmath>
@@ -77,6 +78,30 @@ int Student::getTotalResources() const {
         sum += amount;
     }
     return sum;
+}
+
+// returns string with all student data to be saved to file
+std::string Student::getData() const {
+    std::string data = "";
+
+    // add all resources
+    for (auto &[resource, amount]: resources) {
+        data += std::to_string(amount) + " ";
+    }
+
+    // add goals
+    data += "g ";
+    for (auto goalSPtr: goals) {
+        data += std::to_string(goalSPtr->getId()) + " ";
+    }
+
+    // add criteria
+    data += "c ";
+    for (auto criterionSPtr: criteria) {
+        data += std::to_string(criterionSPtr->getId()) + " " + std::to_string(criterionSPtr->getCompletion());
+    }
+
+    return data;
 }
 
 // prints student's status (victory points and resources)

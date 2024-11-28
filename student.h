@@ -39,6 +39,7 @@ class Student {
     int getVP() const; // returns number of victory points
     const std::map<Resource, int>& getResources() const; // returns student's current resources
     int getTotalResources() const; // returns total number of resources
+    std::string getData() const; // returns string with all student data to be saved to file
     
     void printStatus() const; // prints status (victory points and available resources)
     void printCriteria() const; // prints completed criteria

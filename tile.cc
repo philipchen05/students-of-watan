@@ -40,3 +40,5 @@ int Tile::getLocation() const {
 void Tile::setGeese(bool geese) {
     this->geese = geese;
 }
+
+Tile::~Tile() {}
