@@ -20,14 +20,14 @@ class Student {
 
     std::string colour; // student's colour (name)
     int number; // student's place in order of turns [1, 4]
-    int numVP; // number of victory points student has
     std::map<Resource, int> resources; // number of each resource that student has: resource |-> amount
 
     std::vector<std::shared_ptr<Criterion>> criteria; // list of all criteria that student has completed
     std::vector<std::shared_ptr<Goal>> goals; // list of all goals that student has achieved
 
   public:
-    Student(std::string colour, int number, int numVP = 0, const std::map<Resource, int> &resources = defaultResources);
+    Student(std::string colour, int number, int numVP = 0, const std::map<Resource, int> &resources = defaultResources, 
+            std::vector<std::shared_ptr<Criterion>> criteria = {}, std::vector<std::shared_ptr<Goal>> goals = {});
 
     void addCriterion(Criterion *c); // adds criterion to student's list of completed criteria
     void improve(Criterion *c); // attempts to improve the given criterion
@@ -35,11 +35,11 @@ class Student {
 
     void addResources(Resource type, int amount); // adds specified amount of the specified resource
     void removeResources(Resource type, int amount); // removes specified amount of the specified resource
-    void addVP(int amount); // adds the specified amount of victory points
 
     const std::string& getColour() const; // returns student colour (name)
     int getVP() const; // returns number of victory points
     const std::map<Resource, int>& getResources() const; // returns student's current resources
+    int getResource(Resource type) const; // returns the number of resources of the given type
     int getTotalResources() const; // returns total number of resources
     std::string getData() const; // returns string with all student data to be saved to file
     

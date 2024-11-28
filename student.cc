@@ -19,11 +19,13 @@ const std::map<Resource, int> Student::defaultResources = {
 };
 
 // Constructor
-Student::Student(std::string colour, int number, int numVP, const std::map<Resource, int> &resources):
+Student::Student(std::string colour, int number, int numVP, const std::map<Resource, int> &resources, 
+                std::vector<std::shared_ptr<Criterion>> criteria, std::vector<std::shared_ptr<Goal>> goals):
     colour{colour},
     number{number},
-    numVP{numVP},
-    resources{resources}
+    resources{resources},
+    criteria{criteria},
+    goals{goals}
 {}
 
 // adds criterion to student's list of completed criteria
@@ -65,11 +67,6 @@ void Student::removeResources(Resource type, int amount) {
     resources[type] = std::max(resources[type] - amount, 0); // can't have negative resources
 }
 
-// adds the specified amount of victory points
-void Student::addVP(int amount) {
-    numVP += amount;
-}
-
 // returns student's colour (name)
 const std::string& Student::getColour() const {
     return colour;
@@ -78,6 +75,11 @@ const std::string& Student::getColour() const {
 // returns student's current resources
 const std::map<Resource, int>& Student::getResources() const {
     return resources;
+}
+
+// returns the number of resources of the given type
+int Student::getResource(Resource type) const {
+    return resources.at(type);
 }
 
 // returns total number of resources
@@ -118,12 +120,12 @@ void Student::printStatus() const {
     // .at used because [] operator has no const overload
     try {
         std::cout << colour << " has " 
-            << numVP << " victory points, " 
-            << resources.at(Resource::CAFFEINE) << " caffeines, "
-            << resources.at(Resource::LAB) << " labs, "
-            << resources.at(Resource::LECTURE) << " lectures, "
-            << resources.at(Resource::TUTORIAL) << " tutorials, and "
-            << resources.at(Resource::STUDY) << " studies."
+            << getVP() << " victory points, " 
+            << getResource(Resource::CAFFEINE) << " caffeines, "
+            << getResource(Resource::LAB) << " labs, "
+            << getResource(Resource::LECTURE) << " lectures, "
+            << getResource(Resource::TUTORIAL) << " tutorials, and "
+            << getResource(Resource::STUDY) << " studies."
             << std::endl;
     } catch(std::exception &e) {
         std::cerr << "Failed to print Student " << getColour() << "'s status: " << std::endl;
@@ -141,6 +143,10 @@ void Student::printCriteria() const {
 
 // returns number of victory points
 int Student::getVP() const {
+    int numVP = 0;
+    for (std::shared_ptr<Criterion> c: criteria) {
+        numVP += c->getCompletion();
+    }
     return numVP;
 }
 
