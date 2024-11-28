@@ -13,6 +13,7 @@ class GamePhase {
         GamePhase(Game* game); // GamePhase constructor
         virtual ~GamePhase() = default; // GamePhase destructor
         virtual void play() = 0; // Method for executing game phase events
+        virtual bool getPlayAgain() const; // Return whether or not players wish to play again
 };
 
 #endif

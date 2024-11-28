@@ -22,7 +22,6 @@ class Game {
         std::unique_ptr<Board> board; // Unique pointer to Board object 
         std::vector<std::unique_ptr<Student>> players; // Vector containing pointers to players
         std::unique_ptr<GamePhase> gamePhase; // Unique pointer to GamePhase object
-        std::mt19937 gen; // Random number generator
         int seed; // Seed for random number generation
         int turn; // Stores turn number; used for determining which player's turn it is
         bool loaded; // Whether or not game was loaded from previously saved game
