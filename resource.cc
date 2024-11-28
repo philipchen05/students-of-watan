@@ -3,7 +3,7 @@
 #include <iostream>
 
 // Converts string to Resource
-Resource resourceFromInt(std::string s) {
+Resource resourceFromString(std::string s) {
     if(s == "CAFFEINE") {
         return Resource::CAFFEINE;
     } else if(s == "LAB") {

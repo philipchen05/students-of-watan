@@ -1,4 +1,5 @@
 #include "turnend.h"
+#include "game.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -8,52 +9,42 @@ TurnEnd::TurnEnd(Game* game, Student* player) : Turn{game, player} {}
 
 // Method for playing end of turn events
 void TurnEnd::play() {
-    string command; // Player's command
-    std::cout >> "> ";
+    std::string command; // Player's command
+    std::cout << "> ";
     std::cin >> command;
 
     // Execute player commands until "next" command
     while(command != "next") {
-        switch(command) {
-            case "board":
-                board();
-                break;
-            case "status":
-                status();
-                break;
-            case "criteria":
-                criteria();
-                break;
-            case "achieve":
-                int id; // Goal id
-                std::cin >> id;
-                achieve(id);
-                break;
-            case "complete":
-                int id; // Criterion id
-                std::cin >> id;
-                complete(id);
-                break;
-            case "improve":
-                int id; // Criterion id
-                std::cin >> id;
-                improve(id);
-                break;
-            case "trade":
-                string colour, give, take;
-                std::cin >> colour >> give >> take;
-                trade(colour, give, take);
-                break;            
-            case "save":
-                string file;
-                std::cin >> file;
-                save(file);
-                break;
-            case "help":
-                help();
-                break;
-            default:
-                std::cout << "Invalid command."
+        if(command == "board") {
+            board();
+        } else if(command == "status") {
+            status();
+        } else if(command == "criteria") {
+            criteria();
+        } else if(command == "achieve") {
+            int id; // Goal id
+            std::cin >> id;
+            achieve(id);
+        } else if(command == "complete") {
+            int id; // Criterion id
+            std::cin >> id;
+            complete(id);
+        } else if(command == "improve") {
+            int id; // Criterion id
+            std::cin >> id;
+            improve(id);
+        } else if(command == "trade") {
+            std::string colour, give, take;
+            std::cin >> colour >> give >> take;
+            trade(colour, give, take);
+        } else if(command == "save") {
+            std::string file;
+            std::cin >> file;
+            save(file);
+        } else if(command == "help") {
+            help();
+        } else {
+            std::cout << "Invalid command.";
         }
         std::cout << "> ";
         std::cin >> command;
@@ -62,19 +53,20 @@ void TurnEnd::play() {
 
 // Display board
 void TurnEnd::board() {
-    game->board->display();
+    game->getBoard()->display();
 }
 
 // Print status of each student in order of student index
 void TurnEnd::status() {
-    for(const auto& s : game->players) {
+    for(int i = 0; i < game->getNumPlayers(); i++) {
+        Student* s = game->getPlayer(i); // Pointer to current student
         s->printStatus();
     }
 }
 
 // Print current student's criteria
 void TurnEnd::criteria() {
-    s->printCriteria(); 
+    player->printCriteria(); 
 }
 
 // Determine if player can afford desired goal/achievement
@@ -82,7 +74,7 @@ bool TurnEnd::canAfford(Achievement* a) {
     const std::map<Resource, int>& upgradeCost = a->getUpgradeCost(); // Upgrade cost
     const std::map<Resource, int>& resources = player->getResources(); // Player resources
     for(const auto& [resource, cost] : upgradeCost) {
-        if(cost > resources[resource]) {
+        if(cost > resources.at(resource)) {
             return false; // Return false if player does not have enough of a given resource
         }
     }
@@ -92,7 +84,6 @@ bool TurnEnd::canAfford(Achievement* a) {
 // Deducts cost of given achievement from player resources
 void TurnEnd::purchase(Achievement* a) {
     const std::map<Resource, int>& upgradeCost = a->getUpgradeCost(); // Upgrade cost
-    const std::map<Resource, int>& resources = player->getResources(); // Player resources
     for(const auto& [resource, cost] : upgradeCost) {
         player->removeResources(resource, cost); // Deduct resource
     }
@@ -100,10 +91,10 @@ void TurnEnd::purchase(Achievement* a) {
 
 // Achieve goal
 void TurnEnd::achieve(int id) {
-    Goal* goal = game->board->getGoals()[id]; // Pointer to goal
+    Goal* goal = game->getBoard()->getGoals()[id].get(); // Pointer to goal
 
     // Check if space is valid
-    if(!game->board->canBuildGoal(id, *player)) {
+    if(!game->getBoard()->canBuildGoal(id, *player)) {
         std::cout << "You cannot build here." << std::endl;
         return;
     }
@@ -122,10 +113,10 @@ void TurnEnd::achieve(int id) {
 
 // Complete criterion
 void TurnEnd::complete(int id) {
-    Criterion* criterion = game->board->getCriteria()[id]; // Pointer to criterion
+    Criterion* criterion = game->getBoard()->getCriteria()[id].get(); // Pointer to criterion
 
     // Check if space is valid
-    if(!game->board->canBuildCriterion(id, *player)) {
+    if(!game->getBoard()->canBuildCriterion(id, *player)) {
         std::cout << "You cannot build here." << std::endl;
         return;
     }
@@ -144,7 +135,7 @@ void TurnEnd::complete(int id) {
 
 // Improve criterion
 void TurnEnd::improve(int id) {
-    Criterion* criterion = game->board->getCriteria()[id]; // Pointer to criterion
+    Criterion* criterion = game->getBoard()->getCriteria()[id].get(); // Pointer to criterion
 
     // Check if space is valid
     if(criterion->getOwnerName() == player->getColour()) {
@@ -164,13 +155,14 @@ void TurnEnd::improve(int id) {
 }
 
 // Trade resources with another player
-void TurnEnd::trade(string colour, string give, string take) {
+void TurnEnd::trade(std::string colour, std::string give, std::string take) {
     Student* otherPlayer; // Pointer to other player
-    Resource resource1 = resource(give); // Resource being offered
-    Resource resource2 - resource(take); // Resource wanted in return
+    Resource resource1 = resourceFromString(give); // Resource being offered
+    Resource resource2 = resourceFromString(take); // Resource wanted in return
 
     // Determine otherPlayer
-    for(const auto& s : game->players) {
+    for(int i = 0; i < game->getNumPlayers(); i++) {
+        Student* s = game->getPlayer(i); // Pointer to current player
         if(s->getColour() == colour) {
             otherPlayer = s;
             break;
@@ -178,10 +170,10 @@ void TurnEnd::trade(string colour, string give, string take) {
     }
 
     // Prompt other player with trade proposition
-    std::cout << player-getColour() << " offers " << otherPlayer.getColour() << " one " << resource1 << " for one " << resource2 << "." << std::endl;
-    std::cout << "Does " otherPlayer->getColour() << " accept this offer?" << std::endl;
+    std::cout << player->getColour() << " offers " << otherPlayer->getColour() << " one " << resource1 << " for one " << resource2 << "." << std::endl;
+    std::cout << "Does " << otherPlayer->getColour() << " accept this offer?" << std::endl;
 
-    string response; // Other player's response
+    std::string response; // Other player's response
     std::cout << "> ";
     std::cin >> response;
 
@@ -196,13 +188,14 @@ void TurnEnd::trade(string colour, string give, string take) {
 
 // Saves current game state to specified file
 void TurnEnd::save(std::string file) {
-    ofstream out{file}; // Output file stream
+    std::ofstream out{file}; // Output file stream
     out << player->getColour() << std::endl;
-    for(const auto& s : game->players) {
+    for(int i = 0; i < game->getNumPlayers(); i++) {
+        Student* s = game->getPlayer(i); // Pointer to current player
         out << s->getData() << std::endl;
     }
-    out << game->board->getData() << std::endl;
-    out << game->board->getGeeseLocation()->getLocation() << std::endl;
+    out << game->getBoard()->getData() << std::endl;
+    out << game->getBoard()->getGeeseLocation()->getLocation() << std::endl;
     out.close();
 }
 

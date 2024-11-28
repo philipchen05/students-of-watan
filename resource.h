@@ -14,12 +14,13 @@ enum class Resource {
 };
 
 // Converts string to Resource
-Resource resourceFromInt(std::string s);
+Resource resourceFromString(std::string s);
 
+// Converts int to Resource
 Resource resourceFromInt(int value);
 
+// Converts Resource to string
 std::string resourceToString(Resource type);
-
 
 // Overloaded operator<< method for outputting Resource types
 std::ostream &operator<<(std::ostream &out, const Resource &r);
