@@ -50,9 +50,9 @@ void TurnBegin::moveGeese() {
     std::vector<int> amountsLost; // Resource amounts lost in player index order
 
     // Store previous resource values of each student to compare with updated values later
-    std::vector<const std::map<Resource, int>*> prevResources(numPlayers);
+    std::vector<std::map<Resource, int>> prevResources(numPlayers);
     for(int i = 0; i < numPlayers; i++) {
-        prevResources[i] = &(game->getPlayer(i)->getResources());
+        prevResources[i] = game->getPlayer(i)->getResources();
     }
 
     // Each player with more than 10 total resources randomly loses half
@@ -102,7 +102,7 @@ void TurnBegin::moveGeese() {
         // Print stealable students
         std::cout << "Student " << player->getColour() << " can choose to steal from ";
         for(int i = 0; i < numStealable; i++) {
-            std::cout << stealableStudents[i];
+            std::cout << stealableStudents[i]->getColour();
             if(i < numStealable - 1) {
                 std::cout << ", ";
             }
@@ -140,9 +140,9 @@ void TurnBegin::updateResources(int roll) {
     const std::string playerMessage = " gained:";
 
     // Store previous resource values of each student to compare with updated values later
-    std::vector<const std::map<Resource, int>*> prevResources(numPlayers);
+    std::vector<std::map<Resource, int>> prevResources(numPlayers);
     for(int i = 0; i < numPlayers; i++) {
-        prevResources[i] = &(game->getPlayer(i)->getResources());
+        prevResources[i] = game->getPlayer(i)->getResources();
     }
     std::cerr << "got prev resources" << std::endl; // DEBUG - MUST DELETE
 
@@ -161,7 +161,7 @@ void TurnBegin::updateResources(int roll) {
 }
 
 // Output resource updates; returns true if at least one resource updated
-bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevResources, bool gain, std::vector<int>* amountsLost) const {
+bool TurnBegin::printUpdates(std::vector<std::map<Resource, int>> &prevResources, bool gain, std::vector<int>* amountsLost) const {
     std::cerr << "in printUpdates" << std::endl; // DEBUG - MUST DELETE
     int numPlayers = game->getNumPlayers(); // Number of players
     std::vector<Resource> resources = {Resource::CAFFEINE, Resource::LAB, Resource::LECTURE, Resource::STUDY, Resource::TUTORIAL}; // Stores resources in output order
@@ -176,7 +176,7 @@ bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevRe
         bool playerUpdated = false; // Flag for whether or not current student resources were updated
         for(size_t j = 0; j < resources.size(); j++) {
             Resource curResource = resources[j]; // Current resource
-            int resourceDiff = abs(curResources.at(curResource) - prevResources[i]->at(curResource)); // Difference between updated and previous amount of current resource
+            int resourceDiff = abs(curResources.at(curResource) - prevResources[i].at(curResource)); // Difference between updated and previous amount of current resource
             // If difference > 0, output difference as an update
             if(resourceDiff > 0) {
                 // Print student identification message only once
@@ -190,7 +190,7 @@ bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevRe
                     std::cout << std::endl;
                     playerUpdated = true;
                 }
-                std::cout << resourceDiff << curResource << std::endl; // Output resource update amount
+                std::cout << resourceDiff << " " << curResource << std::endl; // Output resource update amount
                 update = true;
             }
         }
@@ -200,12 +200,12 @@ bool TurnBegin::printUpdates(std::vector<const std::map<Resource, int>*> &prevRe
 }
 
 // Output resource gains; returns true if at least one resource was gained
-bool TurnBegin::printGains(std::vector<const std::map<Resource, int>*> &prevResources) const {
+bool TurnBegin::printGains(std::vector<std::map<Resource, int>> &prevResources) const {
     return printUpdates(prevResources, 1, nullptr);
 }
 
 // Output resource losses; returns true if at least one resource was lost
-bool TurnBegin::printLosses(std::vector<const std::map<Resource, int>*> &prevResources, std::vector<int>* amountsLost) const {
+bool TurnBegin::printLosses(std::vector<std::map<Resource, int>> &prevResources, std::vector<int>* amountsLost) const {
     return printUpdates(prevResources, 0, amountsLost);
 }
 
