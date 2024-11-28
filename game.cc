@@ -1,36 +1,116 @@
 #include "game.h"
+#include "boardsetup.h"
 #include "student.h"
 #include "begin.h"
 #include "turnbegin.h"
 #include "end.h"
+#include <iostream>
+#include <fstream>
+#indlude <sstream>
 
 // Game constructor
-Game::Game() : board{std::make_unique<Board>()}, players{std::vector<std::unique_ptr<Student>>(4)}, gamePhase{nullptr} {
-    std::vector<std::string> colours = {"Blue", "Red", "Orange", "Yellow"};
+Game::Game(int seed, std::string load, std::string board) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, gen{seed}, seed{seed}, turn{0}, loaded{false} {
+    if(load == "") { // Case: not loading game from file
+        if(board == "") {
+            board = std::make_unique<Board>(new RandomSetup{seed}); // Case: generate board from scratch
+        } else {
+            board = std::make_unique<Board>(new FileSetup{board}); // Case: load saved board
+        }
+        // Initialize new Students in index order
+        initializePlayers();
+    } else { // Case: loading previously saved game
+        ifstream in{load}; // Input file stream to read in saved game file
+        string curTurn; // Store current player turn by name (colour)
+        std::vector<std::string> studentData(numPlayers); // Student data
+        std::string boardData; // Board data
+        int geese; // Geese location
 
-    // Initialize Students
-    for(size_t i = 0; i < players.size(); i++) {
-        players[i] = std::make_unique<Student>(colours[i]);
+        in >> curTurn;
+
+        // Map player colour to index number and update turn field
+        for(size_t i = 0; i < numPlayers; i++) {
+            if(players[i]->getColour == curTurn) {
+                turn = i;
+            }
+        }
+
+        // Read in Student data
+        for(int i = 0; i < numPlayers; i++) {
+            std::string data;
+            std::getline(in, data);
+            studentData[i] = data;
+        }
+
+        // Set up board
+        std::getline(in, boardData);
+        board = std::make_unique<Board>(new FileSetup{boardData});
+
+        // Set up students
+        for(int i = 0; i < numPlayers; i++) {
+            istringstream iss{playerData[i]}; // Input string stream from current player data
+            players[i] = std::make_unique<Student>(colours[i]); // Initialize player
+            Student* player& = players[i]; // Pointer to current player
+
+            // Add resources
+            for(Resource r : resources) {
+                int amount;
+                iss >> amount;
+                player->addResources(r, amount);
+            }
+
+            // Add goals
+            std::string s;
+            iss >> s; // Throwaway 'g'
+            iss >> s;
+            while(s != "c") {
+                int id = std::stoi(s); // Goal location
+                Goal* goal = board->getGoals()[id]; // Pointer to goal
+                goal->achieve(player);
+                player->addGoal(goal);
+            }
+
+            // Add criteria
+            while(iss >> s) {
+                int id = std::stoi(s); // Criterion location
+                Criterion* criterion = board->getCriteria()[id] // Pointer to criterion
+                int completionLevel; // Criterion completion level
+                iss >> completionLevel;
+                criterion->complete(player);
+                player->addCriterion(criterion);
+
+                // Improve criterion if applicable
+                for(int i = 0; i < completionLevel - 1; i++) {
+                    criterion->improve();
+                }
+            }
+        }
+
+        // Set geese location
+        in >> geese;
+        board->tiles[geese]->setGeese(true);
+
+        loaded = true;
     }
 }
 
 // Method for playing game
 void Game::play() {
-    int turn = 0; // Stores turn number; used for determining which player's turn it is
-
     do {
-        // Play beginning of game
-        gamePhase = std::make_unique<Begin>(this);
-        gamePhase->play();
+        if(!loaded) {
+            // Play beginning of game
+            gamePhase = std::make_unique<Begin>(this);
+            gamePhase->play();
+        }
 
         // Continue taking turns while nobody has won
         while(!hasWon()) {
+            if()
             // Beginning of turn
-            gamePhase = std::make_unique<TurnBegin>(this, players[turn % players.size()]);
+            gamePhase = std::make_unique<TurnBegin>(this, players[turn % numPlayers]);
             gamePhase->play();
 
             // End of turn
-            gamePhase = std::make_unique<TurnEnd>(this, players[turn % players.size()]);
+            gamePhase = std::make_unique<TurnEnd>(this, players[turn % numPlayers]);
             gamePhase->play();
 
             turn++; // Increment turn number
@@ -38,8 +118,23 @@ void Game::play() {
 
         // Play end of game
         gamePhase = std::make_unique<End>(this);
-        gamePhase->play();        
+        gamePhase->play();
+
+        // Reset game if players wish to play again
+        if(gamePhase->playAgain()) {
+            board = std::make_unique<Board>(new RandomSetup{seed}); // Reset Board (including goals and criteria)
+            initializePlayer(); // Reset players
+            loaded = false;
+        }
     } while(gamePhase->playAgain());
+}
+
+// Initialize players at beginning of game
+void Game::initializePlayers() {
+    // Initialize Students in index order
+    for(size_t i = 0; i < numPlayers; i++) {
+        players[i] = std::make_unique<Student>(colours[i]);
+    }
 }
 
 // Helper method for determining if a player has won
