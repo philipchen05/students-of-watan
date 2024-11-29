@@ -17,8 +17,6 @@ class Criterion: public Achievement {
 
   private:
     CompletionLevel completion; // current level of completion
-    std::map<CompletionLevel, std::map<Resource, int>> upgradeCost; // maps current level to the cost of upgrading to the next level,
-    // where cost is a map from each resource to the amount of that resource needed
 
   public:
     Criterion(int id, Student* owner = nullptr, CompletionLevel completion = CompletionLevel::INCOMPLETE); // ctor
