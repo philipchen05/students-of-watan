@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <stdexcept>
 
 // Game constructor
 Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, seed{seed}, turn{0}, loaded{false} {
@@ -136,7 +137,15 @@ void Game::play() {
 
             // End of turn
             gamePhase = std::make_unique<TurnEnd>(this, players[turn % numPlayers].get());
-            gamePhase->play();
+            
+            try {
+                gamePhase->play();
+            } catch (std::exception &e) {
+                if (e.what() == "EOF") {
+                    gamePhase->save("backup.sv", );
+                    throw std::invalid_argument{"QUIT"};
+                }
+            }
 
             loaded = false;
 
