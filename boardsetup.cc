@@ -1,10 +1,10 @@
-#include <random>    // For random number generation
+#include <random>   
 #include <vector>
 #include <memory>
 #include <fstream>
 #include <sstream>
 #include "boardsetup.h"
-#include "tile.h" // Include your Tile class header file
+#include "tile.h" 
 #include "resource.h"
 
 
@@ -26,7 +26,6 @@ std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles(
 
     // Predefine the values according to constraints
     std::vector<int> values = {
-        // 0,                           // One 0
         2,                           // One 2
         12,                          // One 12
         3, 3, 4, 4, 5, 5, 6, 6,      // Two each of 3-6

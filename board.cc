@@ -5,12 +5,12 @@
 #include "resource.h"
 using namespace std;
 
+// Constructs board by creating Criteria and Goals, generating tiles, and creating the adjacent criteriaMap
 Board::Board(std::unique_ptr<BoardSetup> setup) {
     generateCriteriaAndGoals();
     tiles = setup->generateTiles(criteria, goals);
     populateCriterionMap();
 }
-
 
 // Generate criteria and goals
 void Board::generateCriteriaAndGoals() {
@@ -25,6 +25,7 @@ void Board::generateCriteriaAndGoals() {
     }
 }
 
+// A map that contains each criterion and its adjacent goals and criteria
 void Board::populateCriterionMap() {
     criterionMap = {
         {0, {{1, 3}, {0, 1}}},
@@ -84,14 +85,18 @@ void Board::populateCriterionMap() {
     };
 }
 
+// Check if it's valid to achieve/build at a specific goal
 bool Board::canBuildGoal(int goalId, const Student& student) const {
+    // if Goal is already owned, return false
     if (getGoal(goalId)->isOwned()) {return false;}
     
     // Find adjacent criteria to goal
     for (const auto& [key, pairSet] : criterionMap) {
         const auto& adjacentGoals = pairSet.second; // Access the second set in the pair
         if (adjacentGoals.count(goalId) != 0) { // Check if goalId is in the set
+            // Check if criterion adjacent to goal is owned by the player
             if (getCriterion(key)->getOwnerName() == student.getColour()) {return true;}
+            // Otherwise check if player owns at least one adjacent goal
             for (int v : adjacentGoals) {
                 if (getGoal(v)->getOwnerName() == student.getColour()) {return true;}
             }
@@ -101,6 +106,7 @@ bool Board::canBuildGoal(int goalId, const Student& student) const {
     return false;
 
 }
+
 // Check if it's valid to build at a specific location
 bool Board::canBuildCriteria(int criterionId, const Student& student, bool begin) const {
     // Check if criteria is already owned
@@ -119,6 +125,7 @@ bool Board::isValid(int criterionId) const {
     return true;
 }
 
+// Checks if a specific goal has been achieved by player/student
 bool Board::ownsGoal(int criterionId, const Student& student) const {
     const auto& [adjCriteria, adjGoals] = criterionMap.at(criterionId);
     // Check if the student owns at least one adjacent goal
@@ -134,6 +141,8 @@ bool Board::ownsGoal(int criterionId, const Student& student) const {
 // Returns true if no adjacent criteria to a given a criterionId is owned 
 bool Board::emptyAdjacent(int criterionId) const {
     const auto& [adjCriteria, adjGoals] = criterionMap.at(criterionId);
+    // Check if the student owns at least one adjacent criterion
+
     for (int adj : adjCriteria) {
         if (getCriterion(adj)->isOwned()) {
             return false;
@@ -164,12 +173,11 @@ void Board::display() const {
 
     char ch;
 
-    // Read character by character
     int goalIndex = 0, criteriaIndex = 0, index = 0, rollIndex = 0, tileIndex = 0, geeseIndex = 0;
-
+    // Read character by character
     while (inputFile.get(ch)) {
-
-        if (ch == 'G') {
+        
+        if (ch == 'G') { // replace by goal
             if (goals[goalIndex]->isOwned()) {
                 cout << goals[goalIndex]->getOwnerName()[0] << "A";
                 inputFile.get(ch);
@@ -177,18 +185,16 @@ void Board::display() const {
                 outputNum(goals[goalIndex]->getId());
                 inputFile.get(ch);
             }
-            // cout << "goal index: " << goalIndex << endl;
             goalIndex++;
 
         }   
-        else if (ch=='T') {
+        else if (ch=='T') { // replace by tile
             std::string typeString = resourceToString(tiles[tileIndex]->getType());
             cout << typeString;
             for (std::size_t i = 0; i < typeString.length() - 1; i++) {inputFile.get(ch);}
             tileIndex++;
         }
-        else if (ch=='C') {
-        // cout << "display: isOwned " << criteria[criteriaIndex]->isOwned() << endl; 
+        else if (ch=='C') { // replace by criteria
         std::cerr << *criteria[criteriaIndex] << std::endl;
             if (criteria[criteriaIndex]->isOwned()) {
                 cout << criteria[criteriaIndex]->getOwnerName()[0];
@@ -213,15 +219,14 @@ void Board::display() const {
                 outputNum(criteria[criteriaIndex]->getId());
                 inputFile.get(ch);
             }
-            // cout << "criteria index: " << criteriaIndex << endl;
             criteriaIndex++;
         }
-        else if (ch=='I') {
+        else if (ch=='I') { // replace by location/index
             outputNum(index);
             inputFile.get(ch);
             index++;
         }
-        else if (ch=='R') { 
+        else if (ch=='R') { // replace by roll amount
             if (tiles[rollIndex]->getValue() == 0) {std::cout << " ";}
             else {
                 outputNum(tiles[rollIndex]->getValue());
@@ -229,7 +234,7 @@ void Board::display() const {
             }
             rollIndex++;
         }
-        else if (ch=='M') {
+        else if (ch=='M') { // replace by geese if it exists
             if(tiles[geeseIndex]->hasGeese()) {
                 const std::string geese = "GEESE";
                 std::cout << geese;
@@ -242,7 +247,7 @@ void Board::display() const {
             }
             geeseIndex++;
         }
-        else {
+        else { // otherwise print what was read from file
             cout << ch;
         }
         
@@ -287,7 +292,7 @@ const std::vector<std::unique_ptr<Tile>>& Board::getTiles() const {
     return tiles;
 }
 
-
+// Returns a string of the board data
 std::string Board::getData() const {
     std::string boardData = "";
     for (const auto& tile : tiles) {
