@@ -139,6 +139,8 @@ void Game::play() {
             gamePhase = std::make_unique<TurnEnd>(this, players[turn % numPlayers].get());
             gamePhase->play();
 
+            loaded = false;
+
             turn++; // Increment turn number
         }
 

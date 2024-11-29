@@ -280,15 +280,19 @@ const std::vector<std::unique_ptr<Tile>>& Board::getTiles() const {
 std::string Board::getData() const {
     std::string boardData = "";
     for (const auto& tile : tiles) {
+        // add type of resource for tile
         boardData += std::to_string(resourceToInt(tile->getType()));
         boardData += " ";
+
+        // add value of tile (7 if resource is Netflix)
         if (tile->getType() == Resource::NETFLIX) {
             boardData += "7";
         } else {
             boardData += std::to_string(tile->getValue());
         }
+
+        // don't add space after last tile
         if (tile->getLocation() != 18) {boardData += " ";}
-        
     }
     return boardData;
 }

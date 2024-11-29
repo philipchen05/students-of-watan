@@ -96,9 +96,11 @@ std::string Student::getData() const {
     std::string data = "";
 
     // add all resources
-    for (auto &[resource, amount]: resources) {
-        data += std::to_string(amount) + " ";
-    }
+    data += std::to_string(resources.at(Resource::CAFFEINE)) + " ";
+    data += std::to_string(resources.at(Resource::LAB)) + " ";
+    data += std::to_string(resources.at(Resource::LECTURE)) + " ";
+    data += std::to_string(resources.at(Resource::STUDY)) + " ";
+    data += std::to_string(resources.at(Resource::TUTORIAL)) + " ";
 
     // add goals
     data += "g ";

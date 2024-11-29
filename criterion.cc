@@ -86,7 +86,6 @@ const std::map<Resource, int>& Criterion::getUpgradeCost() const {
     return upgradeCost.at(completion); // use .at because [] doesn't have overload for const map
 }
 
-
 Criterion::~Criterion() {}
 
 // prints criterion contents for debug [Criterion: (id: ID, isOwned: ISOWNED, owner: OWNER, comp: COMPLETIONLEVEL)]
