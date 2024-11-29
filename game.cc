@@ -91,8 +91,11 @@ Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullpt
         }
 
         // Set geese location
+        const int invalidGeeseLocation = -1; // "Location" of geese when geese are not present on board
         in >> geese;
-        board->getTiles()[geese].get()->setGeese(true);
+        if(geese != invalidGeeseLocation) {
+            board->getTiles()[geese].get()->setGeese(true);
+        }
 
         loaded = true;
     }
@@ -110,8 +113,11 @@ void Game::play() {
         // Continue taking turns while nobody has won
         while(!hasWon()) {
             // Beginning of turn
-            gamePhase = std::make_unique<TurnBegin>(this, players[turn % numPlayers].get(), gen);
-            gamePhase->play();
+            if(!loaded) {
+                gamePhase = std::make_unique<TurnBegin>(this, players[turn % numPlayers].get(), gen);
+                gamePhase->play();
+                loaded = false;
+            }
 
             // End of turn
             gamePhase = std::make_unique<TurnEnd>(this, players[turn % numPlayers].get());
@@ -128,7 +134,6 @@ void Game::play() {
         if(gamePhase->getPlayAgain()) {
             board = std::make_unique<Board>(std::make_unique<RandomSetup>(gen)); // Reset Board (including goals and criteria)
             initializePlayers(); // Reset players
-            loaded = false;
         }
     } while(gamePhase->getPlayAgain());
 }

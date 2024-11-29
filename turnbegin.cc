@@ -130,7 +130,10 @@ void TurnBegin::moveGeese() {
         std::cout << "Student " << player->getColour() << " steals " << resource << " from student " << victim->getColour() << "." << std::endl;
     }
 
-    game->getBoard()->getGeeseLocation()->setGeese(false); // Set tile with current geese location to no longer have geese
+    Tile* prevGeeseLocation = game->getBoard()->getGeeseLocation(); // Pointer to tile with previous geese location
+    if(prevGeeseLocation) {
+        prevGeeseLocation->setGeese(false); // Set tile with previous geese location to no longer have geese
+    }
     newGeeseTile->setGeese(true); // Set geese to be true on new geese tile
 }
 
