@@ -12,7 +12,6 @@
 
 // Game constructor
 Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, seed{seed}, turn{0}, loaded{false}, gen{static_cast<uint32_t>(seed)} {
-    std::cerr << "[Game Ctor]: " << std::endl;
     // Initialize new Students in index order
     initializePlayers();
     if(loadFile == "") { // Case: not loading game from file
@@ -26,9 +25,7 @@ Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullpt
             board = std::make_unique<Board>(std::make_unique<FileSetup>(boardData)); // Set up board using file setup
         }
     } else { // Case: loading previously saved game
-        std::cerr << "\tloading game from file" << std::endl;
         std::ifstream in{loadFile}; // Input file stream to read in saved game file
-        std::cerr << "\topened file" << std::endl;
         std::string curTurn; // Store current player turn by name (colour)
         std::vector<std::string> studentData(numPlayers); // Student data
         std::string boardData; // Board data
@@ -36,11 +33,9 @@ Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullpt
 
 
         getline(in, curTurn);
-        std::cerr << "\tread curTurn: " << curTurn << std::endl;
 
         // Map player colour to index number and update turn field
         for(size_t i = 0; i < numPlayers; i++) {
-            std::cerr << "\tgetting colour for player " << i << std::endl;
             if(players[i]->getColour() == curTurn) {
                 turn = i;
             }
@@ -51,10 +46,8 @@ Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullpt
             std::string data;
             std::getline(in, data);
             studentData[i] = data;
-            std::cerr << "\tread student " << i << ": data = " << data << std::endl;
         }
 
-        std::cerr << "\tset up board" << std::endl;
         // Set up board
         std::getline(in, boardData);
 
@@ -65,7 +58,6 @@ Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullpt
         }
 
         board = std::make_unique<Board>(std::make_unique<FileSetup>(boardData));
-        std::cerr << "\tconstructed board" << std::endl;
 
         // Set up students
         for(size_t i = 0; i < numPlayers; i++) {
@@ -80,35 +72,28 @@ Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullpt
                 player->addResources(r, amount);
             }
 
-            std::cerr << "\tAdding Goals:" << std::endl;
             // Add goals
             std::string s;
             iss >> s; // Throwaway 'g'
             while(iss >> s) {
                 if (s == "c") break; // c marks beginning of criteria
-                std::cerr << "\t\tadding goal " << s << "to student " << player->getColour() << std::endl;
                 int id = std::stoi(s); // Goal location
                 Goal* goal = (board->getGoals()[id]).get(); // Pointer to goal
                 goal->achieve(player);
                 player->addGoal(goal);
             }
 
-            std::cerr << "\tAdding Criteria:" << std::endl;
             // Add criteria
             while(iss >> s) {
                 int id = std::stoi(s); // Criterion location
                 Criterion* criterion = (board->getCriteria()[id]).get(); // Pointer to criterion
-                std::cerr << "\t\tgot criterion "<< *criterion << std::endl;
                 int completionLevel; // Criterion completion level
                 iss >> completionLevel;
-                std::cerr << "\t\tcompleting criterion "<< *criterion << std::endl;
                 criterion->complete(player);
-                std::cerr << "\t\tadding criterion to player "<< *criterion << std::endl;
                 player->addCriterion(criterion);
 
                 // Improve criterion if applicable
                 for(int i = 0; i < completionLevel - 1; i++) {
-                    std::cerr << "\t\timproving criterion "<< *criterion << std::endl;
                     criterion->improve();
                 }
             }

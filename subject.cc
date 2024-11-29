@@ -24,7 +24,6 @@ void Subject::detach( Observer* o ) {
 // notifies all observers attached to subject
 void Subject::notifyObservers() {
     for (auto &ob: observers) {
-        std::cerr << "[Subject] - notifying observer " << *dynamic_cast<Criterion*>(ob) << std::endl; // DEBUG - MUST DELETE
         ob->notify(this);
     }
 }

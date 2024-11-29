@@ -37,7 +37,4 @@ class Tile: public Subject {
     ~Tile();
 };
 
-// prints tile contents for debug [Tile: (type: TYPE, loc: LOCATION, val: VALUE)]
-std::ostream& operator<<(std::ostream &out, const Tile &tile);
-
 #endif

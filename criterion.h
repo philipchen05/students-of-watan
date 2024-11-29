@@ -32,7 +32,4 @@ class Criterion: public Achievement {
     ~Criterion() override;
 };
 
-// prints criterion contents for debug [Criterion: (id: ID, isOwned: ISOWNED, owner: OWNER, comp: COMPLETIONLEVEL)]
-std::ostream& operator<<(std::ostream &out, const Criterion &criterion);
-
 #endif

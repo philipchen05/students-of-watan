@@ -195,7 +195,6 @@ void Board::display() const {
             tileIndex++;
         }
         else if (ch=='C') { // replace by criteria
-        std::cerr << *criteria[criteriaIndex] << std::endl;
             if (criteria[criteriaIndex]->isOwned()) {
                 cout << criteria[criteriaIndex]->getOwnerName()[0];
                 switch (criteria[criteriaIndex]->getCompletion())

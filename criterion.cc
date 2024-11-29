@@ -42,7 +42,6 @@ void Criterion::complete(Student* s) {
         std::cout << getOwnerName() << " has already completed criterion " << getId() << std::endl;
         return;
     }
-    std::cerr << "Criterion::complete() - setting onwer = " << s << std::endl; // DEBUG - MUST DELETE
     owner = s;
     completion = Criterion::CompletionLevel::ASSIGNMENT;
 }
@@ -64,15 +63,10 @@ void Criterion::improve() {
 
 // adds resources earned from the notifying tile to the owner
 void Criterion::notify(const Subject *sbj) {
-    std::cerr << *this << " entered notify()" << std::endl; // DEBUG - MUST DELTE
     const Tile *tile = dynamic_cast<const Tile*>(sbj);
-    std::cerr << "\tcasted subject to tile" << std::endl;// DEBUG - MUST DELTE
     // if criterion has been completed, add resources to its owner
     if (isOwned()) {
         owner->addResources(tile->getType(), getCompletion());
-        std::cerr << "\tadded resources to owner" << std::endl;// DEBUG - MUST DELTE
-    } else {
-        std::cerr << "\thas no owner! doing nothing" << std::endl;
     }
 }
 
@@ -87,9 +81,3 @@ const std::map<Resource, int>& Criterion::getUpgradeCost() const {
 }
 
 Criterion::~Criterion() {}
-
-// prints criterion contents for debug [Criterion: (id: ID, isOwned: ISOWNED, owner: OWNER, comp: COMPLETIONLEVEL)]
-std::ostream& operator<<(std::ostream &out, const Criterion &criterion) {
-    out << "[Criterion: (id: " << criterion.getId() << " , isOwned: " << criterion.isOwned() << ", owner: " << criterion.getOwnerName() << ", comp: " << criterion.getCompletion() << ")]";
-    return out;
-}

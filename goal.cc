@@ -28,9 +28,3 @@ const std::map<Resource, int>& Goal::getUpgradeCost() const {
 }
 
 Goal::~Goal() {}
-
-// prints goal contents for debug [Goal: (id: ID, owner: OWNER, ach: ACHIEVED)]
-std::ostream& operator<<(std::ostream &out, const Goal &goal) {
-    out << "[Goal: (id: " << goal.getId() << " , isOwned: " << goal.isOwned() << ", owner: " << goal.getOwnerName() << ", ach: " << goal.isOwned() << ")]";
-    return out;
-}

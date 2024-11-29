@@ -26,7 +26,4 @@ class Goal: public Achievement {
     ~Goal();
 };
 
-// prints goal contents for debug [Goal: (id: ID, isOwned: ISOWNED, owner: OWNER, ach: ACHIEVED)]
-std::ostream& operator<<(std::ostream &out, const Goal &goal);
-
 #endif
