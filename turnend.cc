@@ -43,7 +43,11 @@ void TurnEnd::play() {
             save(file);
         } else if(command == "help") {
             help();
-        } else {
+        }  else if (std::cin.eof()) {
+            std::cout << "saved to file backup.sv" << std::endl;
+            save("backup.sv");
+        }  
+        else {
             std::cout << "Invalid command." << std::endl;
         }
         std::cout << "> ";
@@ -139,7 +143,7 @@ void TurnEnd::improve(int id) {
     Criterion* criterion = game->getBoard()->getCriteria()[id].get(); // Pointer to criterion
 
     // Check if space is valid
-    if(criterion->getOwnerName() == player->getColour()) {
+    if(criterion->getOwnerName() != player->getColour()) {
         std::cout << "You cannot build here." << std::endl;
         return;
     }

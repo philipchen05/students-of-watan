@@ -1,0 +1,388 @@
+[Game Ctor]: 
+[Tile: (type: TUTORIAL, loc: 0, val: 3)]: 
+  criteria: 
+	[Criterion: (id: 0 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 1 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 3 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 4 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 8 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 9 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 0 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 1 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 2 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 6 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 7 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 10 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: TUTORIAL, loc: 1, val: 10)]: 
+  criteria: 
+	[Criterion: (id: 2 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 3 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 7 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 8 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 13 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 14 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 3 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 5 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 6 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 13 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 14 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 18 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: CAFFEINE, loc: 2, val: 11)]: 
+  criteria: 
+	[Criterion: (id: 4 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 5 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 9 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 10 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 15 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 16 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 4 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 7 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 8 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 15 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 16 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 19 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: TUTORIAL, loc: 3, val: 4)]: 
+  criteria: 
+	[Criterion: (id: 6 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 7 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 12 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 13 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 18 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 19 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 9 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 12 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 13 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 20 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 21 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 26 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: LECTURE, loc: 4, val: 5)]: 
+  criteria: 
+	[Criterion: (id: 8 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 9 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 14 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 15 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 20 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 21 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 10 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 14 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 15 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 22 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 23 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 27 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: CAFFEINE, loc: 5, val: 8)]: 
+  criteria: 
+	[Criterion: (id: 10 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 11 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 16 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 17 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 22 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 23 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 11 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 16 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 17 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 24 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 25 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 28 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: LAB, loc: 6, val: 3)]: 
+  criteria: 
+	[Criterion: (id: 13 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 14 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 19 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 20 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 25 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 26 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 18 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 21 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 22 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 30 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 31 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 35 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: LECTURE, loc: 7, val: 11)]: 
+  criteria: 
+	[Criterion: (id: 15 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 16 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 21 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 22 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 27 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 28 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 19 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 23 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 24 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 32 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 33 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 36 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: NETFLIX, loc: 8, val: 0)]: 
+  criteria: 
+	[Criterion: (id: 18 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 19 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 24 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 25 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 30 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 31 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 26 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 29 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 30 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 37 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 38 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 43 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: STUDY, loc: 9, val: 10)]: 
+  criteria: 
+	[Criterion: (id: 20 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 21 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 26 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 27 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 32 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 33 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 27 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 31 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 32 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 39 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 40 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 44 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: STUDY, loc: 10, val: 12)]: 
+  criteria: 
+	[Criterion: (id: 22 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 23 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 28 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 29 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 34 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 35 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 28 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 33 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 34 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 41 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 42 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 45 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: LECTURE, loc: 11, val: 9)]: 
+  criteria: 
+	[Criterion: (id: 25 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 26 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 31 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 32 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 37 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 38 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 35 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 38 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 39 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 47 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 48 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 52 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: STUDY, loc: 12, val: 9)]: 
+  criteria: 
+	[Criterion: (id: 27 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 28 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 33 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 34 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 39 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 40 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 36 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 40 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 41 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 49 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 50 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 53 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: CAFFEINE, loc: 13, val: 5)]: 
+  criteria: 
+	[Criterion: (id: 30 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 31 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 36 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 37 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 42 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 42 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 43 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 46 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 47 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 54 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 55 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 60 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: LAB, loc: 14, val: 8)]: 
+  criteria: 
+	[Criterion: (id: 32 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 33 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 38 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 39 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 44 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 45 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 44 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 48 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 49 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 56 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 57 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 61 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: LAB, loc: 15, val: 2)]: 
+  criteria: 
+	[Criterion: (id: 34 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 35 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 40 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 41 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 46 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 47 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 45 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 50 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 51 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 58 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 59 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 62 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: CAFFEINE, loc: 16, val: 6)]: 
+  criteria: 
+	[Criterion: (id: 37 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 38 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 43 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 44 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 48 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 49 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 52 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 55 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 56 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 63 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 64 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 67 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: LAB, loc: 17, val: 6)]: 
+  criteria: 
+	[Criterion: (id: 39 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 40 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 45 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 46 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 50 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 51 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 53 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 57 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 58 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 65 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 66 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 68 , isOwned: 0, owner: , ach: 0)]
+[Tile: (type: LECTURE, loc: 18, val: 4)]: 
+  criteria: 
+	[Criterion: (id: 44 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 45 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 49 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 50 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 52 , isOwned: 0, owner: , comp: 0)]
+	[Criterion: (id: 53 , isOwned: 0, owner: , comp: 0)]
+  goal: 
+	[Goal: (id: 61 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 64 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 65 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 69 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 70 , isOwned: 0, owner: , ach: 0)]
+	[Goal: (id: 71 , isOwned: 0, owner: , ach: 0)]
+Begin::play() - completing [Criterion: (id: 1 , isOwned: 0, owner: , comp: 0)]
+Criterion::complete() - setting onwer = 0x957ab0
+Begin::play() - completing [Criterion: (id: 5 , isOwned: 0, owner: , comp: 0)]
+Criterion::complete() - setting onwer = 0x957b40
+Begin::play() - completing [Criterion: (id: 19 , isOwned: 0, owner: , comp: 0)]
+Criterion::complete() - setting onwer = 0x957bd0
+Begin::play() - completing [Criterion: (id: 33 , isOwned: 0, owner: , comp: 0)]
+Criterion::complete() - setting onwer = 0x957c90
+Begin::play() - completing [Criterion: (id: 52 , isOwned: 0, owner: , comp: 0)]
+Criterion::complete() - setting onwer = 0x957c90
+Begin::play() - completing [Criterion: (id: 43 , isOwned: 0, owner: , comp: 0)]
+Criterion::complete() - setting onwer = 0x957bd0
+Begin::play() - completing [Criterion: (id: 16 , isOwned: 0, owner: , comp: 0)]
+Criterion::complete() - setting onwer = 0x957b40
+Begin::play() - completing [Criterion: (id: 14 , isOwned: 0, owner: , comp: 0)]
+Criterion::complete() - setting onwer = 0x957ab0
+[Criterion: (id: 0 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 1 , isOwned: 1, owner: Blue, comp: 1)]
+[Criterion: (id: 2 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 3 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 4 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 5 , isOwned: 1, owner: Red, comp: 1)]
+[Criterion: (id: 6 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 7 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 8 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 9 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 10 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 11 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 12 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 13 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 14 , isOwned: 1, owner: Blue, comp: 1)]
+[Criterion: (id: 15 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 16 , isOwned: 1, owner: Red, comp: 1)]
+[Criterion: (id: 17 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 18 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 19 , isOwned: 1, owner: Orange, comp: 1)]
+[Criterion: (id: 20 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 21 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 22 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 23 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 24 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 25 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 26 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 27 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 28 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 29 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 30 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 31 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 32 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 33 , isOwned: 1, owner: Yellow, comp: 1)]
+[Criterion: (id: 34 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 35 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 36 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 37 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 38 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 39 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 40 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 41 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 42 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 43 , isOwned: 1, owner: Orange, comp: 1)]
+[Criterion: (id: 44 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 45 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 46 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 47 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 48 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 49 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 50 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 51 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 52 , isOwned: 1, owner: Yellow, comp: 1)]
+[Criterion: (id: 53 , isOwned: 0, owner: , comp: 0)]
+got prev resources
+notifying tile[Tile: (type: STUDY, loc: 10, val: 12)]
+[Subject] - notifying observer [Criterion: (id: 22 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 22 , isOwned: 0, owner: , comp: 0)] entered notify()
+	casted subject to tile
+	has no owner! doing nothing
+[Subject] - notifying observer [Criterion: (id: 23 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 23 , isOwned: 0, owner: , comp: 0)] entered notify()
+	casted subject to tile
+	has no owner! doing nothing
+[Subject] - notifying observer [Criterion: (id: 28 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 28 , isOwned: 0, owner: , comp: 0)] entered notify()
+	casted subject to tile
+	has no owner! doing nothing
+[Subject] - notifying observer [Criterion: (id: 29 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 29 , isOwned: 0, owner: , comp: 0)] entered notify()
+	casted subject to tile
+	has no owner! doing nothing
+[Subject] - notifying observer [Criterion: (id: 34 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 34 , isOwned: 0, owner: , comp: 0)] entered notify()
+	casted subject to tile
+	has no owner! doing nothing
+[Subject] - notifying observer [Criterion: (id: 35 , isOwned: 0, owner: , comp: 0)]
+[Criterion: (id: 35 , isOwned: 0, owner: , comp: 0)] entered notify()
+	casted subject to tile
+	has no owner! doing nothing
+notified all tiles
+in printUpdates
+student Blue
+student Red
+student Orange
+student Yellow
