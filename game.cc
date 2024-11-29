@@ -10,7 +10,7 @@
 #include <sstream>
 
 // Game constructor
-Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, seed{seed}, turn{0}, loaded{false} {
+Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, seed{seed}, turn{0}, loaded{false}, gen{static_cast<uint32_t>(seed)} {
     std::cerr << "[Game Ctor]: " << std::endl;
     // Initialize new Students in index order
     initializePlayers();

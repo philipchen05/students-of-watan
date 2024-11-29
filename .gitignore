@@ -6,7 +6,7 @@ Makefile[0-9]*
 watan
 game.txt
 gcm.cache/
-
+funkyboard.txt
 *.o
 *.d
 test*
