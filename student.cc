@@ -110,7 +110,7 @@ std::string Student::getData() const {
 
     // add criteria
     data += "c ";
-    for (int i = 0; i < criteria.size(); ++i) {
+    for (size_t i = 0; i < criteria.size(); ++i) {
         data += std::to_string(criteria[i]->getId()) + " " + std::to_string(criteria[i]->getCompletion());
         if (i != criteria.size() - 1) data += " ";
     }

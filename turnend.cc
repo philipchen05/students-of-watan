@@ -66,7 +66,7 @@ void TurnEnd::status() {
 
 // Print current student's criteria
 void TurnEnd::criteria() {
-    player->printCriteria(); 
+    player->printCriteria();
 }
 
 // Determine if player can afford desired goal/achievement
