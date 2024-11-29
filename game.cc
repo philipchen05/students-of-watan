@@ -134,7 +134,7 @@ void Game::play() {
             try {
                 gamePhase->play();
             } catch(std::exception &e) {
-                std::cout << std::endl << "Closing Game." << std::endl;
+                std::cout << std::endl << "Closing game..." << std::endl;
                 throw std::invalid_argument{"QUIT"};
             }
         }
@@ -151,7 +151,7 @@ void Game::play() {
                     std::cerr << "\tis EOF" << std::endl;
                     Turn* te = dynamic_cast<Turn*>(gamePhase.get());
                     gamePhase->save("backup.sv", te->getPlayer());
-                    std::cout << std::endl << "Closing Game." << std::endl;
+                    std::cout << std::endl << "Closing game..." << std::endl;
                     throw std::invalid_argument{"QUIT"};
                 }
             }
@@ -165,7 +165,7 @@ void Game::play() {
                 std::cerr << "\tis EOF" << std::endl;
                 Turn* te = dynamic_cast<Turn*>(gamePhase.get());
                 gamePhase->save("backup.sv", te->getPlayer());
-                std::cout << std::endl << "Closing Game." << std::endl;
+                std::cout << std::endl << "Closing game..." << std::endl;
                 throw std::invalid_argument{"QUIT"};
             }
             loaded = false;
@@ -178,7 +178,7 @@ void Game::play() {
         try {
             gamePhase->play();
         } catch (std::exception &e) {
-            std::cout << std::endl << "Closing Game." << std::endl;
+            std::cout << std::endl << "Closing game..." << std::endl;
             throw std::invalid_argument{"QUIT"};
         }
 

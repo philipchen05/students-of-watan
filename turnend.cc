@@ -188,10 +188,21 @@ void TurnEnd::trade(std::string colour, std::string give, std::string take) {
 
     std::string response; // Other player's response
     std::cout << "> ";
-    std::cin >> response;
+
+    // Get other player's response
+    while (std::cin >> response) {
+        if (response != "yes" && response != "no") {
+            std::cout << "Invalid command." << std::endl;
+            std::cout << "> ";
+        } else {
+            break;
+        }
+    }
 
     // Make trade if other player agrees
-    if(response == "yes") {
+    if (std::cin.eof()){
+        throw std::invalid_argument{"EOF"};
+    } else if(response == "yes") {
         player->removeResources(resource1, 1);
         player->addResources(resource2, 1);
         otherPlayer->removeResources(resource2, 1);

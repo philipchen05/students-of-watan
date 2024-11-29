@@ -14,7 +14,7 @@ void End::play() {
     std::cout << "> ";
     while (std::cin >> res) {
         if (res != "yes" && res != "no") {
-            std::cout << "Invalid input. Enter \"yes\" or \"no\"." << std::endl;
+            std::cout << "Invalid command." << std::endl;
             std::cout << "> ";
         } else {
             break;
