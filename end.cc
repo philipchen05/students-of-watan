@@ -12,7 +12,13 @@ void End::play() {
     // Prompt player(s) for input
     std::cout << "Would you like to play again?" << std::endl;
     std::cout << "> ";
-    std::cin >> res;
+    while (std::cin >> res) {
+        if (res != "yes" && res != "no") {
+            std::cout << "> ";
+        } else {
+            break;
+        }
+    }
 
     // Interpret response
     if (std::cin.eof()){
