@@ -6,7 +6,7 @@
 #include <random>
 
 // TurnBegin constructor
-TurnBegin::TurnBegin(Game* game, Student* player, int seed) : Turn{game, player}, dice{Dice{seed}}, gen{static_cast<uint32_t>(seed)} {}
+TurnBegin::TurnBegin(Game* game, Student* player, std::mt19937 &gen) : Turn{game, player}, dice{Dice{gen}}, gen{gen} {}
 
 // Method for playing beginning of turn events
 void TurnBegin::play() {
@@ -60,7 +60,7 @@ void TurnBegin::moveGeese() {
         Student* s = game->getPlayer(i); // Pointer to current player
         int totalResources = s->getTotalResources(); // Current player's total resources
         if(totalResources >= geeseMin) {
-            int numLost = totalResources - (totalResources / 2);
+            int numLost = totalResources / 2;
             amountsLost.push_back(numLost);
             for(int i = 0; i < numLost; i++) {
                 loseResource(*s);
@@ -130,7 +130,10 @@ void TurnBegin::moveGeese() {
         std::cout << "Student " << player->getColour() << " steals " << resource << " from student " << victim->getColour() << "." << std::endl;
     }
 
-    game->getBoard()->getGeeseLocation()->setGeese(false); // Set tile with current geese location to no longer have geese
+    Tile* prevGeeseLocation = game->getBoard()->getGeeseLocation(); // Pointer to tile with previous geese location
+    if(prevGeeseLocation) {
+        prevGeeseLocation->setGeese(false); // Set tile with previous geese location to no longer have geese
+    }
     newGeeseTile->setGeese(true); // Set geese to be true on new geese tile
 }
 

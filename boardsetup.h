@@ -8,6 +8,7 @@
 #include "tile.h"
 #include <map>
 #include <set>
+#include <random>
 
 class BoardSetup {
     protected:
@@ -50,10 +51,10 @@ class FileSetup : public BoardSetup {
 
 class RandomSetup : public BoardSetup {
     private: 
-        int seed;
+        std::mt19937 &gen; // Random number generator
 
     public:
-        RandomSetup(int seed);
+        RandomSetup(std::mt19937 &gen);
         std::vector<std::unique_ptr<Tile>> generateTiles(
                 const std::vector<std::shared_ptr<Criterion>>& criteria,
                 const std::vector<std::shared_ptr<Goal>>& goals

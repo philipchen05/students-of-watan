@@ -102,15 +102,15 @@ bool Board::canBuildGoal(int goalId, const Student& student) const {
 
 }
 // Check if it's valid to build at a specific location
-bool Board::canBuildCriteria(int criterionId, const Student& student) const {
+bool Board::canBuildCriteria(int criterionId, const Student& student, bool begin) const {
     // Check if criteria is already owned
     if (getCriterion(criterionId)->isOwned()) {return false;}
     // cout << "Can build: isOwned " << getCriterion(criterionId)->isOwned() << endl;
 
     if (!emptyAdjacent(criterionId)) {return false;}
 
-    // Check if the student owns at least one adjacent goal
-    if (!ownsGoal(criterionId, student)) {return false;}
+    // Check if the student owns at least one adjacent goal (if it's not the beginning of the game)
+    if (!begin && !ownsGoal(criterionId, student)) {return false;}
 
     return true;
 }

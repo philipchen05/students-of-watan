@@ -1,7 +1,7 @@
 #include "fairroll.h"
 
 // FairRoll constructor
-FairRoll::FairRoll(int seed) : gen{static_cast<uint32_t>(seed)} {}
+FairRoll::FairRoll(std::mt19937 &gen) : gen{gen} {}
 
 // Roll method
 int FairRoll::roll() {

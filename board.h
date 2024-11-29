@@ -35,7 +35,7 @@ public:
     Board(std::unique_ptr<BoardSetup> setup);
 
     // Check if it's valid to build at a specific location
-    bool canBuildCriteria(int criterionId, const Student& student) const;
+    bool canBuildCriteria(int criterionId, const Student& student, bool begin) const;
 
     bool canBuildGoal(int goalId, const Student& student) const;
 
