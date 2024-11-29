@@ -9,7 +9,6 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
-#include <stdexcept>
 
 // Game constructor
 Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, seed{seed}, turn{0}, loaded{false}, gen{static_cast<uint32_t>(seed)} {
