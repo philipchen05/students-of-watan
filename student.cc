@@ -19,7 +19,7 @@ const std::map<Resource, int> Student::defaultResources = {
 };
 
 // Constructor
-Student::Student(std::string colour, int number, int numVP, const std::map<Resource, int> &resources, 
+Student::Student(std::string colour, int number, const std::map<Resource, int> &resources, 
                 std::vector<Criterion*> criteria, std::vector<Goal*> goals):
     colour{colour},
     number{number},

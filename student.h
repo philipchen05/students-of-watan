@@ -26,7 +26,7 @@ class Student {
     std::vector<Goal*> goals; // list of all goals that student has achieved
 
   public:
-    Student(std::string colour, int number, int numVP = 0, const std::map<Resource, int> &resources = defaultResources, 
+    Student(std::string colour, int number, const std::map<Resource, int> &resources = defaultResources, 
             std::vector<Criterion*> criteria = {}, std::vector<Goal*> goals = {});
 
     void addCriterion(Criterion *c); // adds criterion to student's list of completed criteria
