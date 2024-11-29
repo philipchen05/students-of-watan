@@ -2,7 +2,7 @@ CXX =  g++-14.2.0 -std=c++20 -fmodules-ts
 CXXFLAGS = -Wall -g
 HEADERFLAGS = -c -x c++-system-header
 SOURCES = *.cc
-HEADERS = algorithm cstdlib cmath fstream iostream map memory random set sstream string vector
+HEADERS = algorithm cstdlib cmath fstream iostream limits map memory random set sstream string vector
 EXEC = watan
 
 $(EXEC): $(SOURCES)

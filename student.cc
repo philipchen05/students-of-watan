@@ -139,7 +139,7 @@ void Student::printStatus() const {
 void Student::printCriteria() const {
     std::cout << colour << " has completed:" << std::endl;
     for (auto criterion: criteria) {
-        std::cout << "\t" << criterion->getId() << " " << criterion->getCompletion() << std:: endl;
+        std::cout << criterion->getId() << " " << criterion->getCompletion() << std:: endl;
     }
 }
 
