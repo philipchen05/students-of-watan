@@ -59,7 +59,7 @@ void Board::populateCriterionMap() {
         {29, {{23, 35}, {34, 42}}},
         {30, {{24, 31, 36}, {37, 46, 43}}},
         {31, {{25, 30, 37}, {38, 43, 47}}},
-        {32, {{36, 33, 38}, {39, 44, 49}}},
+        {32, {{26, 33, 38}, {39, 44, 48}}},
         {33, {{27, 32, 39}, {40, 44, 49}}},
         {34, {{28, 35, 40}, {41, 45, 50}}},
         {35, {{29, 34, 41}, {42, 45, 51}}},
@@ -90,7 +90,7 @@ bool Board::canBuildGoal(int goalId, const Student& student) const {
     // Find adjacent criteria to goal
     for (const auto& [key, pairSet] : criterionMap) {
         const auto& adjacentGoals = pairSet.second; // Access the second set in the pair
-        if (adjacentGoals.find(goalId) != adjacentGoals.end()) { // Check if goalId is in the set
+        if (adjacentGoals.count(goalId) != 0) { // Check if goalId is in the set
             if (getCriterion(key)->getOwnerName() == student.getColour()) {return true;}
             for (int v : adjacentGoals) {
                 if (getGoal(v)->getOwnerName() == student.getColour()) {return true;}
