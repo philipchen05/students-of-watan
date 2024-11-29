@@ -73,6 +73,7 @@ void TurnEnd::criteria() {
 bool TurnEnd::canAfford(Achievement* a) {
     const std::map<Resource, int>& upgradeCost = a->getUpgradeCost(); // Upgrade cost
     const std::map<Resource, int>& resources = player->getResources(); // Player resources
+    
     for(const auto& [resource, cost] : upgradeCost) {
         if(cost > resources.at(resource)) {
             return false; // Return false if player does not have enough of a given resource
@@ -98,7 +99,7 @@ void TurnEnd::achieve(int id) {
         std::cout << "You cannot build here." << std::endl;
         return;
     }
-
+    
     // Check if player has enough resources
     if(!canAfford(goal)) {
         std::cout << "You do not have enough resources." << std::endl; // Output if player doesn't have enough of a resource

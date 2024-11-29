@@ -83,7 +83,7 @@ int Criterion::getCompletion() const {
 
 // returns the cost of upgrading to next level
 const std::map<Resource, int>& Criterion::getUpgradeCost() const {
-    return upgradeCost.at(completion); // use .at because [] doesn't have overload for const map
+    return upgradeCosts.at(completion); // use .at because [] doesn't have overload for const map
 }
 
 Criterion::~Criterion() {}
