@@ -13,7 +13,7 @@
 Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, seed{seed}, turn{0}, loaded{false}, gen{static_cast<uint32_t>(seed)} {
     if(loadFile == "") { // Case: not loading game from file
         if(boardFile == "") {
-            board = std::make_unique<Board>(std::make_unique<RandomSetup>(seed)); // Case: generate board from scratch
+            board = std::make_unique<Board>(std::make_unique<RandomSetup>(gen)); // Case: generate board from scratch
         } else { // Case: load saved board
             std::ifstream in{boardFile}; // Input file stream to read in saved board file
             std::string boardData; // Board data
@@ -126,7 +126,7 @@ void Game::play() {
 
         // Reset game if players wish to play again
         if(gamePhase->getPlayAgain()) {
-            board = std::make_unique<Board>(std::make_unique<RandomSetup>(seed)); // Reset Board (including goals and criteria)
+            board = std::make_unique<Board>(std::make_unique<RandomSetup>(gen)); // Reset Board (including goals and criteria)
             initializePlayers(); // Reset players
             loaded = false;
         }
