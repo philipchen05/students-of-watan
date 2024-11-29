@@ -131,7 +131,11 @@ void Game::play() {
         if(!loaded) {
             // Play beginning of game
             gamePhase = std::make_unique<Begin>(this);
-            gamePhase->play();
+            try {
+                gamePhase->play();
+            } catch(std::exception &e) {
+                throw std::invalid_argument{"QUIT"};
+            }
         }
 
         // Continue taking turns while nobody has won
