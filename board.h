@@ -30,6 +30,9 @@ private:
     // Populate the criterion map with adjacency data
     void populateCriterionMap();
 
+    // Output number in specified board format
+    void outputNum(int num) const;
+
 public:
     // Constructor
     Board(std::unique_ptr<BoardSetup> setup);

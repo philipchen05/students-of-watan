@@ -174,9 +174,8 @@ void Board::display() const {
                 cout << goals[goalIndex]->getOwnerName()[0] << "A";
                 inputFile.get(ch);
             } else {
-                std::cout << goals[goalIndex]->getId();
-                if (goals[goalIndex]->getId() >= 10) {inputFile.get(ch);}
-
+                outputNum(goals[goalIndex]->getId());
+                inputFile.get(ch);
             }
             // cout << "goal index: " << goalIndex << endl;
             goalIndex++;
@@ -211,23 +210,22 @@ void Board::display() const {
                 }
                 inputFile.get(ch);
             } else {
-                std::cout << criteria[criteriaIndex]->getId();
-                if (criteria[criteriaIndex]->getId() >= 10) {inputFile.get(ch);}
-
+                outputNum(criteria[criteriaIndex]->getId());
+                inputFile.get(ch);
             }
             // cout << "criteria index: " << criteriaIndex << endl;
             criteriaIndex++;
         }
         else if (ch=='I') {
-            std::cout << index;
-            if (index >= 10) {inputFile.get(ch);}
+            outputNum(index);
+            inputFile.get(ch);
             index++;
         }
         else if (ch=='R') { 
             if (tiles[rollIndex]->getValue() == 0) {std::cout << " ";}
             else {
-                std::cout << tiles[rollIndex]->getValue();
-                if (tiles[rollIndex]->getValue() >= 10) {inputFile.get(ch);}
+                outputNum(tiles[rollIndex]->getValue());
+                inputFile.get(ch);
             }
             rollIndex++;
         }
@@ -295,4 +293,12 @@ std::string Board::getData() const {
         if (tile->getLocation() != 18) {boardData += " ";}
     }
     return boardData;
+}
+
+// Output number in specified board format
+void Board::outputNum(int num) const {
+    if(num < 10) {
+        std::cout << ' ';
+    }
+    std::cout << num;
 }
