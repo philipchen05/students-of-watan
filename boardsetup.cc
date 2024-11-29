@@ -33,15 +33,14 @@ std::vector<std::unique_ptr<Tile>> RandomSetup::generateTiles(
         8, 8, 9, 9, 10, 10, 11, 11   // Two each of 8-11
     };
 
-    std::uniform_int_distribution<> resourceDistrib{0, static_cast<int>(resources.size() - 1)}; // Range between 0 and resources.size() - 1 (inclusive)
-    std::uniform_int_distribution<> valueDistrib{0, static_cast<int>(values.size() - 1)}; // Range between 0 and values.size() - 1 (inclusive)
-
     // Create the tiles
     std::vector<std::unique_ptr<Tile>> tiles;
 
     for (int i = 0; i < 19; ++i) {
         std::vector<std::shared_ptr<Criterion>> TileCriteria;
         std::vector<std::shared_ptr<Goal>> TileGoals;
+        std::uniform_int_distribution<> resourceDistrib{0, static_cast<int>(resources.size() - 1)}; // Range between 0 and resources.size() - 1 (inclusive)
+        std::uniform_int_distribution<> valueDistrib{0, static_cast<int>(values.size() - 1)}; // Range between 0 and values.size() - 1 (inclusive)
 
         int resourceIndex = resourceDistrib(gen);
         int type = resources[resourceIndex];
