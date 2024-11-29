@@ -132,7 +132,6 @@ void Game::play() {
             if(!loaded) {
                 gamePhase = std::make_unique<TurnBegin>(this, players[turn % numPlayers].get(), gen);
                 gamePhase->play();
-                loaded = false;
             }
 
             // End of turn

@@ -143,7 +143,7 @@ void TurnEnd::improve(int id) {
     Criterion* criterion = game->getBoard()->getCriteria()[id].get(); // Pointer to criterion
 
     // Check if space is valid
-    if(criterion->getOwnerName() != player->getColour()) {
+    if(criterion->getOwnerName() != player->getColour() || criterion->getCompletion() == 3) {
         std::cout << "You cannot build here." << std::endl;
         return;
     }
@@ -155,8 +155,8 @@ void TurnEnd::improve(int id) {
     }
 
     // Improve criterion and deduct cost from player resources
-    criterion->improve();
     purchase(criterion);
+    criterion->improve();
 }
 
 // Trade resources with another player
