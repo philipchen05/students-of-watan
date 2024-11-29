@@ -7,6 +7,7 @@ Tile::Tile(Resource type, int value, int location, const std::vector<std::shared
     type{type},
     value{value},
     location{location},
+    geese{false},
     criteria{criteria},
     goals{goals}
 {

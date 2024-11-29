@@ -26,6 +26,6 @@ int main(int argc, char* argv[]) {
     try {
         game.play(); // Play game
     } catch (...) {
-        std::cout << "Closing Game." << std::endl;
+        std::cout << std::endl << "Closing Game." << std::endl;
     }
 }
