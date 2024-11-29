@@ -168,7 +168,11 @@ void Game::play() {
 
         // Play end of game
         gamePhase = std::make_unique<End>(this);
-        gamePhase->play();
+        try {
+            gamePhase->play();
+        } catch (std::exception &e) {
+            throw std::invalid_argument{"QUIT"};
+        }
 
         // Reset game if players wish to play again
         if(gamePhase->getPlayAgain()) {
