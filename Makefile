@@ -6,10 +6,8 @@ HEADERS = algorithm cctype cmath fstream iostream limits map memory random set s
 EXEC = watan
 
 $(EXEC): $(SOURCES)
-	rm -rf gcm.cache
 	$(CXX) $(HEADERFLAGS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(EXEC)
 
 .PHONY: clean 
 clean:
-	rm -f $(EXEC)
