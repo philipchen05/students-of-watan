@@ -22,12 +22,12 @@ class Student {
     int number; // student's place in order of turns [1, 4]
     std::map<Resource, int> resources; // number of each resource that student has: resource |-> amount
 
-    std::vector<std::shared_ptr<Criterion>> criteria; // list of all criteria that student has completed
-    std::vector<std::shared_ptr<Goal>> goals; // list of all goals that student has achieved
+    std::vector<Criterion*> criteria; // list of all criteria that student has completed
+    std::vector<Goal*> goals; // list of all goals that student has achieved
 
   public:
     Student(std::string colour, int number, int numVP = 0, const std::map<Resource, int> &resources = defaultResources, 
-            std::vector<std::shared_ptr<Criterion>> criteria = {}, std::vector<std::shared_ptr<Goal>> goals = {});
+            std::vector<Criterion*> criteria = {}, std::vector<Goal*> goals = {});
 
     void addCriterion(Criterion *c); // adds criterion to student's list of completed criteria
     void improve(Criterion *c); // attempts to improve the given criterion

@@ -20,7 +20,7 @@ const std::map<Resource, int> Student::defaultResources = {
 
 // Constructor
 Student::Student(std::string colour, int number, int numVP, const std::map<Resource, int> &resources, 
-                std::vector<std::shared_ptr<Criterion>> criteria, std::vector<std::shared_ptr<Goal>> goals):
+                std::vector<Criterion*> criteria, std::vector<Goal*> goals):
     colour{colour},
     number{number},
     resources{resources},
@@ -31,31 +31,29 @@ Student::Student(std::string colour, int number, int numVP, const std::map<Resou
 // adds criterion to student's list of completed criteria
 void Student::addCriterion(Criterion *c) {
     // quit if criterion already tracked by student
-    for (std::shared_ptr<Criterion> sptr: criteria) {
-        if (sptr.get() == c) {
+    for (Criterion* sptr: criteria) {
+        if (sptr == c) {
             std::cout << colour << " already has criterion " << c->getId() << std::endl;
             return;
         }
     }
 
-    // add shared ptr of criterion to student's list of criteria
-    std::shared_ptr<Criterion> cptr{c}; // make shared ptr
-    criteria.emplace_back(cptr); // add to list
+    // add ptr of criterion to student's list of criteria
+    criteria.emplace_back(c);
 }
 
 // adds goal to student's list of achieved goals
 void Student::addGoal(Goal *g) {
     // quit if goal already tracked by student
-    for (std::shared_ptr<Goal> sptr: goals) {
-        if (sptr.get() == g) {
+    for (Goal* sptr: goals) {
+        if (sptr == g) {
             std::cout << colour << " already has criterion " << g->getId() << std::endl;
             return;
         }
     }
 
-    // add shared ptr of goal to student's list of goals
-    std::shared_ptr<Goal> gptr{g}; // make shared ptr
-    goals.emplace_back(gptr); // add to list
+    // add ptr of goal to student's list of goals
+    goals.emplace_back(g);
 }
 
 void Student::addResources(Resource type, int amount) {
@@ -147,7 +145,7 @@ void Student::printCriteria() const {
 // returns number of victory points
 int Student::getVP() const {
     int numVP = 0;
-    for (std::shared_ptr<Criterion> c: criteria) {
+    for (Criterion* c: criteria) {
         numVP += c->getCompletion();
     }
     return numVP;

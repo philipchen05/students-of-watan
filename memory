@@ -1,0 +1,14 @@
+==78197== HEAP SUMMARY:
+==78197==     in use at exit: 92,372 bytes in 226 blocks
+==78197==   total heap usage: 1,942 allocs, 1,730 frees, 182,159 bytes allocated
+==78197== 
+==78197== LEAK SUMMARY:
+==78197==    definitely lost: 0 bytes in 0 blocks
+==78197==    indirectly lost: 0 bytes in 0 blocks
+==78197==      possibly lost: 0 bytes in 0 blocks
+==78197==    still reachable: 92,372 bytes in 226 blocks
+==78197==         suppressed: 0 bytes in 0 blocks
+==78197== Rerun with --leak-check=full to see details of leaked memory
+==78197== 
+==78197== For lists of detected and suppressed errors, rerun with: -s
+==78197== ERROR SUMMARY: 15 errors from 3 contexts (suppressed: 0 from 0)
