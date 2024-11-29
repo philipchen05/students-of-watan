@@ -165,7 +165,7 @@ void Board::display() const {
     char ch;
 
     // Read character by character
-    int goalIndex = 0, criteriaIndex = 0, index = 0, rollIndex = 0, tileIndex = 0, geeseIndex = 0;
+    int goalIndex = 0, criteriaIndex = 0, index = 0, rollIndex = 0, tileIndex = 0;
 
     while (inputFile.get(ch)) {
 
@@ -228,19 +228,6 @@ void Board::display() const {
                 inputFile.get(ch);
             }
             rollIndex++;
-        }
-        else if (ch=='M') {
-            if(tiles[geeseIndex]->hasGeese()) {
-                const std::string geese = "GEESE";
-                std::cout << geese;
-                for(size_t i = 0; i < geese.length() - 1; i++) {
-                    inputFile.get(ch);
-                }
-            }
-            else {
-                std::cout << ' ';
-            }
-            geeseIndex++;
         }
         else {
             cout << ch;

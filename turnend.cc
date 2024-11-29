@@ -15,7 +15,9 @@ void TurnEnd::play() {
 
     // Execute player commands until "next" command
     while(command != "next") {
-        if(command == "board") {
+        if (std::cin.eof()) {
+            throw std::invalid_argument{"EOF"};
+        } if(command == "board") {
             board();
         } else if(command == "status") {
             status();
@@ -176,6 +178,7 @@ void TurnEnd::trade(std::string colour, std::string give, std::string take) {
     std::string response; // Other player's response
     std::cout << "> ";
     std::cin >> response;
+    if (std::cin.eof()) throw std::invalid_argument{"EOF"};
 
     // Make trade if other player agrees
     if(response == "yes") {
