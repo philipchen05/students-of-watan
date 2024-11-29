@@ -118,6 +118,7 @@ void TurnBegin::moveGeese() {
         std::cout << "Choose a student to steal from." << std::endl;
         std::cout << "> ";
         std::cin >> victimColour;
+        victimColour = formatName(victimColour); // Properly format colour capitalization
         if (std::cin.eof()) throw std::invalid_argument{"EOF"};
 
 

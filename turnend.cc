@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <cctype>
 
 // TurnBegin constructor
 TurnEnd::TurnEnd(Game* game, Student* player) : Turn{game, player} {}
@@ -38,7 +39,7 @@ void TurnEnd::play() {
         } else if(command == "trade") {
             std::string colour, give, take;
             std::cin >> colour >> give >> take;
-            trade(colour, give, take);
+            trade(formatName(colour), toUpper(give), toUpper(take));
         } else if(command == "save") {
             std::string file;
             std::cin >> file;
@@ -232,3 +233,4 @@ void TurnEnd::help() {
     std::cout << "save <file>" << std::endl;
     std::cout << "help" << std::endl;
 }
+
