@@ -178,6 +178,7 @@ void Game::play() {
         if(gamePhase->getPlayAgain()) {
             board = std::make_unique<Board>(std::make_unique<RandomSetup>(gen)); // Reset Board (including goals and criteria)
             initializePlayers(); // Reset players
+            loaded = false;
         }
     } while(gamePhase->getPlayAgain());
 }
