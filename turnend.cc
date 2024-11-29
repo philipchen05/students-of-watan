@@ -168,6 +168,11 @@ void TurnEnd::trade(std::string colour, std::string give, std::string take) {
     Resource resource1 = resourceFromString(give); // Resource being offered
     Resource resource2 = resourceFromString(take); // Resource wanted in return
 
+    if(player->getResource(resource1) <= 0) {
+        std::cout << "You do not have enough resources." << std::endl; // Output if player doesn't have resource they are offering
+        return;
+    }
+
     // Determine otherPlayer
     for(int i = 0; i < game->getNumPlayers(); i++) {
         Student* s = game->getPlayer(i); // Pointer to current player
