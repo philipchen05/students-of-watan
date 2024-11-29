@@ -4,7 +4,7 @@
                                  /     T          \
                     |C |--G --|C |       R        |C |--G --|C |
                     /            \     M          /            \
-                  G       I      G              G       I       G  
+                  G       I      G              G       I      G  
                   /     T          \            /     T          \
      |C |--G --|C |       R        |C |--G --|C |       R        |C |--G --|C |
      /            \     M          /            \     M          /            \
@@ -20,11 +20,11 @@
    /     T          \            /     T          \            /     T          \
 |C |       R        |C |--G --|C |       R        |C |--G --|C |       R        |C |
    \     M          /            \     M          /            \     M          /
-   G              G       I      G              G       I     G              G 
+   G              G       I      G              G       I      G              G 
      \            /     T          \            /     T          \            /
      |C |--G --|C |       R        |C |--G --|C |       R        |C |--G --|C |
      /            \     M          /            \     M          /            \
-   G       I      G              G       I       G              G      I       G 
+   G       I      G              G       I      G              G      I       G 
    /     T          \            /     T          \            /     T          \
 |C |       R        |C |--G --|C |       R        |C |--G --|C |       R        |C |
    \     M          /            \     M          /            \     M          /
@@ -36,6 +36,6 @@
                     \            /     T          \            /
                     |C |--G --|C |       R        |C |--G --|C |
                                  \     M          /
-                                 G               G 
+                                 G              G 
                                    \            /
                                    |C |--G --|C |
