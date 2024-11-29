@@ -132,7 +132,18 @@ void Game::play() {
             // Beginning of turn
             if(!loaded) {
                 gamePhase = std::make_unique<TurnBegin>(this, players[turn % numPlayers].get(), gen);
-                gamePhase->play();
+                try {
+                    gamePhase->play();
+                } catch (std::exception &e) {
+                    std::cerr << "[Game::play() - TurnBegin] exception raised " << e.what() << std::endl;
+                    // if (e.what() == "EOF") {
+                        std::cerr << "\tis EOF" << std::endl;
+                        Turn* te = dynamic_cast<Turn*>(gamePhase.get());
+                        gamePhase->save("backup.sv", te->getPlayer());
+                        throw std::invalid_argument{"QUIT"};
+                    // }
+                }
+                loaded = false;
             }
 
             // End of turn
@@ -141,10 +152,13 @@ void Game::play() {
             try {
                 gamePhase->play();
             } catch (std::exception &e) {
-                if (e.what() == "EOF") {
-                    gamePhase->save("backup.sv", );
+                std::cerr << "[Game::play() - TurnEnd] exception raised " << e.what() << std::endl;
+                // if (e.what() == "EOF") {
+                    std::cerr << "\tis EOF" << std::endl;
+                    Turn* te = dynamic_cast<Turn*>(gamePhase.get());
+                    gamePhase->save("backup.sv", te->getPlayer());
                     throw std::invalid_argument{"QUIT"};
-                }
+                // }
             }
 
             loaded = false;

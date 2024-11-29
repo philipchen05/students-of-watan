@@ -10,6 +10,7 @@ class Turn: public GamePhase {
         Student* player; // Pointer to player whose turn it is
     public:
         Turn(Game* game, Student* player); // Turn constructor
+        Student* getPlayer(); // returns raw ptr to player
         virtual ~Turn() = default; // Turn destructor
 };
 
