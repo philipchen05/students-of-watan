@@ -15,7 +15,9 @@ void TurnEnd::play() {
 
     // Execute player commands until "next" command
     while(command != "next") {
-        if(command == "board") {
+        if (std::cin.eof()) {
+            throw std::invalid_argument{"EOF"};
+        } if(command == "board") {
             board();
         } else if(command == "status") {
             status();

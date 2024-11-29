@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
 // Begin constructor
 Begin::Begin(Game* game) : GamePhase{game} {}
@@ -29,6 +30,9 @@ void Begin::play() {
             std::cout << "You cannot build here." << std::endl;
             std::cout << "> ";
         }
+        if (std::cin.eof()) {
+            throw std::invalid_argument{"EOF"};
+        } 
         
         // Complete specified criterion under current player
         std::cerr << "Begin::play() - completing " << *board->getCriterion(intersection) << std:: endl;

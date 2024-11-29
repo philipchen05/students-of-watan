@@ -1,5 +1,6 @@
 #include "end.h"
 #include <iostream>
+#include <stdexcept>
 
 // End constructor
 End::End(Game* game) : GamePhase{game}, playAgain{false} {}
@@ -11,10 +12,16 @@ void End::play() {
     // Prompt player(s) for input
     std::cout << "Would you like to play again?" << std::endl;
     std::cout << "> ";
-    std::cin >> res;
+    while (std::cin >> res) {
+        if (res != "yes" && res != "no") {
+            std::cout << "> ";
+        }
+    }
 
     // Interpret response
-    if(res == "yes") {
+    if (std::cin.eof()){
+        throw std::invalid_argument{"EOF"};
+    } else if(res == "yes") {
         playAgain = true;
     } else {
         playAgain = false;

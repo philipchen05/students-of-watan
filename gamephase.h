@@ -2,6 +2,7 @@
 #define GAMEPHASE_H
 
 #include <memory>
+#include "student.h"
 
 class Game;
 
@@ -14,6 +15,8 @@ class GamePhase {
         virtual ~GamePhase() = default; // GamePhase destructor
         virtual void play() = 0; // Method for executing game phase events
         virtual bool getPlayAgain() const; // Return whether or not players wish to play again
+        void save(std::string file, Student* player); // saves to the file
+
 };
 
 #endif

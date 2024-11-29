@@ -32,6 +32,7 @@ void TurnBegin::play() {
         }
         std::cout << "> "; // Prepare for next command input
     }
+    if (std::cin.eof()) throw std::invalid_argument{"EOF"};
 
     // Roll dice
     int roll = dice.roll(fair);
@@ -76,6 +77,8 @@ void TurnBegin::moveGeese() {
     std::cout << "Choose where to place the GEESE." << std::endl; // Prompt player for new geese location
     std::cout << "> ";
     std::cin >> newGeeseLocation;
+    if (std::cin.eof()) throw std::invalid_argument{"EOF"};
+
     newGeeseTile = game->getBoard()->getTiles()[newGeeseLocation].get();
 
     // Determine stealable students by iterating through all students one by one
@@ -115,6 +118,8 @@ void TurnBegin::moveGeese() {
         std::cout << "Choose a student to steal from." << std::endl;
         std::cout << "> ";
         std::cin >> victimColour;
+        if (std::cin.eof()) throw std::invalid_argument{"EOF"};
+
 
         // Set pointer to victim student (student who is stolen from)
         for(const auto& s : stealableStudents) {
