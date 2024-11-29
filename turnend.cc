@@ -107,9 +107,9 @@ void TurnEnd::achieve(int id) {
     }
 
     // Achieve goal and deduct cost from player resources
+    purchase(goal);
     goal->achieve(player);
     player->addGoal(goal);
-    purchase(goal);
 }
 
 // Complete criterion
@@ -129,9 +129,9 @@ void TurnEnd::complete(int id) {
     }
 
     // Complete criterion and deduct cost from player resources
+    purchase(criterion);
     criterion->complete(player);
     player->addCriterion(criterion);
-    purchase(criterion);
 }
 
 // Improve criterion
