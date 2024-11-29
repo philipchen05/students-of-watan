@@ -56,6 +56,13 @@ Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullpt
         std::cerr << "\tset up board" << std::endl;
         // Set up board
         std::getline(in, boardData);
+
+        // Prioritize board file for board setup if both board and load files present (overwrite boardData)
+        if(boardFile != "") {
+            std::ifstream boardInput{boardFile};
+            std::getline(boardInput, boardData);
+        }
+
         board = std::make_unique<Board>(std::make_unique<FileSetup>(boardData));
         std::cerr << "\tconstructed board" << std::endl;
 
