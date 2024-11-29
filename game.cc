@@ -9,6 +9,7 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <stdexcept>
 
 // Game constructor
 Game::Game(int seed, std::string loadFile, std::string boardFile) : board{nullptr}, players{std::vector<std::unique_ptr<Student>>(numPlayers)}, gamePhase{nullptr}, seed{seed}, turn{0}, loaded{false}, gen{static_cast<uint32_t>(seed)} {
@@ -143,12 +144,10 @@ void Game::play() {
                     gamePhase->play();
                 } catch (std::exception &e) {
                     std::cerr << "[Game::play() - TurnBegin] exception raised " << e.what() << std::endl;
-                    // if (e.what() == "EOF") {
-                        std::cerr << "\tis EOF" << std::endl;
-                        Turn* te = dynamic_cast<Turn*>(gamePhase.get());
-                        gamePhase->save("backup.sv", te->getPlayer());
-                        throw std::invalid_argument{"QUIT"};
-                    // }
+                    std::cerr << "\tis EOF" << std::endl;
+                    Turn* te = dynamic_cast<Turn*>(gamePhase.get());
+                    gamePhase->save("backup.sv", te->getPlayer());
+                    throw std::invalid_argument{"QUIT"};
                 }
                 loaded = false;
             }
@@ -160,12 +159,10 @@ void Game::play() {
                 gamePhase->play();
             } catch (std::exception &e) {
                 std::cerr << "[Game::play() - TurnEnd] exception raised " << e.what() << std::endl;
-                // if (e.what() == "EOF") {
-                    std::cerr << "\tis EOF" << std::endl;
-                    Turn* te = dynamic_cast<Turn*>(gamePhase.get());
-                    gamePhase->save("backup.sv", te->getPlayer());
-                    throw std::invalid_argument{"QUIT"};
-                // }
+                std::cerr << "\tis EOF" << std::endl;
+                Turn* te = dynamic_cast<Turn*>(gamePhase.get());
+                gamePhase->save("backup.sv", te->getPlayer());
+                throw std::invalid_argument{"QUIT"};
             }
 
             loaded = false;
