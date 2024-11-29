@@ -2,6 +2,7 @@
 #define GAMEPHASE_H
 
 #include <memory>
+#include "student.h"
 
 class Game;
 

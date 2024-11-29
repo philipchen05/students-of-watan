@@ -22,5 +22,10 @@ int main(int argc, char* argv[]) {
     }
 
     Game game{seed, load, board}; // Construct game
-    game.play(); // Play game
+
+    try {
+        game.play(); // Play game
+    } catch (...) {
+        std::cout << "Closing Game." << std::endl;
+    }
 }
