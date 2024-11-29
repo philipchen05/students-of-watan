@@ -60,7 +60,7 @@ void TurnBegin::moveGeese() {
         Student* s = game->getPlayer(i); // Pointer to current player
         int totalResources = s->getTotalResources(); // Current player's total resources
         if(totalResources >= geeseMin) {
-            int numLost = totalResources - (totalResources / 2);
+            int numLost = totalResources / 2;
             amountsLost.push_back(numLost);
             for(int i = 0; i < numLost; i++) {
                 loseResource(*s);
